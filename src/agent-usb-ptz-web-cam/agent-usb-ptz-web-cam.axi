@@ -25,11 +25,11 @@ integer CAMERA_MAX_FOCUS_SPEED = 7
 
 
 /*
- * Function:	agentUsbPtzWebCamTiltUp
+ * Function:    agentUsbPtzWebCamTiltUp
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Tilts camera up at specified speed (1 - 18).
+ * Description: Tilts camera up at specified speed (1 - 18).
  */
 define_function agentUsbPtzWebCamTiltUp (dev camera, integer tiltSpeed)
 {
@@ -42,11 +42,11 @@ define_function agentUsbPtzWebCamTiltUp (dev camera, integer tiltSpeed)
 }
 
 /*
- * Function:	agentUsbPtzWebCamTiltDown
+ * Function:    agentUsbPtzWebCamTiltDown
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Tilts camera down at specified speed (1 - 18).
+ * Description: Tilts camera down at specified speed (1 - 18).
  */
 define_function agentUsbPtzWebCamTiltDown (dev camera, integer tiltSpeed)
 {
@@ -59,11 +59,11 @@ define_function agentUsbPtzWebCamTiltDown (dev camera, integer tiltSpeed)
 }
 
 /*
- * Function:	agentUsbPtzWebCamTiltOff
+ * Function:    agentUsbPtzWebCamTiltOff
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Stop camera tilt.
+ * Description: Stop camera tilt.
  */
 define_function agentUsbPtzWebCamTiltOff (dev camera)
 {
@@ -79,11 +79,11 @@ define_function agentUsbPtzWebCamTiltOff (dev camera)
 
 
 /*
- * Function:	agentUsbPtzWebCamPanLeft
+ * Function:    agentUsbPtzWebCamPanLeft
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Pans camera left at specified speed (1 - 18).
+ * Description: Pans camera left at specified speed (1 - 18).
  */
 define_function agentUsbPtzWebCamPanLeft (dev camera, integer panSpeed)
 {
@@ -96,11 +96,11 @@ define_function agentUsbPtzWebCamPanLeft (dev camera, integer panSpeed)
 }
 
 /*
- * Function:	agentUsbPtzWebCamPanRight
+ * Function:    agentUsbPtzWebCamPanRight
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Pans camera right at specified speed (1 - 18).
+ * Description: Pans camera right at specified speed (1 - 18).
  */
 define_function agentUsbPtzWebCamPanRight (dev camera, integer panSpeed)
 {
@@ -113,11 +113,11 @@ define_function agentUsbPtzWebCamPanRight (dev camera, integer panSpeed)
 }
 
 /*
- * Function:	agentUsbPtzWebCamPanOff
+ * Function:    agentUsbPtzWebCamPanOff
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Stop camera pan.
+ * Description: Stop camera pan.
  */
 define_function agentUsbPtzWebCamPanOff (dev camera)
 {
@@ -133,11 +133,11 @@ define_function agentUsbPtzWebCamPanOff (dev camera)
 
 
 /*
- * Function:	agentUsbPtzWebCamZoomInStandardSpeed
+ * Function:    agentUsbPtzWebCamZoomInStandardSpeed
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Zooms camera up at standard speed.
+ * Description: Zooms camera up at standard speed.
  */
 define_function agentUsbPtzWebCamZoomInStandardSpeed (dev camera)
 {
@@ -145,11 +145,11 @@ define_function agentUsbPtzWebCamZoomInStandardSpeed (dev camera)
 }
 
 /*
- * Function:	agentUsbPtzWebCamZoomInVariableSpeed
+ * Function:    agentUsbPtzWebCamZoomInVariableSpeed
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Zooms camera up at variable specified speed (1 - 7).
+ * Description: Zooms camera up at variable specified speed (1 - 7).
  */
 define_function agentUsbPtzWebCamZoomInVariableSpeed (dev camera, integer zoomSpeed)
 {
@@ -162,11 +162,11 @@ define_function agentUsbPtzWebCamZoomInVariableSpeed (dev camera, integer zoomSp
 }
 
 /*
- * Function:	agentUsbPtzWebCamZoomOutStandardSpeed
+ * Function:    agentUsbPtzWebCamZoomOutStandardSpeed
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Zooms camera down at standard speed.
+ * Description: Zooms camera down at standard speed.
  */
 define_function agentUsbPtzWebCamZoomOutStandardSpeed (dev camera)
 {
@@ -174,11 +174,11 @@ define_function agentUsbPtzWebCamZoomOutStandardSpeed (dev camera)
 }
 
 /*
- * Function:	agentUsbPtzWebCamZoomOutVariableSpeed
+ * Function:    agentUsbPtzWebCamZoomOutVariableSpeed
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Zooms camera down at specified speed (1 - 7).
+ * Description: Zooms camera down at specified speed (1 - 7).
  */
 define_function agentUsbPtzWebCamZoomOutVariableSpeed (dev camera, integer zoomSpeed)
 {
@@ -191,11 +191,11 @@ define_function agentUsbPtzWebCamZoomOutVariableSpeed (dev camera, integer zoomS
 }
 
 /*
- * Function:	agentUsbPtzWebCamZoomOff
+ * Function:    agentUsbPtzWebCamZoomOff
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Stop camera zoom.
+ * Description: Stop camera zoom.
  */
 define_function agentUsbPtzWebCamZoomOff (dev camera)
 {
@@ -211,11 +211,11 @@ define_function agentUsbPtzWebCamZoomOff (dev camera)
 
 
 /*
- * Function:	agentUsbPtzWebCamFocusFarStandardSpeed
+ * Function:    agentUsbPtzWebCamFocusFarStandardSpeed
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Focuss camera up at standard speed.
+ * Description: Focuss camera up at standard speed.
  */
 define_function agentUsbPtzWebCamFocusFarStandardSpeed (dev camera)
 {
@@ -223,11 +223,11 @@ define_function agentUsbPtzWebCamFocusFarStandardSpeed (dev camera)
 }
 
 /*
- * Function:	agentUsbPtzWebCamFocusFarVariableSpeed
+ * Function:    agentUsbPtzWebCamFocusFarVariableSpeed
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Focuss camera up at variable specified speed (1 - 7).
+ * Description: Focuss camera up at variable specified speed (1 - 7).
  */
 define_function agentUsbPtzWebCamFocusFarVariableSpeed (dev camera, integer focusSpeed)
 {
@@ -240,11 +240,11 @@ define_function agentUsbPtzWebCamFocusFarVariableSpeed (dev camera, integer focu
 }
 
 /*
- * Function:	agentUsbPtzWebCamFocusNearStandardSpeed
+ * Function:    agentUsbPtzWebCamFocusNearStandardSpeed
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Focuss camera down at standard speed.
+ * Description: Focuss camera down at standard speed.
  */
 define_function agentUsbPtzWebCamFocusNearStandardSpeed (dev camera)
 {
@@ -252,11 +252,11 @@ define_function agentUsbPtzWebCamFocusNearStandardSpeed (dev camera)
 }
 
 /*
- * Function:	agentUsbPtzWebCamFocusNearVariableSpeed
+ * Function:    agentUsbPtzWebCamFocusNearVariableSpeed
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Focuss camera down at specified speed (1 - 7).
+ * Description: Focuss camera down at specified speed (1 - 7).
  */
 define_function agentUsbPtzWebCamFocusNearVariableSpeed (dev camera, integer focusSpeed)
 {
@@ -269,11 +269,11 @@ define_function agentUsbPtzWebCamFocusNearVariableSpeed (dev camera, integer foc
 }
 
 /*
- * Function:	agentUsbPtzWebCamFocusOff
+ * Function:    agentUsbPtzWebCamFocusOff
  * 
- * Arguments:	dev camera - serial port connected to web cam
+ * Arguments:   dev camera - serial port connected to web cam
  * 
- * Description:	Stop camera focus.
+ * Description: Stop camera focus.
  */
 define_function agentUsbPtzWebCamFocusOff (dev camera)
 {

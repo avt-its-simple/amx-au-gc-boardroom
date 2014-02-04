@@ -13,7 +13,7 @@ program_name='nec-monitor'
 define_device
 
 //dvMonitor = 5001:1:0
-//vdvMonitor = 41001:1:0	// Duet module virtual device
+//vdvMonitor = 41001:1:0    // Duet module virtual device
 
 
 /*

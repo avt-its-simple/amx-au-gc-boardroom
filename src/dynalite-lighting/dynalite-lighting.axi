@@ -27,17 +27,17 @@ define_device
 define_constant
 
 // lighting levels by percentage 
-INTEGER LIGHTING_LEVEL_0_PERCENT	= 0
-INTEGER LIGHTING_LEVEL_10_PERCENT	= 25
-INTEGER LIGHTING_LEVEL_20_PERCENT	= 51
-INTEGER LIGHTING_LEVEL_30_PERCENT	= 76
-INTEGER LIGHTING_LEVEL_40_PERCENT	= 102
-INTEGER LIGHTING_LEVEL_50_PERCENT	= 127
-INTEGER LIGHTING_LEVEL_60_PERCENT	= 153
-INTEGER LIGHTING_LEVEL_70_PERCENT	= 178
-INTEGER LIGHTING_LEVEL_80_PERCENT	= 204
-INTEGER LIGHTING_LEVEL_90_PERCENT	= 230
-INTEGER LIGHTING_LEVEL_100_PERCENT	= 255
+INTEGER LIGHTING_LEVEL_0_PERCENT    = 0
+INTEGER LIGHTING_LEVEL_10_PERCENT   = 25
+INTEGER LIGHTING_LEVEL_20_PERCENT   = 51
+INTEGER LIGHTING_LEVEL_30_PERCENT   = 76
+INTEGER LIGHTING_LEVEL_40_PERCENT   = 102
+INTEGER LIGHTING_LEVEL_50_PERCENT   = 127
+INTEGER LIGHTING_LEVEL_60_PERCENT   = 153
+INTEGER LIGHTING_LEVEL_70_PERCENT   = 178
+INTEGER LIGHTING_LEVEL_80_PERCENT   = 204
+INTEGER LIGHTING_LEVEL_90_PERCENT   = 230
+INTEGER LIGHTING_LEVEL_100_PERCENT  = 255
 
 
 /*
@@ -73,32 +73,32 @@ define_function lightsPassThroughData (char strData[])
 
 define_function lightsSetLevelAll(integer lightingLevel)
 {
-    sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMLEVEL-255:1:ALL,',itoa(lightingLevel)")
+	sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMLEVEL-255:1:ALL,',itoa(lightingLevel)")
 }
 
 define_function lightsSetLevel (char strLightAddress[], integer lightingLevel)
 {
-    sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMLEVEL-',strLightAddress,',',itoa(lightingLevel)")
+	sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMLEVEL-',strLightAddress,',',itoa(lightingLevel)")
 }
 
 define_function lightsSetLevelWithFade (char strLightAddress[], integer lightingLevel, integer fadeRateInSeconds)
 {
-    sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMLEVEL-',strLightAddress,',',itoa(lightingLevel),',',itoa(fadeRateInSeconds)")
+	sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMLEVEL-',strLightAddress,',',itoa(lightingLevel),',',itoa(fadeRateInSeconds)")
 }
 
 define_function lightsToggle (char strLightAddress[])
 {
-    sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMSTATE-',strLightAddress,',TOGGLE'")
+	sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMSTATE-',strLightAddress,',TOGGLE'")
 }
 
 define_function lightsOn (char strLightAddress[])
 {
-    sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMSTATE-',strLightAddress,',ON'")
+	sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMSTATE-',strLightAddress,',ON'")
 }
 
 define_function lightsOff (char strLightAddress[])
 {
-    sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMSTATE-',strLightAddress,',OFF'")
+	sendCommand (vdvDynaliteDyNetLightSystem,"'LIGHTSYSTEMSTATE-',strLightAddress,',OFF'")
 }
 
 define_function lightsEnableRampUp (char strLightAddress[])
@@ -127,10 +127,10 @@ define_event
 
 data_event[vdvDynaliteDyNetLightSystem]
 {
-    online:
-    {
+	online:
+	{
 		sendCommand (vdvDynaliteDyNetLightSystem,"'PROPERTY-IP_Address,',strIPAddressDynalite")
 		sendCommand (vdvDynaliteDyNetLightSystem,'PROPERTY-Port,24601')
 		sendCommand (vdvDynaliteDyNetLightSystem,'REINIT')
-    }
+	}
 }

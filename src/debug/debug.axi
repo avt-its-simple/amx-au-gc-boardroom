@@ -9,14 +9,14 @@ program_name='debug'
 define_device
 
 #if_not_defined dvDebug
-dvDebug	= 0:1:0
+dvDebug = 0:1:0
 #end_if
 
 /*
  * --------------------
  * Function: debugPrint
  *
- * Parameters:	char debugString[] - debug string
+ * Parameters:  char debugString[] - debug string
  * 
  * Description: Prints a debug string to the Diagnostics tab in NetLinx Studio.
  * --------------------
@@ -30,7 +30,7 @@ define_function debugPrint (char debugString[])
  * --------------------
  * Function: debugDevToString
  *
- * Parameters:	dev device - device
+ * Parameters:  dev device - device
  * 
  * Description: Returns a string representation of a device in D:P:S format.
  * --------------------
@@ -44,7 +44,7 @@ define_function char[50] debugDevToString (dev device)
  * --------------------
  * Function: debugDevChanToString
  *
- * Parameters:	devchan dc - device,channel
+ * Parameters:  devchan dc - device,channel
  * 
  * Description: Returns a string representation of a devchan in D:P:S,C format.
  * --------------------
@@ -58,7 +58,7 @@ define_function char[50] debugDevChanToString (devchan dc)
  * --------------------
  * Function: debugDevLevToString
  *
- * Parameters:	devlev dl - device,level
+ * Parameters:  devlev dl - device,level
  * 
  * Description: Returns a string representation of a devlev in D:P:S,L format.
  * --------------------
