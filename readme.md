@@ -62,21 +62,24 @@ Features Implemented:
 + Automated system/lighting shutdown and blinds/screens raise after 8 minutes of no occupancy
 + Automated system startup (lighting to presentation mode, display monitors on, volume set, AV routing, shades drop, touch panel flip to source selection page) upon signal presence detection when laptop plugged into table input.
 + Automated monitor shutdown after 1 minute of source selected with no signal detected.
-+ House PC Wake-On-Lan
-+ House PC shutdown after hours.
-+ House PC lock screen after room occupancy loss detected.
++ House PC Wake-On-Lan on input select.
 + Multi-Preview snapshots.
 + Streaming video preview of selected input source.
 + NFC authentication for ad-hoc room booking from touch panel.
-+ Gestures
++ Touch Panel Gestures.
 + Subpage scrolling.
 + Animated page flips.
-+ RMS asset management.
-+ RMS scheduling.
++ RMS scheduling on welcome panel.
 
 Features Still To Be Implemented:
 + Video intercom doorbell.
 + Room booking and meeting extension from 19" Modero-X panel.
++ Automated house PC shutdown after hours.
++ Automated drop power to monitors after hours to conserve energy.
++ RMS asset management.
++ RMS scheduling on 19" panel.
++ House PC lock screen after room occupancy loss detected.
++ House PC go to login screen of user who booked meeting when meeting starts.
 
 ---------------------------------------------------------------
 
