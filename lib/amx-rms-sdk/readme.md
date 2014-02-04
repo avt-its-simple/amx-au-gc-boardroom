@@ -82,8 +82,7 @@ Overview
 --------
 Due to licensing restrictions the **AMX RMS SDK** can not be made publicly available.
 
-Please visit [www.amx.com][AMX] to download the latest version of the SDK.
+Please visit the [AMX website][AMX] to download the latest version of the SDK.
 
 ---------------------------------------------------------------
-
-[AMX]: www.amx.com
+[AMX]: http://www.amx.com "www.amx.com"
