@@ -1,18 +1,18 @@
 [submodule "lib/amx-dvx-library"]
 	path = lib/amx-dvx-library
-	url = https://github.com/DavidVine/amx-dvx-library.git
+	url = https://github.com/AMXAUNZ/amx-dvx-library.git
 [submodule "lib/amx-dxlink-library"]
 	path = lib/amx-dxlink-library
-	url = https://github.com/DavidVine/amx-dxlink-library.git
+	url = https://github.com/AMXAUNZ/amx-dxlink-library.git
 [submodule "lib/amx-pdu-library"]
 	path = lib/amx-pdu-library
-	url = https://github.com/DavidVine/amx-pdu-library.git
+	url = https://github.com/AMXAUNZ/amx-pdu-library.git
 [submodule "lib/amx-modero-library"]
 	path = lib/amx-modero-library
-	url = https://github.com/DavidVine/amx-modero-library.git
+	url = https://github.com/AMXAUNZ/amx-modero-library.git
 [submodule "lib/xtra-pc-control"]
 	path = lib/xtra-pc-control
-	url = https://github.com/DavidVine/xtra-pc-control.git
+	url = https://github.com/AMXAUNZ/xtra-pc-control.git
 [submodule "lib/amx-device-library"]
 	path = lib/amx-device-library
-	url = https://github.com/DavidVine/amx-device-library.git
+	url = https://github.com/AMXAUNZ/amx-device-library.git
