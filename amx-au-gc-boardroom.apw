@@ -190,6 +190,34 @@
 <FilePathName>lib\amx-pdu-library\amx-pdu-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="DUET"><Identifier>commons-codec-1.4-AMX-01</Identifier>
+<FilePathName>lib\amx-rms-sdk\commons-codec-1.4-AMX-01.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>commons-httpclient-3.1-AMX-01</Identifier>
+<FilePathName>lib\amx-rms-sdk\commons-httpclient-3.1-AMX-01.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>commons-lang-2.5-AMX-01</Identifier>
+<FilePathName>lib\amx-rms-sdk\commons-lang-2.5-AMX-01.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>commons-logging-1.1.1-AMX-01</Identifier>
+<FilePathName>lib\amx-rms-sdk\commons-logging-1.1.1-AMX-01.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>rmsclient</Identifier>
+<FilePathName>lib\amx-rms-sdk\rmsclient.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
+<FilePathName>lib\amx-rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="DUET"><Identifier>rmsnlplatform</Identifier>
+<FilePathName>lib\amx-rms-sdk\rmsnlplatform.jar</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>xtra-pc-control-api</Identifier>
 <FilePathName>lib\xtra-pc-control\xtra-pc-control-api.axi</FilePathName>
 <Comments></Comments>
@@ -210,38 +238,6 @@
 <FilePathName>src\amx-au-gc-boardroom-main.axs</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="DUET"><Identifier>commons-codec-1.4-AMX-01</Identifier>
-<FilePathName>src\amx-rms\commons-codec-1.4-AMX-01.jar</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="DUET"><Identifier>commons-httpclient-3.1-AMX-01</Identifier>
-<FilePathName>src\amx-rms\commons-httpclient-3.1-AMX-01.jar</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="DUET"><Identifier>commons-lang-2.5-AMX-01</Identifier>
-<FilePathName>src\amx-rms\commons-lang-2.5-AMX-01.jar</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="DUET"><Identifier>commons-logging-1.1.1-AMX-01</Identifier>
-<FilePathName>src\amx-rms\commons-logging-1.1.1-AMX-01.jar</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="Include"><Identifier>rms-main</Identifier>
-<FilePathName>src\amx-rms\rms-main.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="DUET"><Identifier>rmsclient</Identifier>
-<FilePathName>src\amx-rms\rmsclient.jar</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
-<FilePathName>src\amx-rms\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="DUET"><Identifier>rmsnlplatform</Identifier>
-<FilePathName>src\amx-rms\rmsnlplatform.jar</FilePathName>
-<Comments></Comments>
-</File>
 <File CompileType="None" Type="Include"><Identifier>debug</Identifier>
 <FilePathName>src\debug\debug.axi</FilePathName>
 <Comments></Comments>
@@ -260,6 +256,10 @@
 </File>
 <File CompileType="None" Type="DUET"><Identifier>NEC_LCD5710_Comm_dr1_0_0</Identifier>
 <FilePathName>src\nec-monitor\NEC_LCD5710_Comm_dr1_0_0.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>rms-main</Identifier>
+<FilePathName>src\rms\rms-main.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>wake-on-lan</Identifier>
