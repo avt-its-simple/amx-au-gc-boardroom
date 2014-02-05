@@ -44,6 +44,7 @@ program_name='amx-au-gc-boardroom-main'
 // include files
 #include 'debug'
 #include 'amx-device-control'
+#include 'amx-controlports-api'
 #include 'amx-controlports-control'
 #include 'amx-dvx-api'
 #include 'amx-dvx-control'
@@ -956,10 +957,10 @@ define_variable
  * --------------------
  */
 
-// Override the DEVCHAN array within modero-listener
+// Override the DEV array within modero-listener
 dev dvPanelsCoordinateTracking[] = {dvTpTableMain}
 
-// Override the DEVCHAN array within dvx-listener
+// Override the DEV array within dvx-listener
 dev dvDvxMainPorts[] = {dvDvxMain}
 
 dev dvDvxVidOutPorts[] = 
@@ -996,7 +997,7 @@ dev dvDvxAudInPorts[] =
 
 //dev dvDvxMicInPorts[] = { 5002:1:0, 5002:2:0 }
 
-// Override the DEVCHAN arrays within dxlink-listener
+// Override the DEV arrays within dxlink-listener
 dev dvDxlinkTxMainPorts[] = 
 {
 	dvTxTable1Main,
@@ -1048,7 +1049,7 @@ dev dvDxlinkRxAudOutPorts[] =
 }
 
 
-// Override the DEVCHAN arrays within pdu-listsner
+// Override the DEV arrays within pdu-listener
 
 dev dvPduMains1[] = {dvPduMain1}
 
@@ -1070,6 +1071,10 @@ dev dvPduAxlinkBuses[] =
 	dvPduAxlinkBus1, 
 	dvPduAxlinkBus2
 }
+
+// Override the DEV arrays within controlports-listener
+
+dev dvIoPorts[] = {dvDvxIos}
 
 
 /*
@@ -2349,6 +2354,88 @@ define_function pduNotifyTemperatureScaleFahrenheit (dev pduPort1)
 
 
 
+
+
+
+
+
+/*
+ * --------------------
+ * Override controlports-listener callback functions
+ * --------------------
+ */
+
+
+#define INCLUDE_CONTROLPORTS_NOTIFY_IO_INPUT_ON_CALLBACK
+define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
+{
+	// ioPort is the IO port.
+	// ioChanCde is the IO channel code.
+	
+	if (ioPort == dvDvxIos)
+	{
+		switch (ioChanCde)
+		{
+			case IO_OCCUPANCY_SENSOR:
+			{
+				// occupancy has been detected - meaning the room was previously vacant
+				isRoomOccupied = TRUE
+				
+				// Set lights to "all on" mode as people have entered the room
+				lightsEnablePresetAllOn ()
+				
+				// wake up the touch panel
+				moderoWake (dvTpTableMain)
+				
+				// start taking snapshots (just in case the person who triggered the occ sensor wants to go to the source selection page)
+				startMultiPreviewSnapshots ()
+			}
+		}
+	}
+}
+
+
+
+#define INCLUDE_CONTROLPORTS_NOTIFY_IO_INPUT_OFF_CALLBACK
+define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
+{
+	// ioPort is the IO port.
+	// ioChanCde is the IO channel code.
+	
+	if (ioPort == dvDvxIos)
+	{
+		switch (ioChanCde)
+		{
+			case IO_OCCUPANCY_SENSOR:
+			{
+				// room is now unoccupied (note: Will take 8 minutes minimum to trigger after person leaves room)
+				isRoomOccupied = FALSE
+				
+				// Set lights to "all off" mode as there have been no people in the room for at least 8 minutes
+				lightsEnablePresetAllOff ()
+				
+				// Flip the touch panel to the splash screen
+				moderoSetPage (dvTpTableMain, PAGE_NAME_SPLASH_SCREEN)
+				
+				// Send the panel to sleep
+				moderoSleep (dvTpTableMain)
+				
+				// Stop taking snapshots
+				stopMultiPreviewSnapshots ()
+				
+				// shutdown the system if it was being used (i.e., someone just walked away without pressing the shutdown button on the panel)
+				if (isSystemAvInUse)
+				{
+					countTimesPeopleLeftWithoutShuttingDownSystem++
+					shutdownAvSystem ()
+				}
+			}
+		}
+	}
+}
+
+
+
 /*
  * --------------------
  * Startup code
@@ -3063,60 +3150,6 @@ button_event[dvTpTableDxlink,0]
 	}
 }
 
-button_event[dvDvxIos, 0]
-{
-	push:
-	{
-		switch (button.input.channel)
-		{
-			case IO_OCCUPANCY_SENSOR:
-			{
-				// occupancy has been detected - meaning the room was previously vacant
-				isRoomOccupied = TRUE
-				
-				// Set lights to "all on" mode as people have entered the room
-				lightsEnablePresetAllOn ()
-				
-				// wake up the touch panel
-				moderoWake (dvTpTableMain)
-				
-				// start taking snapshots (just in case the person who triggered the occ sensor wants to go to the source selection page)
-				startMultiPreviewSnapshots ()
-			}
-		}
-	}
-	release:
-	{
-		switch (button.input.channel)
-		{
-			case IO_OCCUPANCY_SENSOR:
-			{
-				// room is now unoccupied (note: Will take 8 minutes minimum to trigger after person leaves room)
-				isRoomOccupied = FALSE
-				
-				// Set lights to "all off" mode as there have been no people in the room for at least 8 minutes
-				lightsEnablePresetAllOff ()
-				
-				// Flip the touch panel to the splash screen
-				moderoSetPage (dvTpTableMain, PAGE_NAME_SPLASH_SCREEN)
-				
-				// Send the panel to sleep
-				moderoSleep (dvTpTableMain)
-				
-				// Stop taking snapshots
-				stopMultiPreviewSnapshots ()
-				
-				// shutdown the system if it was being used (i.e., someone just walked away without pressing the shutdown button on the panel)
-				if (isSystemAvInUse)
-				{
-					countTimesPeopleLeftWithoutShuttingDownSystem++
-					shutdownAvSystem ()
-				}
-			}
-		}
-	}
-}
-
 button_event[dvTpTableDebug,0]
 {
 	push:
@@ -3271,6 +3304,7 @@ data_event[dvTpTableMain]
 #include 'amx-pdu-listener'
 #include 'amx-dxlink-listener'
 #include 'amx-modero-listener'
+#include 'amx-controlports-listener'
 
 
 /*
