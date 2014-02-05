@@ -134,8 +134,16 @@
 <FilePathName>C:\Program Files (x86)\Common Files\AMXShare\AXIs\SNAPI.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-api</Identifier>
+<FilePathName>lib\amx-device-library\amx-controlports-api.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>amx-controlports-control</Identifier>
 <FilePathName>lib\amx-device-library\amx-controlports-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>amx-controlports-listener</Identifier>
+<FilePathName>lib\amx-device-library\amx-controlports-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>amx-device-control</Identifier>
