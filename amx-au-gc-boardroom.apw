@@ -270,10 +270,6 @@
 <FilePathName>touch-panels\amx-au-gc-boardroom-mxt-1900.TP4</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="TP4"><Identifier>integrate-2013-boardroom-mxt-1900 (for-reference)</Identifier>
-<FilePathName>touch-panels\integrate-2013-boardroom-mxt-1900 (for-reference).TP4</FilePathName>
-<Comments></Comments>
-</File>
 </System>
 </Project>
 </Workspace>
