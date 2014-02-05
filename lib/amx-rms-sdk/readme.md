@@ -80,9 +80,9 @@ Module Files
 
 Overview
 --------
-Due to licensing restrictions the **AMX RMS SDK** can not be made publicly available.
+Due to licensing restrictions the SDK for RMS Enterprise can not be made publicly available.
 
-Please visit the [AMX website][AMX] to download the latest version of the SDK.
+Please visit the [AMX website][AMX_RMS_SDK] to download the latest version of AMX's SDK for RMS Enterprise.
 
 ---------------------------------------------------------------
-[AMX]: http://www.amx.com "www.amx.com"
+[AMX_RMS_SDK]: http://www.amx.com/techcenter/downloadConfirm.asp?fn=/assets/applicationFiles/ResourceManagementSuiteSDK.zip "AMX RMS SDK"
