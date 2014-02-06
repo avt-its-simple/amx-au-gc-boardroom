@@ -16,3 +16,6 @@
 [submodule "lib/amx-device-library"]
 	path = lib/amx-device-library
 	url = https://github.com/AMXAUNZ/amx-device-library.git
+[submodule "lib\\common-library"]
+	path = lib\\common-library
+	url = https://github.com/AMXAUNZ/common-library.git
