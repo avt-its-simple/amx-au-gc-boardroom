@@ -82,7 +82,7 @@
                IRDB*)>
 
 <!ATTLIST File 
-       Type (Source | MasterSrc | Include | Module | AXB | IR | TPD | TP4 | KPD | TKO | AMX_IR_DB | IRN_DB | Other | DUET | TOK | TKN | KPB ) "Other"
+       Type (Source | MasterSrc | Include | Module | AXB | IR | TPD | TP4 | TP5 | XDD | KPD | TKO | AMX_IR_DB | IRN_DB | Other | DUET | TOK | TKN | KPB ) "Other"
        CompileType (Axcess | Netlinx | None) "None"> 
 
 <!ELEMENT FilePathName	(#PCDATA)>
@@ -119,7 +119,7 @@
 <System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>amx-au-gc-boardroom</Identifier>
 <SysID>0</SysID>
 <TransSerial>COM4,38400,8,None,1,None</TransSerial>
-<TransModem>COM1,38400,8,None,1,None</TransModem>
+<TransModem></TransModem>
 <TransTCPIP>192.168.7.201:1319:1:AMX AU - GC Office - Boardroom DVX::</TransTCPIP>
 <VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
 <VNMRestoreIPSettings>192.168.7.190:1319:1:AMX Australia - GC Office - Boardroom DVX-2100:administrator:p@55w0rd</VNMRestoreIPSettings>
@@ -218,12 +218,24 @@
 <FilePathName>lib\amx-rms-sdk\rmsclient.jar</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
+<FilePathName>lib\amx-rms-sdk\RmsControlSystemMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
 <FilePathName>lib\amx-rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="DUET"><Identifier>rmsnlplatform</Identifier>
 <FilePathName>lib\amx-rms-sdk\rmsnlplatform.jar</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>
+<FilePathName>lib\amx-rms-sdk\RmsSystemPowerMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="None" Type="Include"><Identifier>common</Identifier>
+<FilePathName>lib\common-library\common.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>xtra-pc-control-api</Identifier>
