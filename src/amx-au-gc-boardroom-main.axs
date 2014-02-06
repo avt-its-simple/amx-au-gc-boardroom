@@ -42,6 +42,7 @@ program_name='amx-au-gc-boardroom-main'
  */
 
 // include files
+#include 'common'
 #include 'debug'
 #include 'amx-device-control'
 #include 'amx-controlports-api'
@@ -1666,7 +1667,7 @@ define_function dvxNotifySwitch (dev dvxPort1, char signalType[], integer input,
 	
 	switch (signalType)
 	{
-		case cSIGNAL_TYPE_VIDEO:
+		case SIGNAL_TYPE_VIDEO:
 		{
 			select
 			{
@@ -1675,7 +1676,7 @@ define_function dvxNotifySwitch (dev dvxPort1, char signalType[], integer input,
 				active (output == dvDvxVidOutMonitorRight.port):    selectedVideoInputMonitorRight = input
 			}
 		}
-		case cSIGNAL_TYPE_AUDIO:
+		case SIGNAL_TYPE_AUDIO:
 		{
 			select
 			{
@@ -1822,7 +1823,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 define_function dvxNotifyAudioOutMute (dev dvxAudioOutput, char muteStatus[])
 {
 	// dvxAudioOutput is the D:P:S of the video output port on the DVX switcher. The output number can be taken from dvDvxAudioOutput.PORT
-	// muteStatus is the mute status (cENABLE | cDISABLE)
+	// muteStatus is the mute status (STATUS_ENABLE | STATUS_DISABLE)
 	
 	dvx.audioOutputs[dvxAudioOutput.port].muteStatus = muteStatus
 	
@@ -1830,9 +1831,9 @@ define_function dvxNotifyAudioOutMute (dev dvxAudioOutput, char muteStatus[])
 	{
 		switch (muteStatus)
 		{
-			case cENABLE:    moderoEnableButtonFeedback (dvTpTableAudio, BTN_AUDIO_VOLUME_MUTE)
+			case STATUS_ENABLE:    moderoEnableButtonFeedback (dvTpTableAudio, BTN_AUDIO_VOLUME_MUTE)
 			
-			case cDISABLE:   moderoDisableButtonFeedback (dvTpTableAudio, BTN_AUDIO_VOLUME_MUTE)
+			case STATUS_DISABLE:   moderoDisableButtonFeedback (dvTpTableAudio, BTN_AUDIO_VOLUME_MUTE)
 		}
 	}
 }
@@ -1963,11 +1964,11 @@ define_function dxlinkNotifyRxVideoOutputAspectRatio (dev dxlinkRxVideoOutput, c
 define_function dxlinkNotifyTxVideoInputAutoSelect (dev dxlinkTxPort1, char status[])
 {
 	// dvDxlinkTxPort1 is the port #1 on the DXLink Tx
-	// cStatus contains the auto video input select status (cENABLE | cDISABLE)
+	// cStatus contains the auto video input select status (STATUS_ENABLE | STATUS_DISABLE)
 	
 	switch (status)
 	{
-		case cENABLE:
+		case STATUS_ENABLE:
 		{
 			select
 			{
@@ -1977,7 +1978,7 @@ define_function dxlinkNotifyTxVideoInputAutoSelect (dev dxlinkTxPort1, char stat
 				active (dxlinkTxPort1 == dvTxTable4Main):   moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_TX_AUTO_4)
 			}
 		}
-		case cDISABLE:
+		case STATUS_DISABLE:
 		{
 			select
 			{
@@ -2035,7 +2036,7 @@ define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoI
 define_function dxlinkNotifyTxVideoInputFormatAnalog (dev dxlinkTxAnalogVideoInput, char videoFormat[])
 {
 	// dxlinkTxAnalogVideoInput is the analog video input port on the DXLink Tx
-	// videoFormat is the video format (cVIDEO_SIGNAL_FORMAT_VGA | cVIDEO_SIGNAL_FORMAT_COMPOSITE | cVIDEO_SIGNAL_FORMAT_COMPONENT | cVIDEO_SIGNAL_FORMAT_SVIDEO)
+	// videoFormat is the video format (VIDEO_SIGNAL_FORMAT_VGA | VIDEO_SIGNAL_FORMAT_COMPOSITE | VIDEO_SIGNAL_FORMAT_COMPONENT | VIDEO_SIGNAL_FORMAT_SVIDEO)
 }
 */
 /*
@@ -2043,7 +2044,7 @@ define_function dxlinkNotifyTxVideoInputFormatAnalog (dev dxlinkTxAnalogVideoInp
 define_function dxlinkNotifyTxVideoInputFormatDigital (dev dxlinkTxDigitalVideoInput, char videoFormat[])
 {
 	// dxlinkTxDigitalVideoInput is the digital video input port on the DXLink Tx
-	// videoFormat is the video format (cVIDEO_SIGNAL_FORMAT_DVI | cVIDEO_SIGNAL_FORMAT_HDMI)
+	// videoFormat is the video format (VIDEO_SIGNAL_FORMAT_DVI | VIDEO_SIGNAL_FORMAT_HDMI)
 }
 */
 
@@ -3029,25 +3030,25 @@ button_event[dvTpTableDxlink,0]
 			case BTN_DXLINK_TX_HDMI_1:
 			{
 				dxlinkDisableTxVideoInputAutoSelect (dvTxTable1Main)
-				dxlinkSetTxVideoInputFormatDigital (dvTxTable1VidInDigital, cVIDEO_SIGNAL_FORMAT_HDMI)
+				dxlinkSetTxVideoInputFormatDigital (dvTxTable1VidInDigital, VIDEO_SIGNAL_FORMAT_HDMI)
 				dxlinkSetTxVideoInputDigital (dvTxTable1Main)
 			}
 			case BTN_DXLINK_TX_HDMI_2:
 			{
 				dxlinkDisableTxVideoInputAutoSelect (dvTxTable2Main)
-				dxlinkSetTxVideoInputFormatDigital (dvTxTable2VidInDigital, cVIDEO_SIGNAL_FORMAT_HDMI)
+				dxlinkSetTxVideoInputFormatDigital (dvTxTable2VidInDigital, VIDEO_SIGNAL_FORMAT_HDMI)
 				dxlinkSetTxVideoInputDigital (dvTxTable2Main)
 			}
 			case BTN_DXLINK_TX_HDMI_3:
 			{
 				dxlinkDisableTxVideoInputAutoSelect (dvTxTable3Main)
-				dxlinkSetTxVideoInputFormatDigital (dvTxTable3VidInDigital, cVIDEO_SIGNAL_FORMAT_HDMI)
+				dxlinkSetTxVideoInputFormatDigital (dvTxTable3VidInDigital, VIDEO_SIGNAL_FORMAT_HDMI)
 				dxlinkSetTxVideoInputDigital (dvTxTable3Main)
 			}
 			case BTN_DXLINK_TX_HDMI_4:
 			{
 				dxlinkDisableTxVideoInputAutoSelect (dvTxTable4Main)
-				dxlinkSetTxVideoInputFormatDigital (dvTxTable4VidInDigital, cVIDEO_SIGNAL_FORMAT_HDMI)
+				dxlinkSetTxVideoInputFormatDigital (dvTxTable4VidInDigital, VIDEO_SIGNAL_FORMAT_HDMI)
 				dxlinkSetTxVideoInputDigital (dvTxTable4Main)
 			}
 			
@@ -3055,25 +3056,25 @@ button_event[dvTpTableDxlink,0]
 			case BTN_DXLINK_TX_VGA_1:
 			{
 				dxlinkDisableTxVideoInputAutoSelect (dvTxTable1Main)
-				dxlinkSetTxVideoInputFormatAnalog (dvTxTable1VidInAnalog, cVIDEO_SIGNAL_FORMAT_VGA)
+				dxlinkSetTxVideoInputFormatAnalog (dvTxTable1VidInAnalog, VIDEO_SIGNAL_FORMAT_VGA)
 				dxlinkSetTxVideoInputAnalog (dvTxTable1Main)
 			}
 			case BTN_DXLINK_TX_VGA_2:
 			{
 				dxlinkDisableTxVideoInputAutoSelect (dvTxTable2Main)
-				dxlinkSetTxVideoInputFormatAnalog (dvTxTable2VidInAnalog, cVIDEO_SIGNAL_FORMAT_VGA)
+				dxlinkSetTxVideoInputFormatAnalog (dvTxTable2VidInAnalog, VIDEO_SIGNAL_FORMAT_VGA)
 				dxlinkSetTxVideoInputAnalog (dvTxTable2Main)
 			}
 			case BTN_DXLINK_TX_VGA_3:
 			{
 				dxlinkDisableTxVideoInputAutoSelect (dvTxTable3Main)
-				dxlinkSetTxVideoInputFormatAnalog (dvTxTable3VidInAnalog, cVIDEO_SIGNAL_FORMAT_VGA)
+				dxlinkSetTxVideoInputFormatAnalog (dvTxTable3VidInAnalog, VIDEO_SIGNAL_FORMAT_VGA)
 				dxlinkSetTxVideoInputAnalog (dvTxTable3Main)
 			}
 			case BTN_DXLINK_TX_VGA_4:
 			{
 				dxlinkDisableTxVideoInputAutoSelect (dvTxTable4Main)
-				dxlinkSetTxVideoInputFormatAnalog (dvTxTable4VidInAnalog, cVIDEO_SIGNAL_FORMAT_VGA)
+				dxlinkSetTxVideoInputFormatAnalog (dvTxTable4VidInAnalog, VIDEO_SIGNAL_FORMAT_VGA)
 				dxlinkSetTxVideoInputAnalog (dvTxTable4Main)
 			}
 			
