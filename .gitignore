@@ -9,6 +9,14 @@ src/amx-au-gc-boardroom-main.tko
 *.pdf
 *.doc
 
+# Image Files #
+###################
+*.ai
+*.bmp
+*.jpg
+*.jpeg
+*.png
+
 # Code Files in lib/amx-rms-sdk#
 ###################
 lib/amx-rms-sdk/*.axi
