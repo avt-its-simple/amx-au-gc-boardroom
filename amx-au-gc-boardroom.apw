@@ -198,40 +198,44 @@
 <FilePathName>lib\amx-pdu-library\amx-pdu-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="DUET"><Identifier>commons-codec-1.4-AMX-01</Identifier>
-<FilePathName>lib\amx-rms-sdk\commons-codec-1.4-AMX-01.jar</FilePathName>
+<File CompileType="None" Type="Include"><Identifier>RmsApi</Identifier>
+<FilePathName>lib\amx-rms-sdk\includes\RmsApi.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="DUET"><Identifier>commons-httpclient-3.1-AMX-01</Identifier>
-<FilePathName>lib\amx-rms-sdk\commons-httpclient-3.1-AMX-01.jar</FilePathName>
+<File CompileType="None" Type="Include"><Identifier>RmsEventListener</Identifier>
+<FilePathName>lib\amx-rms-sdk\includes\RmsEventListener.axi</FilePathName>
 <Comments></Comments>
 </File>
-<File CompileType="None" Type="DUET"><Identifier>commons-lang-2.5-AMX-01</Identifier>
-<FilePathName>lib\amx-rms-sdk\commons-lang-2.5-AMX-01.jar</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="DUET"><Identifier>commons-logging-1.1.1-AMX-01</Identifier>
-<FilePathName>lib\amx-rms-sdk\commons-logging-1.1.1-AMX-01.jar</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="DUET"><Identifier>rmsclient</Identifier>
-<FilePathName>lib\amx-rms-sdk\rmsclient.jar</FilePathName>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsDuetMonitorMonitor</Identifier>
+<FilePathName>lib\amx-rms-sdk\monitors-duet\RmsDuetMonitorMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsControlSystemMonitor</Identifier>
-<FilePathName>lib\amx-rms-sdk\RmsControlSystemMonitor.axs</FilePathName>
+<FilePathName>lib\amx-rms-sdk\monitors\RmsControlSystemMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsDvxSwitcherMonitor</Identifier>
+<FilePathName>lib\amx-rms-sdk\monitors\RmsDvxSwitcherMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsGenericNetLinxDeviceMonitor</Identifier>
+<FilePathName>lib\amx-rms-sdk\monitors\RmsGenericNetLinxDeviceMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsPowerDistributionUnitMonitor</Identifier>
+<FilePathName>lib\amx-rms-sdk\monitors\RmsPowerDistributionUnitMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>
+<FilePathName>lib\amx-rms-sdk\monitors\RmsSystemPowerMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsTouchPanelMonitor</Identifier>
+<FilePathName>lib\amx-rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
 <FilePathName>lib\amx-rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="None" Type="DUET"><Identifier>rmsnlplatform</Identifier>
-<FilePathName>lib\amx-rms-sdk\rmsnlplatform.jar</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Module"><Identifier>RmsSystemPowerMonitor</Identifier>
-<FilePathName>lib\amx-rms-sdk\RmsSystemPowerMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="Include"><Identifier>common</Identifier>

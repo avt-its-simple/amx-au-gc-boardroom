@@ -1,126 +1,59 @@
 program_name='rms-main'
 
 
-define_variable
-
-// location ID for boardroom
-//integer nLocationIdBoardroom = 30
-//#warn '@WTF? - rms-main - what is the location ID for the boardroom? Do we even need this?'
-//char cLocationNameBoardroom[] = 'Gold Coast Boardroom'
-
-
-url_struct rmsUrl
-
-
-
+define_module
 
 // instantiate the Netlinx adaptor module which will start the RMS client
-define_module 'RmsNetLinxAdapter_dr4_0_0' modRMS1(vdvRms)
+'RmsNetLinxAdapter_dr4_0_0' mdlRms(vdvRms)
+
 // add the control system as an assett
-define_module 'RmsControlSystemMonitor' modRMSsysMon(vdvRms, dvMaster)
+'RmsControlSystemMonitor' mdlRmsControlSysMon(vdvRms, dvMaster)
+
 // monitor power of the system
-define_module 'RmsSystemPowerMonitor' modRMSPwrMon(vdvRms, dvMaster)
+'RmsSystemPowerMonitor' mdlRmsSysPwrMon(vdvRms, dvMaster)
 
+// DVX switcher monitor
+'RmsDvxSwitcherMonitor' mdlRmsDvxMon(vdvRms)
 
+// touch panel monitoring
+'RmsTouchPanelMonitor' mdlRmsTpMon(vdvRms, dvTpTableMain)
 
+// keypads
+'RmsGenericNetLinxDeviceMonitor' mdlRmsKeypad1Mon(vdvRms, dvKeypad1)
+'RmsGenericNetLinxDeviceMonitor' mdlRmsKeypad2Mon(vdvRms, dvKeypad2)
 
-// This function will get called when RMS is ready to register assets
-// as long as 'RmsEventListener' is included and the 
-// INCLUDE_RMS_CUSTOM_EVENT_CLIENT_RESPONSE_CALLBACK compiler directive is 
-// defined above the line on which 'RmsEventListener' is included.
-#define INCLUDE_RMS_EVENT_ASSETS_REGISTER_CALLBACK
-define_function RmsEventRegisterAssets()
-{
-	/*stack_var RmsAsset rmsAssetDtvRx
-	
-	
-	rmsAssetDtvRx.assetType = RMS_ASSET_TYPE_SETTOP_BOX
-	rmsAssetDtvRx.clientKey = cIpTvRxAddressBoardroom
-	rmsAssetDtvRx.globalKey = ''
-	rmsAssetDtvRx.name = 'TV Receiver'
-	rmsAssetDtvRx.description = 'High Definition Receiver, Ethernet, with integrated IR and Serial control'
-	rmsAssetDtvRx.manufacturerName = 'AMX'
-	rmsAssetDtvRx.manufacturerUrl = 'http://www.amx.com'
-	rmsAssetDtvRx.modelName = 'DTV-RX02HD'
-	rmsAssetDtvRx.modelUrl = 'http://www.amx.com/products/DTV-RX02-HD.asp'
-	rmsAssetDtvRx.serialNumber = ''
-	rmsAssetDtvRx.firmwareVersion = ''
-	*/
-}
+// DXLink receivers
+'RmsGenericNetLinxDeviceMonitor' mdlRmsRxMonitorLeftMon(vdvRms, dvRxMonitorLeftMain)
+'RmsGenericNetLinxDeviceMonitor' mdlRmsRxMonitorRightMon(vdvRms, dvRxMonitorRightMain)
 
+// DXLink transmitters
+'RmsGenericNetLinxDeviceMonitor' mdlRmsTxTable1Mon(vdvRms, dvTxTable1Main)
+'RmsGenericNetLinxDeviceMonitor' mdlRmsTxTable2Mon(vdvRms, dvTxTable2Main)
+'RmsGenericNetLinxDeviceMonitor' mdlRmsTxTable3Mon(vdvRms, dvTxTable3Main)
+'RmsGenericNetLinxDeviceMonitor' mdlRmsTxTable4Mon(vdvRms, dvTxTable4Main)
 
+// external relay box
+'RmsGenericNetLinxDeviceMonitor' mdlRmsRelayMon(vdvRms, dvRelaysRelBox)
 
+// camera
+// @TODO requires NetLinx / Duet control module for simple integration
 
-#define INCLUDE_RMS_EVENT_ASSET_REGISTERED_CALLBACK
-define_function RmsEventAssetRegistered(CHAR assetClientKey[], LONG assetId, CHAR newAssetRegistration)
-{
-	/*switch (assetClientKey)
-	{
-		case cIpTvRxAddressBoardroom:
-		{
-			/*
-			RmsAssetParameterEnqueueString(	CHAR assetClientKey[],
-											CHAR parameterKey[],
-											CHAR parameterName[],
-											CHAR parameterDescription[],
-											CHAR reportingType[],
-											CHAR initialValue[],
-											CHAR units[],
-											CHAR allowReset,
-											CHAR resetValue[],
-											CHAR trackChanges )
-			*/
-			
-			RmsAssetParameterEnqueueString(assetClientKey,
-											'Channel',
-											'Channel',
-											'Current Channel',
-											RMS_ASSET_PARAM_TYPE_NONE,
-											'',
-											'',
-											FALSE,
-											'',
-											FALSE)
-			
-			//RmsAssetParameterSubmit(assetClientKey)
-		}
-	}*/
-}
+// PDU monitor
+// @TODO implement PDU monitor - require schematics for visibility of attached devices
+//'RmsPowerDistributionUnitMonitor' mdlRmsPduMon(vdvRms
 
+// @TODO register occupancy sensor against system asset
 
+// @TODO register lighting system
 
+// @TODO register room PC
 
+// @TODO register blinds and shades
 
+// @TODO implement source usage monitoring
 
-/*
- * --------------------
- * Events for listening to RMS server
- * --------------------
- */
+// @TODO implement system power on/off notification and control
 
-
-
-define_event
-
-data_event[vdvRms]
-{
-	online: 
-	{
-	
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// monitoring for our LCD's
+'RmsDuetMonitorMonitor' mdlRmsLcdLeftMon(vdvRms, vdvMonitorLeft, dvMonitorLeft)
+'RmsDuetMonitorMonitor' mdlRmsLcdRightMon(vdvRms, vdvMonitorRight, dvMonitorRight)
