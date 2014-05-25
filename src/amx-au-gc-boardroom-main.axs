@@ -5,8 +5,8 @@ program_name='amx-au-gc-boardroom-main'
  * --------------------
  * Room: Boardroom
  * Location: AMX Australia Gold Coast office
- * 
- * 
+ *
+ *
  * Device Hostname Info
  * ::::::::::::::::::::
  * DVX in Rack:
@@ -104,7 +104,7 @@ integer DEV_ID_DUET_MODULE_VIRTUAL_DYNALITE         = 41004
  * Device ports
  * --------------------
  */
- 
+
  // Virtual device main port
 integer PORT_VIRTUAL_MAIN       = 1
 
@@ -257,7 +257,7 @@ dvDvxAudIn11    = DEV_ID_DVX_SWITCHER:DVX_PORT_AUD_IN_11:SYS_MASTER
 dvDvxAudIn12    = DEV_ID_DVX_SWITCHER:DVX_PORT_AUD_IN_12:SYS_MASTER
 dvDvxAudIn13    = DEV_ID_DVX_SWITCHER:DVX_PORT_AUD_IN_13:SYS_MASTER
 dvDvxAudIn14    = DEV_ID_DVX_SWITCHER:DVX_PORT_AUD_IN_14:SYS_MASTER
-// Names ports                                      
+// Names ports
 dvDvxAudInPc    = dvDvxAudIn5
 dvDvxAudInTx1   = dvDvxAudIn7
 dvDvxAudInTx2   = dvDvxAudIn8
@@ -334,25 +334,10 @@ vdvRms  = DEV_ID_DUET_MODULE_VIRTUAL_RMS:PORT_VIRTUAL_MAIN:SYS_MASTER
 
 /*
  * --------------------
- * 3rd party device includes
- * --------------------
- */
-
-// Need to declare the lighting include file after declaring the lighting devices
-#include 'dynalite-lighting'
-// Need to declare the nec monitor include file after declaring the monitor devices
-#include 'nec-monitor'
-// Need to declare the wake-on-lan include file after declaring the wake-on-lan IP socket
-#include 'wake-on-lan'
-// Need to declare the rms-main include file after declaring the RMS virtual device
-#include 'rms-main'
-
-/*
- * --------------------
  * Constant definitions
  * --------------------
  */
- 
+
 define_constant
 
 
@@ -866,7 +851,7 @@ char DYNALITE_PROTOCOL_RECALL_PRESET_VC_MODE_4[]    = {$1C,$01,$64,$0D,$00,$00,$
  * PDU outlet labels
  * --------------------
  */
- 
+
 char LABELS_PDU_OUTLETS[][20]   =
 {
 	'L MON',
@@ -885,7 +870,7 @@ char LABELS_PDU_OUTLETS[][20]   =
  * Page and popup page names
  * --------------------
  */
- 
+
 char POPUP_NAME_VIDEO_PREVIEW[]                 = 'popup-video-preview'
 char POPUP_NAME_VIDEO_LOADING[]                 = 'popup-video-loading'
 char POPUP_NAME_MESSAGE_QUERY_USER_LYNC_CALL[]  = 'popup-message-query-user-lync-call'
@@ -964,10 +949,10 @@ dev dvPanelsCoordinateTracking[] = {dvTpTableMain}
 // Override the DEV array within dvx-listener
 dev dvDvxMainPorts[] = {dvDvxMain}
 
-dev dvDvxVidOutPorts[] = 
+dev dvDvxVidOutPorts[] =
 {
-	dvDvxVidOutMultiPreview, 
-	dvDvxVidOutMonitorLeft, 
+	dvDvxVidOutMultiPreview,
+	dvDvxVidOutMonitorLeft,
 	dvDvxVidOutMonitorRight
 }
 
@@ -987,7 +972,7 @@ dev dvDvxVidInPorts[] =
 
 dev dvDvxAudOutPorts[] = {dvDvxAudOutSpeakers}
 
-dev dvDvxAudInPorts[] = 
+dev dvDvxAudInPorts[] =
 {
 	dvDvxAudInPc,
 	dvDvxAudInTx1,
@@ -999,52 +984,52 @@ dev dvDvxAudInPorts[] =
 //dev dvDvxMicInPorts[] = { 5002:1:0, 5002:2:0 }
 
 // Override the DEV arrays within dxlink-listener
-dev dvDxlinkTxMainPorts[] = 
+dev dvDxlinkTxMainPorts[] =
 {
 	dvTxTable1Main,
-	dvTxTable2Main, 
-	dvTxTable3Main, 
+	dvTxTable2Main,
+	dvTxTable3Main,
 	dvTxTable4Main
 }
 
-dev dvDxlinkTxDigitalVideoInPorts[] = 
+dev dvDxlinkTxDigitalVideoInPorts[] =
 {
-	dvTxTable1VidInDigital, 
-	dvTxTable2VidInDigital, 
-	dvTxTable3VidInDigital, 
+	dvTxTable1VidInDigital,
+	dvTxTable2VidInDigital,
+	dvTxTable3VidInDigital,
 	dvTxTable4VidInDigital
 }
 
-dev dvDxlinkTxAudInPorts[] = 
+dev dvDxlinkTxAudInPorts[] =
 {
-	dvTxTable1AudIn, 
-	dvTxTable2AudIn, 
-	dvTxTable3AudIn, 
+	dvTxTable1AudIn,
+	dvTxTable2AudIn,
+	dvTxTable3AudIn,
 	dvTxTable4AudIn
 }
 
-dev dvDxlinkTxAnalogVidInPorts[] = 
+dev dvDxlinkTxAnalogVidInPorts[] =
 {
-	dvTxTable1VidInAnalog, 
-	dvTxTable2VidInAnalog, 
-	dvTxTable3VidInAnalog, 
+	dvTxTable1VidInAnalog,
+	dvTxTable2VidInAnalog,
+	dvTxTable3VidInAnalog,
 	dvTxTable4VidInAnalog
 }
 
 // DXLink RX Ports
-dev dvDxlinkRxMainPorts[] = 
+dev dvDxlinkRxMainPorts[] =
 {
-	dvRxMonitorLeftMain, 
+	dvRxMonitorLeftMain,
 	dvRxMonitorRightMain
 }
 
-dev dvDxlinkRxVidOutPorts[] = 
+dev dvDxlinkRxVidOutPorts[] =
 {
-	dvRxMonitorLeftVidOut, 
+	dvRxMonitorLeftVidOut,
 	dvRxMonitorRightVidOut
 }
 
-dev dvDxlinkRxAudOutPorts[] = 
+dev dvDxlinkRxAudOutPorts[] =
 {	dvRxMonitorLeftAudOut,
 	dvRxMonitorRightAudOut
 }
@@ -1056,20 +1041,20 @@ dev dvPduMains1[] = {dvPduMain1}
 
 dev dvPduMains2[] = {dvPduMain2}
 
-dev dvPduOutlets[] = 
-{	dvPduOutlet1, 
-	dvPduOutlet2, 
-	dvPduOutlet3, 
-	dvPduOutlet4, 
-	dvPduOutlet5, 
-	dvPduOutlet6, 
-	dvPduOutlet7, 
+dev dvPduOutlets[] =
+{	dvPduOutlet1,
+	dvPduOutlet2,
+	dvPduOutlet3,
+	dvPduOutlet4,
+	dvPduOutlet5,
+	dvPduOutlet6,
+	dvPduOutlet7,
 	dvPduOutlet8
 }
 
-dev dvPduAxlinkBuses[] = 
+dev dvPduAxlinkBuses[] =
 {
-	dvPduAxlinkBus1, 
+	dvPduAxlinkBus1,
 	dvPduAxlinkBus2
 }
 
@@ -1098,7 +1083,7 @@ integer btnsVideoInputsMonitorLeft[]    =
 	BTN_VIDEO_MONITOR_LEFT_INPUT_10
 }
 
-integer btnsVideoInputsMonitorRight[]   = 
+integer btnsVideoInputsMonitorRight[]   =
 {
 	BTN_VIDEO_MONITOR_RIGHT_INPUT_01,
 	BTN_VIDEO_MONITOR_RIGHT_INPUT_02,
@@ -1250,6 +1235,24 @@ define_mutually_exclusive
 
 
 
+
+/*
+ * --------------------
+ * 3rd party device includes
+ * --------------------
+ */
+
+// Need to declare the lighting include file after declaring the lighting devices
+#include 'dynalite-lighting'
+// Need to declare the nec monitor include file after declaring the monitor devices
+#include 'nec-monitor'
+// Need to declare the wake-on-lan include file after declaring the wake-on-lan IP socket
+#include 'wake-on-lan'
+// Need to declare the rms-main include file after declaring the RMS virtual device
+#include 'rms-main'
+
+
+
 /*
  * --------------------
  * System functions
@@ -1271,7 +1274,7 @@ define_function recallCameraPreset (integer cameraPreset)
 			agentUsbPtzWebCamZoomOutStandardSpeed (dvPtzCam)
 			if (waitTimeCameraAdjustingToPreset1Focus)
 			agentUsbPtzWebCamFocusFarStandardSpeed (dvPtzCam)
-			
+
 			wait waitTimeCameraAdjustingToBasePosition
 			{
 				// adjust pan
@@ -1320,9 +1323,9 @@ define_function startMultiPreviewSnapshots ()
 	{
 		stack_var integer i
 		stack_var integer isAtLeastOneValidSignal
-		
+
 		isAtLeastOneValidSignal = FALSE
-		
+
 		// reset all timeline times back to zero
 		for (i = 1; i<= max_length_array(timelineTimesMultiPreviewSnapshots); i++)
 		{
@@ -1336,13 +1339,13 @@ define_function startMultiPreviewSnapshots ()
 				timelineTimesMultiPreviewSnapshots[i] = 0
 			}
 		}
-		
+
 		if (isAtLeastOneValidSignal)
 		{
 			if (!timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
 			{
 				set_length_array (timelineTimesMultiPreviewSnapshots, max_length_array(timelineTimesMultiPreviewSnapshots))
-				
+
 				timeline_create (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS,
 						timelineTimesMultiPreviewSnapshots,
 						length_array (timelineTimesMultiPreviewSnapshots),
@@ -1384,31 +1387,31 @@ define_function shutdownAvSystem ()
 	amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_WALL_WINDOW_UP)
 	amxRelayPulse (dvRelaysRelBox, REL_SHADES_CORNER_WINDOW_UP)
 	amxRelayPulse (dvRelaysRelBox, REL_SHADES_WALL_WINDOW_UP)
-	
+
 	// Lights - recall the "all on" preset
 	lightsEnablePresetAllOn ()
-	
+
 	// Video - Turn the monitors off and switch input "none" to the monitor and multi-preview outputs on the DVX
 	necMonitorSetPowerOff (vdvMonitorLeft)
 	necMonitorSetPowerOff (vdvMonitorRight)
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
 	dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMultiPreview.port)
-	
+
 	// Audio - Switch input "none" to the speaker output on the DVX, unmute the audio and reset the volume to a base level for next use
 	dvxSwitchAudioOnly (dvDvxMain, DVX_PORT_AUD_IN_NONE, dvDvxAudOutSpeakers.port)
 	dvxSetAudioOutputVolume (dvDvxAudOutSpeakers, volumeDefault)
 	dvxDisableAudioOutputMute (dvDvxAudOutSpeakers)
-	
+
 	// stop taking snapshots (no point constantly switching on the DVX anymore)
 	stopMultiPreviewSnapshots ()
-	
+
 	// recall Camera position
 	recallCameraPreset (CAMERA_PRESET_1)
-	
+
 	// set flag to indicate that system is not in use
 	isSystemAvInUse = FALSE
-	
+
 	// clear flags keeping track of selected video/audio inputs
 	selectedVideoInputMonitorLeft = FALSE
 	selectedVideoInputMonitorRight = FALSE
@@ -1419,86 +1422,86 @@ define_function shutdownAvSystem ()
 
 /*
  * Reports a valid signal on DXLink MFTX HDMI input.
- * 
- * Need to be a little bit careful here. This could be an indicator to tell us someone 
+ *
+ * Need to be a little bit careful here. This could be an indicator to tell us someone
  * has just plugged a video source into a table HDMI input but it might also just be
  * a response to the signal status query that we send to each MFTX when the DVX boots.
- * 
- * One thing we do know for sure is that if the AV system is already on and this notification 
+ *
+ * One thing we do know for sure is that if the AV system is already on and this notification
  * comes through just do nothing.
- * 
- * We really only want to react to this notification if the system is off in which case 
- * we turn the system on and route the DVX to the appropriate DXLink input corresponding 
+ *
+ * We really only want to react to this notification if the system is off in which case
+ * we turn the system on and route the DVX to the appropriate DXLink input corresponding
  * to the MFTX that triggered this notification MFTX.
  */
 define_function tableInputDetected (dev dvTxVidIn)
 {
 	#warn '@BUG: amx-au-gc-boardroom-main'
-	
+
 	/*
 	 * --------------------
 	 * This code running as expected but the MFTX is reporting a valid signal twice when a new input is plugged in.
-	 * 
+	 *
 	 * The result is that this function is getting called twice.
-	 * 
+	 *
 	 * If a new laptop input is plugged in when the system is off this function gets called the first time the MFTX reports
 	 * a valid signal and routes the newly found laptop video to the left monitor.
-	 * 
+	 *
 	 * But then the MFTX reports a valid signal again so this function gets called again. This time teh system is already on
 	 * and nothing is routed to the right monitor so this function sends the laptop to the right monitor.
-	 * 
+	 *
 	 * In effect, what the user sees is that when the plug in their laptop it comes on on both screens.
-	 * 
+	 *
 	 * Not really an issue as far as the user is concerned (they may think the system is designed to do just that) but it's
 	 * not what I want to happen!
 	 * --------------------
 	 */
-	
+
 	if (!isSystemAvInUse)
 	{
 		stack_var integer input
-		
+
 		select
 		{
 			active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
 			active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
-			
+
 			active (dvTxVidIn == dvTxTable2VidInDigital):    input = dvDvxVidInTx2.port
 			active (dvTxVidIn == dvTxTable2VidInAnalog):     input = dvDvxVidInTx2.port
-			
+
 			active (dvTxVidIn == dvTxTable3VidInDigital):    input = dvDvxVidInTx3.port
 			active (dvTxVidIn == dvTxTable3VidInAnalog):     input = dvDvxVidInTx3.port
-			
+
 			active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
 			active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
 		}
-		
+
 		// route the DVX input for this TX to the DVX output for the left monitor
 		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
 		// route the audio from the DVX input for this TX to the DVX output for the speakers
 		dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
 		// set the flag to show that the audio is following the left screen
 		audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
-		
+
 		// lower the shades, raise the blockouts
 		amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_CORNER_WINDOW_UP)
 		amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_WALL_WINDOW_UP)
 		amxRelayPulse (dvRelaysRelBox, REL_SHADES_CORNER_WINDOW_DN)
 		amxRelayPulse (dvRelaysRelBox, REL_SHADES_WALL_WINDOW_DN)
-		
+
 		// set up a nice lighting atmosphere for viewing the video
 		lightsSetLevelWithFade (LIGHT_ADDRESS_DOWN_LIGHTS_DESK, LIGHTING_LEVEL_100_PERCENT,5)
 		lightsSetLevelWithFade (LIGHT_ADDRESS_DOWN_LIGHTS_FRONT_WALL, LIGHTING_LEVEL_40_PERCENT,5)
 		lightsSetLevelWithFade (LIGHT_ADDRESS_DOWN_LIGHTS_SIDE_AND_BACK_WALLS, LIGHTING_LEVEL_40_PERCENT,5)
-		
+
 		// turn on the left monitor
 		necMonitorSetPowerOn (vdvMonitorLeft)
-		
+
 		// flip the panel to the main page
 		moderoSetPage (dvTpTableMain, PAGE_NAME_MAIN_USER)
 		// show the source selection / volume control page
 		moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_SELECTION)
-		
+
 		// set the flag to show that the AV system is now in use
 		isSystemAvInUse = TRUE
 	}
@@ -1506,74 +1509,74 @@ define_function tableInputDetected (dev dvTxVidIn)
 	else if (selectedVideoInputMonitorLeft == DVX_PORT_VID_IN_NONE)
 	{
 		stack_var integer input
-		
+
 		select
 		{
 			active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
 			active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
-			
+
 			active (dvTxVidIn == dvTxTable2VidInDigital):    input = dvDvxVidInTx2.port
 			active (dvTxVidIn == dvTxTable2VidInAnalog):     input = dvDvxVidInTx2.port
-			
+
 			active (dvTxVidIn == dvTxTable3VidInDigital):    input = dvDvxVidInTx3.port
 			active (dvTxVidIn == dvTxTable3VidInAnalog):     input = dvDvxVidInTx3.port
-			
+
 			active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
 			active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
 		}
-		
+
 		// route the DVX input for this TX to the DVX output for the left monitor
 		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorLeft.port)
-		
+
 		// audio
 		if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
 		      ((audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port) and (signalStatusDvxInputMonitorRight != DVX_SIGNAL_STATUS_VALID_SIGNAL))  )
 		{
 			audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
 		}
-		
+
 		if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
 		{
 			dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
 		}
-		
+
 		// turn on the left monitor
 		necMonitorSetPowerOn (vdvMonitorLeft)
 	}
 	else if (selectedVideoInputMonitorRight == DVX_PORT_VID_IN_NONE)
 	{
 		stack_var integer input
-		
+
 		select
 		{
 			active (dvTxVidIn == dvTxTable1VidInDigital):    input = dvDvxVidInTx1.port
 			active (dvTxVidIn == dvTxTable1VidInAnalog):     input = dvDvxVidInTx1.port
-			
+
 			active (dvTxVidIn == dvTxTable2VidInDigital):    input = dvDvxVidInTx2.port
 			active (dvTxVidIn == dvTxTable2VidInAnalog):     input = dvDvxVidInTx2.port
-			
+
 			active (dvTxVidIn == dvTxTable3VidInDigital):    input = dvDvxVidInTx3.port
 			active (dvTxVidIn == dvTxTable3VidInAnalog):     input = dvDvxVidInTx3.port
-			
+
 			active (dvTxVidIn == dvTxTable4VidInDigital):    input = dvDvxVidInTx4.port
 			active (dvTxVidIn == dvTxTable4VidInAnalog):     input = dvDvxVidInTx4.port
 		}
-		
+
 		// route the DVX input for this TX to the DVX output for the right monitor
 		dvxSwitchVideoOnly (dvDvxMain, input, dvDvxVidOutMonitorRight.port)
-		
+
 		// audio
 		if (  (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
 		      ((audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port) and (signalStatusDvxInputMonitorLeft != DVX_SIGNAL_STATUS_VALID_SIGNAL))    )
 		{
 			audioFollowingVideoOutput = dvDvxVidOutMonitorRight.port
 		}
-		
+
 		if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
 		{
 			dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
 		}
-		
+
 		// turn on the right monitor
 		necMonitorSetPowerOn (vdvMonitorRight)
 	}
@@ -1584,26 +1587,26 @@ define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
 {
 	// kill the multi-preview snapshot timeline
 	stopMultiPreviewSnapshots ()
-	
+
 	// turn on the video being previed flag
 	ON [isVideoBeingPreviewed]
-	
+
 	// delete video snapshot on the video preview button
 	moderoDeleteButtonVideoSnapshot (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL)
-	
+
 	moderoDisableButtonFeedback (dvTpTableVideo, BTN_VIDEO_PREVIEW_LOADING_BAR)    // reset the loading progress bar
-	
+
 	moderoSetButtonOpacity (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_INVISIBLE)
 	//moderoSetButtonHide (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW)
 	moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_LOADING_PREVIEW)
 	moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_LOADING_BAR)
-	
+
 	moderoEnablePopup (dvTpTableVideo, POPUP_NAME_VIDEO_PREVIEW)
-	
+
 	moderoEnableButtonFeedback (dvTpTableVideo, BTN_VIDEO_PREVIEW_LOADING_BAR) //start the loading progress bar
-	
+
 	dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInPort.port, dvDvxVidOutMultiPreview.port)
-	
+
 	CANCEL_WAIT 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
 	WAIT waitTimeVideoLoading 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
 	{
@@ -1664,7 +1667,7 @@ define_function dvxNotifySwitch (dev dvxPort1, char signalType[], integer input,
 	// signalType contains the type of signal that was switched ('AUDIO' or 'VIDEO')
 	// input contains the source input number that was switched to the destination
 	// output contains the destination output number that the source was switched to
-	
+
 	switch (signalType)
 	{
 		case SIGNAL_TYPE_VIDEO:
@@ -1672,7 +1675,7 @@ define_function dvxNotifySwitch (dev dvxPort1, char signalType[], integer input,
 			select
 			{
 				active (output == dvDvxVidOutMonitorLeft.port):     selectedVideoInputMonitorLeft = input
-				
+
 				active (output == dvDvxVidOutMonitorRight.port):    selectedVideoInputMonitorRight = input
 			}
 		}
@@ -1692,10 +1695,10 @@ define_function dvxNotifyVideoInputName (dev dvxVideoInput, char name[])
 {
 	// dvxVideoInput is the D:P:S of the video input port on the DVX switcher. The input number can be taken from dvxVideoInput.PORT
 	// name is the name of the video input
-	
+
 	//moderoSetButtonText (dvTpTableVideo, btnsVideoInputsMonitorLeft[dvxVideoInput.port], MODERO_BUTTON_STATE_ALL, name)
 	//moderoSetButtonText (dvTpTableVideo, btnsVideoInputsMonitorRight[dvxVideoInput.port], MODERO_BUTTON_STATE_ALL, name)
-	
+
 	dvx.videoInputs[dvxVideoInput.port].name = name
 }
 
@@ -1705,18 +1708,18 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 {
 	// dvxVideoInput is the D:P:S of the video input port on the DVX switcher. The input number can be taken from dvxVideoInput.PORT
 	// signalStatus is the input signal status (DVX_SIGNAL_STATUS_NO_SIGNAL | DVX_SIGNAL_STATUS_UNKNOWN | DVX_SIGNAL_STATUS_VALID_SIGNAL)
-	
+
 	stack_var char oldSignalStatus[50]
-	
+
 	oldSignalStatus = dvx.videoInputs[dvxVideoInput.port].status
-	
+
 	if (signalStatus != oldSignalStatus)
 	{
 		dvx.videoInputs[dvxVideoInput.port].status = signalStatus
 		startMultiPreviewSnapshots ()
 	}
-	
-	
+
+
 	switch (signalStatus)
 	{
 		case DVX_SIGNAL_STATUS_NO_SIGNAL:
@@ -1729,13 +1732,13 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 		{
 			moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_LEFT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL)
 			moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL)
-			
+
 			// NOTE: Don't set the dynamic resource here. That should be done by the timeline event for taking snapshots.
 			// Otherwise it could result in the snapshots image of the currently routed video to the MPL being shown on all snapshot buttons.
-			
+
 		}
 	}
-	
+
 	if (dvxVideoInput.port == selectedVideoInputMonitorLeft)
 	{
 		signalStatusDvxInputMonitorLeft = signalStatus
@@ -1744,7 +1747,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	{
 		signalStatusDvxInputMonitorRight = signalStatus
 	}
-	
+
 	// Energy saving - switch off monitors when signal has been disconnected for some time
 	// if signal
 	switch (signalStatus)
@@ -1754,7 +1757,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 			if (dvxVideoInput.port == selectedVideoInputMonitorLeft)
 			{
 				cancel_wait 'WAIT_FOR_SIGNAL_OF_INPUT_ROUTED_TO_LEFT_MONITOR_TO_RETURN'
-				
+
 			}
 			if (dvxVideoInput.port == selectedVideoInputMonitorRight)
 			{
@@ -1770,7 +1773,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 					necMonitorSetPowerOff (vdvMonitorLeft)
 					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorLeft.port)
 					off [selectedVideoInputMonitorLeft]
-					
+
 					if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
 					{
 						if (signalStatusDvxInputMonitorRight == DVX_SIGNAL_STATUS_VALID_SIGNAL)
@@ -1788,7 +1791,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 					}
 				}
 			}
-			
+
 			if (dvxVideoInput.port == selectedVideoInputMonitorRight)
 			{
 				wait waitTimeValidSignal 'WAIT_FOR_SIGNAL_OF_INPUT_ROUTED_TO_RIGHT_MONITOR_TO_RETURN'
@@ -1796,7 +1799,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 					necMonitorSetPowerOff (vdvMonitorRight)
 					dvxSwitchVideoOnly (dvDvxMain, DVX_PORT_VID_IN_NONE, dvDvxVidOutMonitorRight.port)
 					off [selectedVideoInputMonitorRight]
-					
+
 					if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
 					{
 						if (signalStatusDvxInputMonitorLeft == DVX_SIGNAL_STATUS_VALID_SIGNAL)
@@ -1824,15 +1827,15 @@ define_function dvxNotifyAudioOutMute (dev dvxAudioOutput, char muteStatus[])
 {
 	// dvxAudioOutput is the D:P:S of the video output port on the DVX switcher. The output number can be taken from dvDvxAudioOutput.PORT
 	// muteStatus is the mute status (STATUS_ENABLE | STATUS_DISABLE)
-	
+
 	dvx.audioOutputs[dvxAudioOutput.port].muteStatus = muteStatus
-	
+
 	if (dvxAudioOutput == dvDvxAudOutSpeakers)
 	{
 		switch (muteStatus)
 		{
 			case STATUS_ENABLE:    moderoEnableButtonFeedback (dvTpTableAudio, BTN_AUDIO_VOLUME_MUTE)
-			
+
 			case STATUS_DISABLE:   moderoDisableButtonFeedback (dvTpTableAudio, BTN_AUDIO_VOLUME_MUTE)
 		}
 	}
@@ -1844,9 +1847,9 @@ define_function dvxNotifyAudioOutVolume (dev dvxAudioOutput, integer volume)
 {
 	// dvxAudioOutput is the D:P:S of the video output port on the DVX switcher. The output number can be taken from dvDvxAudioOutput.PORT
 	// volume is the volume value (range: 0 to 100)
-	
+
 	dvx.audioOutputs[dvxAudioOutput.port].volume = volume
-	
+
 	if (dvxAudioOutput == dvDvxAudOutSpeakers)
 	{
 		send_level dvTpTableAudio, BTN_LVL_VOLUME_DISPLAY, volume
@@ -1858,7 +1861,7 @@ define_function dvxNotifyAudioOutMaximumVolume (dev dvxAudioOutput, integer maxV
 {
 	// dvxAudioOutput is the D:P:S of the video output port on the DVX switcher. The output number can be taken from dvDvxAudioOutput.PORT
 	// maxVol is the maximum volume setting for the audio output port (range: 0 to 100)
-	
+
 	if (dvxAudioOutput == dvDvxAudOutSpeakers)
 	{
 		moderoSetButtonBargraphUpperLimit (dvTpTableAudio, BTN_ADR_VOLUME_BARGRAPH_CONTROL, /*MODERO_BUTTON_STATE_ALL,*/ maxVol)
@@ -1879,7 +1882,7 @@ define_function dxlinkNotifyRxVideoOutputResolution (dev dxlinkRxVideoOutput, ch
 {
 	// dxlinkRxVideoOutput is the D:P:S of the video output port on the DXLink receiver
 	// cResolution is the video output resolution and refresh (HORxVER,REF)
-	
+
 	select
 	{
 		active(dxlinkRxVideoOutput == dvRxMonitorLeftVidOut):
@@ -1889,7 +1892,7 @@ define_function dxlinkNotifyRxVideoOutputResolution (dev dxlinkRxVideoOutput, ch
 					MODERO_BUTTON_STATE_ALL,
 					resolution)
 		}
-		
+
 		active(dxlinkRxVideoOutput == dvRxMonitorRightVidOut):
 			moderoSetButtonText (dvTpTableDxlink, BTN_ADR_DXLINK_RX_OUTPUT_RESOLUTION_MONITOR_RIGHT, MODERO_BUTTON_STATE_ALL, resolution)
 	}
@@ -1901,7 +1904,7 @@ define_function dxlinkNotifyRxVideoOutputScaleMode (dev dxlinkRxVideoOutput, cha
 {
 	// dxlinkRxVideoOutput is the D:P:S of the video output port on the DXLink receiver
 	// scaleMode contains the scaler mode (DXLINK_SCALE_MODE_AUTO | DXLINK_SCALE_MODE_BYPASS | DXLINK_SCALE_MODE_MANUAL)
-	
+
 	select
 	{
 		active(dxlinkRxVideoOutput == dvRxMonitorLeftVidOut):
@@ -1913,7 +1916,7 @@ define_function dxlinkNotifyRxVideoOutputScaleMode (dev dxlinkRxVideoOutput, cha
 				case DXLINK_SCALE_MODE_MANUAL:  moderoEnableButtonFeedback( dvTpTableDxlink, BTN_DXLINK_RX_SCALER_MANUAL_MONITOR_LEFT)
 			}
 		}
-		
+
 		active(dxlinkRxVideoOutput == dvRxMonitorRightVidOut):
 		{
 			switch (scaleMode)
@@ -1932,7 +1935,7 @@ define_function dxlinkNotifyRxVideoOutputAspectRatio (dev dxlinkRxVideoOutput, c
 {
 	// dxlinkRxVideoOutput is the D:P:S of the video output port on the DXLink receiver
 	// cAspectRatio is the aspect ratio (DXLINK_ASPECT_RATIO_ANAMORPHIC | DXLINK_ASPECT_RATIO_MAINTAIN | DXLINK_ASPECT_RATIO_STRETCH | DXLINK_ASPECT_RATIO_ZOOM)
-	
+
 	select
 	{
 		active(dxlinkRxVideoOutput == dvRxMonitorLeftVidOut):
@@ -1945,7 +1948,7 @@ define_function dxlinkNotifyRxVideoOutputAspectRatio (dev dxlinkRxVideoOutput, c
 				case DXLINK_ASPECT_RATIO_ZOOM:          moderoEnableButtonFeedback (dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_ZOOM_MONITOR_LEFT)
 			}
 		}
-		
+
 		active(dxlinkRxVideoOutput == dvRxMonitorRightVidOut):
 		{
 			switch (aspectRatio)
@@ -1965,7 +1968,7 @@ define_function dxlinkNotifyTxVideoInputAutoSelect (dev dxlinkTxPort1, char stat
 {
 	// dvDxlinkTxPort1 is the port #1 on the DXLink Tx
 	// cStatus contains the auto video input select status (STATUS_ENABLE | STATUS_DISABLE)
-	
+
 	switch (status)
 	{
 		case STATUS_ENABLE:
@@ -1997,13 +2000,13 @@ define_function dxlinkNotifyTxVideoInputStatusAnalog (dev dxlinkTxAnalogVideoInp
 {
 	// dxlinkTxAnalogVideoInput is the analog video input port on the DXLink Tx
 	// signalStatus is the input signal status (DXLINK_SIGNAL_STATUS_NO_SIGNAL | DXLINK_SIGNAL_STATUS_UNKNOWN | DXLINK_SIGNAL_STATUS_VALID_SIGNAL)
-	
+
 	switch (signalStatus)
 	{
 		case DXLINK_SIGNAL_STATUS_UNKNOWN:    {}
-		
+
 		case DXLINK_SIGNAL_STATUS_NO_SIGNAL:  {}
-		
+
 		case DXLINK_SIGNAL_STATUS_VALID_SIGNAL:
 		{
 			tableInputDetected (dxlinkTxAnalogVideoInput)
@@ -2017,13 +2020,13 @@ define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoI
 {
 	// dxlinkTxDigitalVideoInput is the digital video input port on the DXLink Tx
 	// signalStatus is the input signal status (DXLINK_SIGNAL_STATUS_NO_SIGNAL | DXLINK_SIGNAL_STATUS_UNKNOWN | DXLINK_SIGNAL_STATUS_VALID_SIGNAL)
-	
+
 	switch (signalStatus)
 	{
 		case DXLINK_SIGNAL_STATUS_UNKNOWN:    {}
-		
+
 		case DXLINK_SIGNAL_STATUS_NO_SIGNAL:  {}
-		
+
 		case DXLINK_SIGNAL_STATUS_VALID_SIGNAL:
 		{
 			tableInputDetected (dxlinkTxDigitalVideoInput)
@@ -2054,7 +2057,7 @@ define_function dxlinkNotifyTxSwitch (dev dxlinkTxPort1, integer input, integer 
 	// dxlinkTxPort1 is port 1 on the DXLink Tx.
 	// input contains the input port on the DXLink TX that has been selected (DXLINK_PORT_VIDEO_INPUT_ANALOG | DXLINK_PORT_VIDEO_INPUT_DIGITAL)
 	// output contains the output of the DXLink TX. This is always DXLINK_PORT_VIDEO_OUTPUT.
-	
+
 	switch (input)
 	{
 		case DXLINK_PORT_VIDEO_INPUT_ANALOG:
@@ -2129,7 +2132,7 @@ define_function pduNotifyPowerSenseTrigger (dev pduPort1, integer outlet, float 
 	// pduPort1 is port 1 on the PDU
 	// outlet is the outlet of the PDU which is reporting the power sense trigger value
 	// triggerValue is the power sense trigger value
-	
+
 	moderoSetButtonText (dvTpTablePower, BTNS_ADR_POWER_SENSE_TRIGGER[outlet], MODERO_BUTTON_STATE_ALL, ftoa(triggerValue))
 }
 
@@ -2372,7 +2375,7 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 {
 	// ioPort is the IO port.
 	// ioChanCde is the IO channel code.
-	
+
 	if (ioPort == dvDvxIos)
 	{
 		switch (ioChanCde)
@@ -2381,13 +2384,13 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 			{
 				// occupancy has been detected - meaning the room was previously vacant
 				isRoomOccupied = TRUE
-				
+
 				// Set lights to "all on" mode as people have entered the room
 				lightsEnablePresetAllOn ()
-				
+
 				// wake up the touch panel
 				moderoWake (dvTpTableMain)
-				
+
 				// start taking snapshots (just in case the person who triggered the occ sensor wants to go to the source selection page)
 				startMultiPreviewSnapshots ()
 			}
@@ -2402,7 +2405,7 @@ define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 {
 	// ioPort is the IO port.
 	// ioChanCde is the IO channel code.
-	
+
 	if (ioPort == dvDvxIos)
 	{
 		switch (ioChanCde)
@@ -2411,19 +2414,19 @@ define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 			{
 				// room is now unoccupied (note: Will take 8 minutes minimum to trigger after person leaves room)
 				isRoomOccupied = FALSE
-				
+
 				// Set lights to "all off" mode as there have been no people in the room for at least 8 minutes
 				lightsEnablePresetAllOff ()
-				
+
 				// Flip the touch panel to the splash screen
 				moderoSetPage (dvTpTableMain, PAGE_NAME_SPLASH_SCREEN)
-				
+
 				// Send the panel to sleep
 				moderoSleep (dvTpTableMain)
-				
+
 				// Stop taking snapshots
 				stopMultiPreviewSnapshots ()
-				
+
 				// shutdown the system if it was being used (i.e., someone just walked away without pressing the shutdown button on the panel)
 				if (isSystemAvInUse)
 				{
@@ -2493,7 +2496,7 @@ data_event[dvTpTableMain]
 				dvxSetVideoOutputResolution (dvDvxVidOutMultiPreview, DVX_VIDEO_OUTPUT_RESOLUTION_1280x720p_60HZ)
 				dvxSetVideoOutputAspectRatio (dvDvxVidOutMultiPreview, DVX_ASPECT_RATIO_STRETCH)
 			}
-			
+
 			active (data.device == dvTpTableMain):
 				moderoSetMultiPreviewInputFormatAndResolution (dvTpTableMain, MODERO_MULTI_PREVIEW_INPUT_FORMAT_HDMI, MODERO_MULTI_PREVIEW_INPUT_RESOLUTION_HDMI_1280x720p30HZ)
 		}
@@ -2527,11 +2530,11 @@ data_event[dvTpTableMain]
 		/*
 		 * --------------------
 		 * Request info from connected devices.
-		 * 
+		 *
 		 * This will solicit a response which will in turn update button feedback.
 		 * --------------------
 		 */
-		
+
 		// DVX
 		dvxRequestVideoInputNameAll (dvDvxMain)
 		dvxRequestVideoInputStatusAll (dvDvxMain)
@@ -2541,17 +2544,17 @@ data_event[dvTpTableMain]
 		dvxRequestAudioOutputMute (dvDvxAudOutSpeakers)
 		dvxRequestAudioOutputVolume (dvDvxAudOutSpeakers)
 		dvxRequestAudioOutputMaximumVolume (dvDvxAudOutSpeakers)
-		
+
 		// DXLink Rx - Left monitor
 		dxlinkRequestRxVideoOutputResolution (dvRxMonitorLeftVidOut)
 		dxlinkRequestRxVideoOutputAspectRatio (dvRxMonitorLeftVidOut)
 		dxlinkRequestRxVideoOutputScaleMode (dvRxMonitorLeftVidOut)
-		
+
 		// DXLink Rx - Right monitor
 		dxlinkRequestRxVideoOutputResolution (dvRxMonitorRightVidOut)
 		dxlinkRequestRxVideoOutputAspectRatio (dvRxMonitorRightVidOut)
 		dxlinkRequestRxVideoOutputScaleMode (dvRxMonitorRightVidOut)
-		
+
 		// DXLink Tx's
 		dxlinkRequestTxVideoInputAutoSelect (dvTxTable1Main)
 		dxlinkRequestTxVideoInputAutoSelect (dvTxTable2Main)
@@ -2569,7 +2572,7 @@ data_event[dvTpTableMain]
 		dxlinkRequestTxVideoInputSignalStatusDigital (dvTxTable2VidInDigital)
 		dxlinkRequestTxVideoInputSignalStatusDigital (dvTxTable3VidInDigital)
 		dxlinkRequestTxVideoInputSignalStatusDigital (dvTxTable4VidInDigital)
-		
+
 		// PDU
 		pduRequestVersion (dvPduMain1)
 		pduRequestSerialNumber (dvPduMain1)
@@ -2582,11 +2585,11 @@ data_event[dvTpTableMain]
 		pduRequestPowerTriggerSenseValue (dvPduMain1, PDU_OUTLET_6)
 		pduRequestPowerTriggerSenseValue (dvPduMain1, PDU_OUTLET_7)
 		pduRequestPowerTriggerSenseValue (dvPduMain1, PDU_OUTLET_8)
-		
+
 		// Update button text for PDU button labels
 		{
 			stack_var integer i
-			
+
 			for (i = 1; i <= PDU_MAX_OUTLETS; i++)
 			{
 				moderoSetButtonText (dvTpTablePower, BTNS_ADR_POWER_OUTLET_LABELS[i], MODERO_BUTTON_STATE_ALL, LABELS_PDU_OUTLETS[i])
@@ -2611,11 +2614,11 @@ data_event[dvTxTable1VidInAnalog]
 data_event[dvTxTable2VidInAnalog]
 data_event[dvTxTable3VidInAnalog]
 data_event[dvTxTable4VidInAnalog]
-{                 
+{
 	online:
 	{
 		dxlinkRequestTxVideoInputSignalStatusAnalog (data.device)
-		
+
 	}
 }
 
@@ -2623,11 +2626,11 @@ data_event[dvTxTable1VidInDigital]
 data_event[dvTxTable2VidInDigital]
 data_event[dvTxTable3VidInDigital]
 data_event[dvTxTable4VidInDigital]
-{                 
+{
 	online:
 	{
 		dxlinkRequestTxVideoInputSignalStatusDigital (data.device)
-		
+
 	}
 }
 
@@ -2658,11 +2661,11 @@ button_event[dvKeypad1,0]
 		{
 			case BTN_KP_OFF:         lightsEnablePresetAllOff()
 			case BTN_KP_LIGHTS:      lightsEnablePresetAllOn()
-			
+
 			case BTN_KP_AV_OFF:      shutdownAvSystem ()
-			
+
 			case BTN_KP_WHITEBOARD:  lightsToggle (LIGHT_ADDRESS_DOWN_LIGHTS_WHITEBOARD)
-			
+
 			case BTN_KP_SHADES:
 			{
 				amxRelayPulse (dvRelaysRelBox, REL_SHADES_CORNER_WINDOW_DN)
@@ -2673,7 +2676,7 @@ button_event[dvKeypad1,0]
 				amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_CORNER_WINDOW_DN)
 				amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_WALL_WINDOW_DN)
 			}
-			
+
 			#warn '@TODO: amx-au-gc-boardroom-main - What do we want to do with these keypad buttons? Anything?'
 			case BTN_KP_WHEEL_ROTATE_LT: {}
 			case BTN_KP_WHEEL_ROTATE_RT: {}
@@ -2698,7 +2701,7 @@ button_event[dvTpTableAudio,0]
 			case BTN_AUDIO_VOLUME_DN:    dvxEnableAudioOutputVolumeRampDown (dvDvxAudOutSpeakers)
 			case BTN_AUDIO_VOLUME_UP:    dvxEnableAudioOutputVolumeRampUp (dvDvxAudOutSpeakers)
 			case BTN_AUDIO_VOLUME_MUTE:  dvxCycleAudioOutputVolumeMute (dvDvxAudOutSpeakers)
-			
+
 			case BTN_AUDIO_INPUT_01:     dvxSwitchAudioOnly (dvDvxMain, 1, dvDvxAudOutSpeakers.port)
 			case BTN_AUDIO_INPUT_02:     dvxSwitchAudioOnly (dvDvxMain, 2, dvDvxAudOutSpeakers.port)
 			case BTN_AUDIO_INPUT_03:     dvxSwitchAudioOnly (dvDvxMain, 3, dvDvxAudOutSpeakers.port)
@@ -2709,7 +2712,7 @@ button_event[dvTpTableAudio,0]
 			case BTN_AUDIO_INPUT_08:     dvxSwitchAudioOnly (dvDvxMain, 8, dvDvxAudOutSpeakers.port)
 			case BTN_AUDIO_INPUT_09:     dvxSwitchAudioOnly (dvDvxMain, 9, dvDvxAudOutSpeakers.port)
 			case BTN_AUDIO_INPUT_10:     dvxSwitchAudioOnly (dvDvxMain, 10, dvDvxAudOutSpeakers.port)
-			
+
 			case BTN_AUDIO_FOLLOW_MONITOR_LEFT:
 			{
 				audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
@@ -2743,29 +2746,29 @@ button_event[dvTpTableVideo,BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION]
 		if (!isVideoBeingPreviewed)
 		{
 			necMonitorSetPowerOn (vdvMonitorLeft)
-			
+
 			dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION)].port, dvDvxVidOutMonitorLeft.port)
-			
+
 			if (dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION)] == dvDvxVidInPc)
 			{
 				wakeOnLan (MAC_ADDRESS_PC)
 			}
-			
+
 			if ( (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
 			     ((audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port) and (signalStatusDvxInputMonitorRight != DVX_SIGNAL_STATUS_VALID_SIGNAL))  )
 			{
 				audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
 			}
-			
+
 			if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
 			{
 				dvxSwitchAudioOnly (dvDvxMain, dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION)].port, dvDvxAudOutSpeakers.port)
 			}
-			
+
 			// set flag to indicate that system is in use
 			isSystemAvInUse = TRUE
 		}
-		
+
 		// turn off the video being previewed flag
 		//isVideoBeingPreviewed = FALSE	// moved to data_event to capture video preview popup hiding
 	}
@@ -2782,29 +2785,29 @@ button_event[dvTpTableVideo,BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION]
 		if (!isVideoBeingPreviewed)
 		{
 			necMonitorSetPowerOn (vdvMonitorRight)
-			
+
 			dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION)].port, dvDvxVidOutMonitorRight.port)
-			
+
 			if (dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION)] == dvDvxVidInPc)
 			{
 				wakeOnLan (MAC_ADDRESS_PC)
 			}
-			
+
 			if ( (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
 			     ((audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port) and (signalStatusDvxInputMonitorLeft != DVX_SIGNAL_STATUS_VALID_SIGNAL))    )
 			{
 				audioFollowingVideoOutput = dvDvxVidOutMonitorRight.port
 			}
-			
+
 			if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
 			{
 				dvxSwitchAudioOnly (dvDvxMain, dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION)].port, dvDvxAudOutSpeakers.port)
 			}
-			
+
 			// set flag to indicate that system is in use
 			isSystemAvInUse = TRUE
 		}
-		
+
 		// turn off the video being previewed flag
 		//isVideoBeingPreviewed = FALSE   // moved to data_event to capture video preview popup hiding
 	}
@@ -2820,7 +2823,7 @@ button_event[dvTpTableVideo,0]
 			case BTN_VIDEO_MONITOR_LEFT_ON:      necMonitorSetPowerOn (vdvMonitorLeft)
 			case BTN_VIDEO_MONITOR_RIGHT_OFF:    necMonitorSetPowerOff (vdvMonitorRight)
 			case BTN_VIDEO_MONITOR_RIGHT_ON:     necMonitorSetPowerOn (vdvMonitorRight)
-			
+
 			case BTN_VIDEO_QUERY_LYNC_CALL_NO:   {}  // ignore
 			case BTN_VIDEO_QUERY_LYNC_CALL_YES:
 			{
@@ -2829,7 +2832,7 @@ button_event[dvTpTableVideo,0]
 				amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_WALL_WINDOW_DN)
 				dvxSetAudioOutputVolume (dvDvxAudOutSpeakers, volumeDefault)
 			}
-			
+
 			case BTN_VIDEO_LYNC_MONITOR_LEFT:
 			{
 				min_to [button.input]   // feedback for the button
@@ -2846,7 +2849,7 @@ button_event[dvTpTableVideo,0]
 				// set flag to indicate that system is in use
 				isSystemAvInUse = TRUE
 			}
-			
+
 			case BTN_VIDEO_LYNC_MONITOR_RIGHT:
 			{
 				min_to [button.input]   // feedback for the button
@@ -2872,17 +2875,17 @@ button_event[dvTpTableLighting,0]
 	push:
 	{
 		min_to [button.input]
-		
+
 		switch (button.input.channel)
 		{
 			case BTN_LIGHTING_PRESET_ALL_OFF:    lightsEnablePresetAllOff()
 			case BTN_LIGHTING_PRESET_ALL_ON:     lightsEnablePresetAllOn()
 			case BTN_LIGHTING_PRESET_ALL_DIM:    lightsEnablePresetAllDim()
 			case BTN_LIGHTING_PRESET_VC_MODE:    lightsEnablePresetVc()
-			
+
 			case BTN_LIGHTING_AREA_WHITEBOARD_OFF:   lightsOff (LIGHT_ADDRESS_DOWN_LIGHTS_WHITEBOARD)
 			case BTN_LIGHTING_AREA_WHITEBOARD_ON:    lightsOn (LIGHT_ADDRESS_DOWN_LIGHTS_WHITEBOARD)
-			
+
 			case BTN_LIGHTING_AREA_FRONT_UP:             lightsEnableRampUp (LIGHT_ADDRESS_DOWN_LIGHTS_FRONT_WALL)
 			case BTN_LIGHTING_AREA_FRONT_DN:             lightsEnableRampDown (LIGHT_ADDRESS_DOWN_LIGHTS_FRONT_WALL)
 			case BTN_LIGHTING_AREA_SIDE_AND_BACK_UP:     lightsEnableRampUp (LIGHT_ADDRESS_DOWN_LIGHTS_SIDE_AND_BACK_WALLS)
@@ -2910,25 +2913,25 @@ button_event[dvTpTableBlinds,0]
 	push:
 	{
 		min_to [button.input]
-		
+
 		switch (button.input.channel)
 		{
 			case BTN_BLIND_1_UP:     amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_CORNER_WINDOW_UP)
 			case BTN_BLIND_1_DOWN:   amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_CORNER_WINDOW_DN)
 			case BTN_BLIND_1_STOP:   amxRelayPulse (dvRelaysDvx, REL_DVX_BLOCKOUTS_CORNER_WINDOW_STOP)
-			
+
 			case BTN_BLIND_2_UP:     amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_WALL_WINDOW_UP)
 			case BTN_BLIND_2_DOWN:   amxRelayPulse (dvRelaysRelBox, REL_BLOCKOUTS_WALL_WINDOW_DN)
 			case BTN_BLIND_2_STOP:   amxRelayPulse (dvRelaysDvx, REL_DVX_BLOCKOUTS_WALL_WINDOW_STOP)
-			
+
 			case BTN_SHADE_1_UP:     amxRelayPulse (dvRelaysRelBox, REL_SHADES_CORNER_WINDOW_UP)
 			case BTN_SHADE_1_DOWN:   amxRelayPulse (dvRelaysRelBox, REL_SHADES_CORNER_WINDOW_DN)
 			case BTN_SHADE_1_STOP:   amxRelayPulse (dvRelaysDvx, REL_DVX_SHADES_CORNER_WINDOW_STOP)
-			
+
 			case BTN_SHADE_2_UP:     amxRelayPulse (dvRelaysRelBox, REL_SHADES_WALL_WINDOW_UP)
 			case BTN_SHADE_2_DOWN:   amxRelayPulse (dvRelaysRelBox, REL_SHADES_WALL_WINDOW_DN)
 			case BTN_SHADE_2_STOP:   amxRelayPulse (dvRelaysDvx, REL_DVX_SHADES_WALL_WINDOW_STOP)
-		}                      
+		}
 	}
 }
 
@@ -2941,7 +2944,7 @@ button_event[dvTpTablePower,0]
 			case BTN_POWER_TOGGLE_MONITOR_LEFT:  pduToggleRelayPower (dvPduOutletMonitorLeft)
 			case BTN_POWER_TOGGLE_MONITOR_RIGHT: pduToggleRelayPower (dvPduOutletMonitorRight)
 			case BTN_POWER_TOGGLE_PDXL2:         pduToggleRelayPower (dvPduOutletPdxl2)
-			
+
 			case BTN_POWER_TOGGLE_MULTI_PREVIEW:
 			{
 				// Cycle power on the PDU
@@ -2951,12 +2954,12 @@ button_event[dvTpTablePower,0]
 					pduEnableRelayPower (dvPduOutletMultiPreview)
 				}
 			}
-			
+
 			case BTN_POWER_TOGGLE_PC:        pduToggleRelayPower (dvPduOutletPc)
 			//case BTN_POWER_TOGGLE_DVX:     pduToggleRelayPower (dvPduOutletDvx)    // don't allow user to turn power off to DVX
 			case BTN_POWER_TOGGLE_FAN_1:     pduToggleRelayPower (dvPduOutletFan1)
 			case BTN_POWER_TOGGLE_FAN_2:     pduToggleRelayPower (dvPduOutletFan2)
-			
+
 			case BTN_POWER_TEMPERATURE_SCALE_TOGGLE:     channelToggle (dvPduMain1,PDU_CHANNEL_TEMP_SCALE)
 			case BTN_POWER_TEMPERATURE_SCALE_CELCIUS:    pduSetTempScaleCelcius (dvPduMain1)
 			case BTN_POWER_TEMPERATURE_SCALE_FAHRENHEIT: pduSetTempScaleFahrenheit (dvPduMain1)
@@ -2969,7 +2972,7 @@ button_event[dvTpTableCamera,0]
 	push:
 	{
 		min_to [button.input]
-		
+
 		switch (button.input.channel)
 		{
 			case BTN_CAMERA_FOCUS_NEAR:  agentUsbPtzWebCamFocusNearStandardSpeed (dvPtzCam)
@@ -2980,7 +2983,7 @@ button_event[dvTpTableCamera,0]
 			case BTN_CAMERA_PAN_RIGHT:   agentUsbPtzWebCamPanRight (dvPtzCam, panSpeed)
 			case BTN_CAMERA_TILT_DOWN:   agentUsbPtzWebCamTiltDown (dvPtzCam, tiltSpeed)
 			case BTN_CAMERA_TILT_UP:     agentUsbPtzWebCamTiltUp (dvPtzCam, tiltSpeed)
-			
+
 			case BTN_CAMERA_PRESET_1:
 			{
 				recallCameraPreset (CAMERA_PRESET_1)
@@ -3017,7 +3020,7 @@ button_event[dvTpTableDxlink,0]
 	{
 		// button feedback
 		on[button.input]
-		
+
 		switch (button.input.channel)
 		{
 			// TX - Auto
@@ -3025,7 +3028,7 @@ button_event[dvTpTableDxlink,0]
 			case BTN_DXLINK_TX_AUTO_2:   dxlinkEnableTxVideoInputAutoSelect (dvTxTable2Main)
 			case BTN_DXLINK_TX_AUTO_3:   dxlinkEnableTxVideoInputAutoSelect (dvTxTable3Main)
 			case BTN_DXLINK_TX_AUTO_4:   dxlinkEnableTxVideoInputAutoSelect (dvTxTable4Main)
-			
+
 			// TX - HDMI
 			case BTN_DXLINK_TX_HDMI_1:
 			{
@@ -3051,7 +3054,7 @@ button_event[dvTpTableDxlink,0]
 				dxlinkSetTxVideoInputFormatDigital (dvTxTable4VidInDigital, VIDEO_SIGNAL_FORMAT_HDMI)
 				dxlinkSetTxVideoInputDigital (dvTxTable4Main)
 			}
-			
+
 			// TX - VGA
 			case BTN_DXLINK_TX_VGA_1:
 			{
@@ -3077,7 +3080,7 @@ button_event[dvTpTableDxlink,0]
 				dxlinkSetTxVideoInputFormatAnalog (dvTxTable4VidInAnalog, VIDEO_SIGNAL_FORMAT_VGA)
 				dxlinkSetTxVideoInputAnalog (dvTxTable4Main)
 			}
-			
+
 			// RX - Scaler Auto
 			case BTN_DXLINK_RX_SCALER_AUTO_MONITOR_LEFT:
 			{
@@ -3087,7 +3090,7 @@ button_event[dvTpTableDxlink,0]
 			{
 				dxlinkSetRxVideoOutputScaleMode (dvRxMonitorRightVidOut, DXLINK_SCALE_MODE_AUTO)
 			}
-			
+
 			// RX - Scaler Bypass
 			case BTN_DXLINK_RX_SCALER_BYPASS_MONITOR_LEFT:
 			{
@@ -3097,7 +3100,7 @@ button_event[dvTpTableDxlink,0]
 			{
 				dxlinkSetRxVideoOutputScaleMode (dvRxMonitorRightVidOut, DXLINK_SCALE_MODE_BYPASS)
 			}
-			
+
 			// RX - Scaler Manual
 			case BTN_DXLINK_RX_SCALER_MANUAL_MONITOR_LEFT:
 			{
@@ -3107,7 +3110,7 @@ button_event[dvTpTableDxlink,0]
 			{
 				dxlinkSetRxVideoOutputScaleMode (dvRxMonitorRightVidOut, DXLINK_SCALE_MODE_MANUAL)
 			}
-			
+
 			// RX - Aspect Maintain
 			case BTN_DXLINK_RX_ASPECT_MAINTAIN_MONITOR_LEFT:
 			{
@@ -3117,7 +3120,7 @@ button_event[dvTpTableDxlink,0]
 			{
 				dxlinkSetRxVideoOutputAspectRatio (dvRxMonitorRightVidOut, DXLINK_ASPECT_RATIO_MAINTAIN)
 			}
-			
+
 			// RX - Aspect Stretch
 			case BTN_DXLINK_RX_ASPECT_STRETCH_MONITOR_LEFT:
 			{
@@ -3127,7 +3130,7 @@ button_event[dvTpTableDxlink,0]
 			{
 				dxlinkSetRxVideoOutputAspectRatio (dvRxMonitorRightVidOut, DXLINK_ASPECT_RATIO_STRETCH)
 			}
-			
+
 			// RX - Aspect Zoom
 			case BTN_DXLINK_RX_ASPECT_ZOOM_MONITOR_LEFT:
 			{
@@ -3137,7 +3140,7 @@ button_event[dvTpTableDxlink,0]
 			{
 				dxlinkSetRxVideoOutputAspectRatio (dvRxMonitorRightVidOut, DXLINK_ASPECT_RATIO_ZOOM)
 			}
-			
+
 			// RX - Aspect Anamorphic
 			case BTN_DXLINK_RX_ASPECT_ANAMORPHIC_MONITOR_LEFT:
 			{
@@ -3147,7 +3150,7 @@ button_event[dvTpTableDxlink,0]
 			{
 				dxlinkSetRxVideoOutputAspectRatio (dvRxMonitorRightVidOut, DXLINK_ASPECT_RATIO_ANAMORPHIC)
 			}
-		}                                                                        
+		}
 	}
 }
 
@@ -3180,11 +3183,11 @@ button_event[dvTpTableMain, 0]
 			{
 				shutdownAvSystem ()
 			}
-			
+
 			case BTN_MAIN_SPLASH_SCREEN:
 			{
 				startMultiPreviewSnapshots ()
-				
+
 				// page flips done on the panel
 			}
 		}
@@ -3217,19 +3220,19 @@ timeline_event[TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS]
 	stack_var integer input
 	local_var integer slotId
 	local_var char dynamicImageName[30]
-	
+
 	input = timeline.sequence
-	
+
 	if (timelineTimesMultiPreviewSnapshots[input])
 	{
 		slotId = input
 		dynamicImageName = "'MXA_PREVIEW_',itoa(slotId)"
-		
+
 		// Only take a snapshot if there is a valid signal status on the input
 		if (dvx.videoInputs[slotId].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
 		{
 			dvxSwitchVideoOnly (dvDvxMain, slotId, dvDvxVidOutMultiPreview.port)
-			
+
 			WAIT waitTimeMplSnapShot 'WAIT_MULTI_PREVIEW_SNAPSHOT'   // wait just over half a second before taking the snapshot....allows the image time to lock on
 			{
 				moderoResourceForceRefreshPrefetchFromCache (dvTpTableVideo, dynamicImageName, MODERO_RESOURCE_NOTIFICATION_OFF)
@@ -3265,12 +3268,12 @@ custom_event[dvTpTableVideo,1,MODERO_CUSTOM_EVENT_ID_STREAMING_VIDEO]
 	debugPrint ("'custom.value2 = <>',itoa(custom.value2)")
 	debugPrint ("'custom.value3 = <>',itoa(custom.value3)")
 	debugPrint ("'custom.text = "',custom.text,'"'")
-	
+
 	switch (custom.flag)
 	{
 		case 1:	// start
 		{
-			
+
 		}
 		case 2:	// stop
 		{
@@ -3313,7 +3316,7 @@ data_event[dvTpTableMain]
  * Mainline
  * --------------------
  */
- 
+
 define_program
 
 // Feedback for device online status
@@ -3371,9 +3374,9 @@ define_program
 /*
  * --------------------
  * END OF PROGRAM
- * 
+ *
  * DO NOT PUT ANY CODE BELOW THIS COMMENT
  * --------------------
  */
- 
+
 

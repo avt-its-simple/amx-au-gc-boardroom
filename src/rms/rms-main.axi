@@ -1,6 +1,14 @@
 program_name='rms-main'
 
 
+#define INCLUDE_RMS_EVENT_SYSTEM_POWER_REQUEST_CALLBACK
+#define INCLUDE_RMS_EVENT_CLIENT_ONLINE_CALLBACK
+#define INCLUDE_RMS_EVENT_CLIENT_OFFLINE_CALLBACK
+
+
+#include 'RmsEventListener'
+
+
 define_device
 
 // Virtual devices for asset registration and power / source monitoring
@@ -12,6 +20,12 @@ rmsFan2 = 34005:1:0
 
 
 define_variable
+
+// As there's no single point to latch on to in order to detect system power
+// we'll set up a timeline to monitor the 'isSystemAvInUse' variable and update
+// RMS accordingly.
+constant long RMS_TL_IN_USE_CHECK = 300
+constant long RMS_IN_USE_CHECK_INTERVAL[1] = {500}
 
 // PDU asset associations
 volatile dev rmsPduAssets[] = {
@@ -36,6 +50,48 @@ volatile char rmsFan1Name[] = 'Rack fan 1'
 volatile char rmsFan1Desc[] = 'Controllable active cooling'
 volatile char rmsFan2Name[] = 'Rack fan 2'
 volatile char rmsFan2Desc[] = 'Controllable active cooling'
+
+
+// Rms callbacks
+
+define_function RmsEventClientOnline()
+{
+	// This system doesn't really appear to have a concept of an initial on
+	// state that we can activate remotely so lets just ommit the control.
+	RmsAssetControlMethodExclude(RmsDevToString(dvMaster), 'system.power.on')
+	
+	// Set up our system power state monitoring timeline
+	if (!timeline_active(RMS_TL_IN_USE_CHECK))
+	{
+		timeline_create(RMS_TL_IN_USE_CHECK,
+				RMS_IN_USE_CHECK_INTERVAL, 
+				1,
+				TIMELINE_ABSOLUTE,
+				TIMELINE_REPEAT)
+	}
+}
+
+define_function RmsEventClientOffline()
+{
+	if (timeline_active(RMS_TL_IN_USE_CHECK))
+	{
+		timeline_kill(RMS_TL_IN_USE_CHECK)
+	}
+}
+
+define_function RmsEventSystemPowerChangeRequest(CHAR powerOn)
+{
+	if (powerOn)
+	{
+		// Not implemented
+	}
+	else
+	{
+		shutdownAvSystem()
+		moderoSetPage(dvTpTableMain, PAGE_NAME_MAIN_USER)
+		moderoDisableAllPopups(dvTpTableMain)
+	}
+}
 
 
 define_module
@@ -97,8 +153,6 @@ define_module
 'RmsPowerDistributionUnitMonitor' mdlRmsPduMon(vdvRms, dvPduMain1, rmsPduAssets)
 
 // @TODO register blinds and shades
- 
-// @TODO implement system power on/off notification and control
 
 // @TODO implement source usage monitoring
 
@@ -107,3 +161,26 @@ define_module
 // @TODO register occupancy sensor against system asset
 
 // @TODO implement power tracking of house PC based on signal status / power draw
+
+
+
+define_event
+
+timeline_event[RMS_TL_IN_USE_CHECK]
+{
+	local_var integer lastInUseValue
+	
+	if (lastInUseValue != isSystemAvInUse)
+	{
+		if (isSystemAvInUse)
+		{
+			RmsSystemPowerOn()
+		}
+		else
+		{
+			RmsSystemPowerOff()
+		}
+	}
+	
+	lastInUseValue = isSystemAvInUse
+}
