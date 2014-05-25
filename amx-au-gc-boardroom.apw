@@ -238,6 +238,10 @@
 <FilePathName>lib\amx-rms-sdk\monitors\RmsTouchPanelMonitor.axs</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsVirtualDeviceMonitor</Identifier>
+<FilePathName>lib\amx-rms-sdk\monitors\RmsVirtualDeviceMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="DUET"><Identifier>RmsNetLinxAdapter_dr4_0_0</Identifier>
 <FilePathName>lib\amx-rms-sdk\RmsNetLinxAdapter_dr4_0_0.jar</FilePathName>
 <Comments></Comments>

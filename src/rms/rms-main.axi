@@ -1,6 +1,43 @@
 program_name='rms-main'
 
 
+define_device
+
+// Virtual devices for asset registration and power / source monitoring
+rmsPc = 34001:1:0
+rmsPdxl2 = 34002:1:0
+rmsMpl = 34003:1:0
+rmsFan1 = 34004:1:0
+rmsFan2 = 34005:1:0
+
+
+define_variable
+
+// PDU asset associations
+volatile dev rmsPduAssets[] = {
+	dvMonitorLeft,
+	dvMonitorRight,
+	rmsPdxl2,
+	rmsMpl,
+	rmsPc,
+	dvDvxMain,
+	rmsFan1,
+	rmsFan2
+}
+
+// Name / description pairs for passing to our virtual device monitors
+volatile char rmsPdxl2Name[] = 'PDXL2'
+volatile char rmsPdxl2Desc[] = 'DXLink power supply'
+volatile char rmsMplName[] = 'MXA-MPL'
+volatile char rmsMplDesc[] = 'Multi preview live encoder / capture box'
+volatile char rmsPcName[] = 'PC'
+volatile char rmsPcDesc[] = 'House PC'
+volatile char rmsFan1Name[] = 'Rack fan 1'
+volatile char rmsFan1Desc[] = 'Controllable active cooling'
+volatile char rmsFan2Name[] = 'Rack fan 2'
+volatile char rmsFan2Desc[] = 'Controllable active cooling'
+
+
 define_module
 
 // instantiate the Netlinx adaptor module which will start the RMS client
@@ -39,24 +76,33 @@ define_module
 'RmsDuetMonitorMonitor' mdlRmsLcdLeftMon(vdvRms, vdvMonitorLeft, dvMonitorLeft)
 'RmsDuetMonitorMonitor' mdlRmsLcdRightMon(vdvRms, vdvMonitorRight, dvMonitorRight)
 
-// camera
-// @TODO requires NetLinx / Duet control module for simple integration
-
-// PDU monitor
-// @TODO implement PDU monitor - require schematics for visibility of attached devices
-//'RmsPowerDistributionUnitMonitor' mdlRmsPduMon(vdvRms
-
 // Monitoring for the lighting system
 // @TODO config internals of module
 'RmsDuetLightSystemMonitor' mdlRmsLightMon(vdvRms, vdvDynaliteDyNetLightSystem, dvDynaliteDyNetLightSystem)
 
-// @TODO register room PC
+// Virtual monitor for the PDXL2
+'RmsVirtualDeviceMonitor' mdlRmsPdxl2Mon(vdvRms, rmsPdxl2, rmsPdxl2Name, rmsPdxl2Desc)
+
+// Virtual monitor for the MPL
+'RmsVirtualDeviceMonitor' mdlRmsMplMon(vdvRms, rmsMpl, rmsMplName, rmsMplDesc)
+
+// Virtual monitor for the rack PC
+'RmsVirtualDeviceMonitor' mdlRmsPcMon(vdvRms, rmsPc, rmsPcName, rmsPcDesc)
+
+// Virtual monitor for the additional rack fans
+'RmsVirtualDeviceMonitor' mdlRmsFan1Mon(vdvRms, rmsFan1, rmsFan1Name, rmsFan1Desc)
+'RmsVirtualDeviceMonitor' mdlRmsFan1Mon(vdvRms, rmsFan2, rmsFan2Name, rmsFan2Desc)
+
+// PDU monitor
+'RmsPowerDistributionUnitMonitor' mdlRmsPduMon(vdvRms, dvPduMain1, rmsPduAssets)
 
 // @TODO register blinds and shades
  
 // @TODO implement system power on/off notification and control
 
 // @TODO implement source usage monitoring
+
+// @TODO add camera monitoring (requires NetLinx / Duet control module for simple integration)
 
 // @TODO register occupancy sensor against system asset
 
