@@ -206,6 +206,10 @@
 <FilePathName>lib\amx-rms-sdk\includes\RmsEventListener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>RmsDuetLightSystemMonitor</Identifier>
+<FilePathName>lib\amx-rms-sdk\monitors-duet\RmsDuetLightSystemMonitor.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Module"><Identifier>RmsDuetMonitorMonitor</Identifier>
 <FilePathName>lib\amx-rms-sdk\monitors-duet\RmsDuetMonitorMonitor.axs</FilePathName>
 <Comments></Comments>

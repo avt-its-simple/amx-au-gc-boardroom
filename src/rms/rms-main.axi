@@ -35,6 +35,10 @@ define_module
 // external relay box
 'RmsGenericNetLinxDeviceMonitor' mdlRmsRelayMon(vdvRms, dvRelaysRelBox)
 
+// monitoring for our LCD's
+'RmsDuetMonitorMonitor' mdlRmsLcdLeftMon(vdvRms, vdvMonitorLeft, dvMonitorLeft)
+'RmsDuetMonitorMonitor' mdlRmsLcdRightMon(vdvRms, vdvMonitorRight, dvMonitorRight)
+
 // camera
 // @TODO requires NetLinx / Duet control module for simple integration
 
@@ -42,18 +46,18 @@ define_module
 // @TODO implement PDU monitor - require schematics for visibility of attached devices
 //'RmsPowerDistributionUnitMonitor' mdlRmsPduMon(vdvRms
 
-// @TODO register occupancy sensor against system asset
-
-// @TODO register lighting system
+// Monitoring for the lighting system
+// @TODO config internals of module
+'RmsDuetLightSystemMonitor' mdlRmsLightMon(vdvRms, vdvDynaliteDyNetLightSystem, dvDynaliteDyNetLightSystem)
 
 // @TODO register room PC
 
 // @TODO register blinds and shades
+ 
+// @TODO implement system power on/off notification and control
 
 // @TODO implement source usage monitoring
 
-// @TODO implement system power on/off notification and control
+// @TODO register occupancy sensor against system asset
 
-// monitoring for our LCD's
-'RmsDuetMonitorMonitor' mdlRmsLcdLeftMon(vdvRms, vdvMonitorLeft, dvMonitorLeft)
-'RmsDuetMonitorMonitor' mdlRmsLcdRightMon(vdvRms, vdvMonitorRight, dvMonitorRight)
+// @TODO implement power tracking of house PC based on signal status / power draw
