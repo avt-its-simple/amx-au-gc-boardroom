@@ -25,7 +25,7 @@ define_variable
 // we'll set up a timeline to monitor the 'isSystemAvInUse' variable and update
 // RMS accordingly.
 constant long RMS_TL_IN_USE_CHECK = 300
-constant long RMS_IN_USE_CHECK_INTERVAL[1] = {500}
+constant long RMS_IN_USE_CHECK_INTERVAL[1] = {5000}
 
 // PDU asset associations
 volatile dev rmsPduAssets[] = {
@@ -158,8 +158,6 @@ define_module
 // @TODO add camera monitoring (requires NetLinx / Duet control module for simple integration)
 
 // @TODO register occupancy sensor against system asset
-
-// @TODO implement power tracking of house PC based on signal status / power draw
 
 
 
