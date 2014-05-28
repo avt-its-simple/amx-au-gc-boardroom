@@ -59,12 +59,12 @@ define_function RmsEventClientOnline()
 	// This system doesn't really appear to have a concept of an initial on
 	// state that we can activate remotely so lets just ommit the control.
 	RmsAssetControlMethodExclude(RmsDevToString(dvMaster), 'system.power.on')
-	
+
 	// Set up our system power state monitoring timeline
 	if (!timeline_active(RMS_TL_IN_USE_CHECK))
 	{
 		timeline_create(RMS_TL_IN_USE_CHECK,
-				RMS_IN_USE_CHECK_INTERVAL, 
+				RMS_IN_USE_CHECK_INTERVAL,
 				1,
 				TIMELINE_ABSOLUTE,
 				TIMELINE_REPEAT)
@@ -112,8 +112,7 @@ define_module
 'RmsTouchPanelMonitor' mdlRmsTpMon(vdvRms, dvTpTableMain)
 
 // keypads
-'RmsGenericNetLinxDeviceMonitor' mdlRmsKeypad1Mon(vdvRms, dvKeypad1)
-'RmsGenericNetLinxDeviceMonitor' mdlRmsKeypad2Mon(vdvRms, dvKeypad2)
+'RmsGenericNetLinxDeviceMonitor' mdlRmsKeypadMon(vdvRms, dvKeypad1)
 
 // DXLink receivers
 'RmsGenericNetLinxDeviceMonitor' mdlRmsRxMonitorLeftMon(vdvRms, dvRxMonitorLeftMain)
@@ -169,7 +168,7 @@ define_event
 timeline_event[RMS_TL_IN_USE_CHECK]
 {
 	local_var integer lastInUseValue
-	
+
 	if (lastInUseValue != isSystemAvInUse)
 	{
 		if (isSystemAvInUse)
@@ -181,6 +180,6 @@ timeline_event[RMS_TL_IN_USE_CHECK]
 			RmsSystemPowerOff()
 		}
 	}
-	
+
 	lastInUseValue = isSystemAvInUse
 }
