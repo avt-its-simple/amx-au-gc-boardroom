@@ -88,7 +88,7 @@ define_function RmsEventSystemPowerChangeRequest(CHAR powerOn)
 	else
 	{
 		shutdownAvSystem()
-		moderoSetPage(dvTpTableMain, PAGE_NAME_MAIN_USER)
+		moderoSetPage(dvTpTableMain, PAGE_NAME_SPLASH_SCREEN)
 		moderoDisableAllPopups(dvTpTableMain)
 	}
 }
