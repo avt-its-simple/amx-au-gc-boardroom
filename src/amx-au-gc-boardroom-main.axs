@@ -2585,6 +2585,9 @@ data_event[dvTpTableMain]
 		pduRequestPowerTriggerSenseValue (dvPduMain1, PDU_OUTLET_6)
 		pduRequestPowerTriggerSenseValue (dvPduMain1, PDU_OUTLET_7)
 		pduRequestPowerTriggerSenseValue (dvPduMain1, PDU_OUTLET_8)
+		
+		// Panel
+		moderoEnablePageTracking(dvTpTableMain)
 
 		// Update button text for PDU button labels
 		{
