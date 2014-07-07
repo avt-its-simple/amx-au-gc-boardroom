@@ -288,6 +288,14 @@
 <FilePathName>src\debug\debug.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>drag-and-drop</Identifier>
+<FilePathName>src\drag-and-drop\drag-and-drop.axs</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>touch-tracker</Identifier>
+<FilePathName>src\drag-and-drop\touch-tracker.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>dynalite-lighting</Identifier>
 <FilePathName>src\dynalite-lighting\dynalite-lighting.axi</FilePathName>
 <Comments></Comments>
