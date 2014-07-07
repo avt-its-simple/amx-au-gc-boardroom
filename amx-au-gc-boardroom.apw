@@ -324,6 +324,10 @@
 <FilePathName>src\system-constants.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-defines</Identifier>
+<FilePathName>src\system-defines.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="Netlinx" Type="Include"><Identifier>system-devices</Identifier>
 <FilePathName>src\system-devices.axi</FilePathName>
 <Comments></Comments>
@@ -374,10 +378,6 @@
 </File>
 <File CompileType="None" Type="Include"><Identifier>wake-on-lan</Identifier>
 <FilePathName>src\wake-on-lan\wake-on-lan.axi</FilePathName>
-<Comments></Comments>
-</File>
-<File CompileType="Netlinx" Type="Include"><Identifier>system-defines</Identifier>
-<FilePathName>system-defines.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="TP4"><Identifier>amx-au-gc-boardroom-mxt-1900</Identifier>
