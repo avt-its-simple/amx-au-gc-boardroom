@@ -304,6 +304,10 @@
 <FilePathName>src\dynalite-lighting\Dynalite_DyNet_Comm_dr1_0_0.jar</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Module"><Identifier>multi-preview-dvx</Identifier>
+<FilePathName>src\multi-preview-dvx\multi-preview-dvx.axs</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>nec-monitor</Identifier>
 <FilePathName>src\nec-monitor\nec-monitor.axi</FilePathName>
 <Comments></Comments>
