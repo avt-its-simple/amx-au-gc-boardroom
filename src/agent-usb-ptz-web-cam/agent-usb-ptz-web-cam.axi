@@ -1,5 +1,8 @@
 program_name='agent-usb-ptz-web-cam'
 
+#if_not_defined __AGENT_USB_PTZ_WEB_CAM__
+#define __AGENT_USB_PTZ_WEB_CAM__
+
 #include 'amx-device-control'
 
 define_constant
@@ -279,3 +282,7 @@ define_function agentUsbPtzWebCamFocusOff (dev camera)
 {
 	sendString (camera, "$81,$01,$04,$08,$00,$FF")
 }
+
+
+
+#end_if

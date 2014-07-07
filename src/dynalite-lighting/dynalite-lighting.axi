@@ -1,5 +1,8 @@
 program_name='lighting'
 
+#if_not_defined __LIGHTING__
+#define	__LIGHTING__
+
 #include 'amx-device-control'
 
 define_device
@@ -134,3 +137,6 @@ data_event[vdvDynaliteDyNetLightSystem]
 		sendCommand (vdvDynaliteDyNetLightSystem,'REINIT')
 	}
 }
+
+
+#end_if

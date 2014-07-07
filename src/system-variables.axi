@@ -7,6 +7,9 @@ PROGRAM_NAME='system-variables'
 #include 'system-structures'
 #include 'system-constants'
 
+// special case
+#include 'agent-usb-ptz-web-cam'
+
 
 
 
@@ -224,6 +227,18 @@ persistent integer cameraSpeedPreset1Focus  = 1
 
 long timelineTimesMultiPreviewSnapshots[DVX_MAX_VIDEO_INPUTS]
 long timelineTimeMplBetweenSwitches = 1000
+
+
+char draggableItemBitmapNames[DVX_MAX_VIDEO_INPUTS][30]
+
+// Drag and drop areas for 19" panel
+// drop areas
+_area dropAreasTpTable[DVX_MAX_VIDEO_OUTPUTS]
+// drag item areas
+_area dragAreasTpTable[DVX_MAX_VIDEO_INPUTS]
+
+
+char draggablePopupsTpTable[DVX_MAX_VIDEO_INPUTS][40]
 
 /*
  * --------------------

@@ -12,6 +12,19 @@ PROGRAM_NAME='system-constants'
  
 define_constant
 
+/*
+ * --------------------
+ * Drag and drop panel button channel/address/level codes
+ * --------------------
+ */
+
+
+// Drag Items
+
+// Drop Items
+integer BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_LEFT  = 61
+integer BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_RIGHT = 62
+
 
 
 /*
@@ -549,7 +562,7 @@ char POPUP_NAME_VIDEO_LOADING[]                 = 'popup-video-loading'
 char POPUP_NAME_MESSAGE_QUERY_USER_LYNC_CALL[]  = 'popup-message-query-user-lync-call'
 char PAGE_NAME_SPLASH_SCREEN[]                  = 'page-spash-screen'
 char PAGE_NAME_MAIN_USER[]                      = 'page-main-user'
-char POPUP_NAME_SOURCE_SELECTION[]              = 'popup-source-selection-v3'
+char POPUP_NAME_SOURCE_SELECTION[]              = 'popup-source-selection-drag-and-drop'
 
 /*
  * --------------------

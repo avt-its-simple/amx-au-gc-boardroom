@@ -37,6 +37,7 @@ integer DEV_ID_PDU_5                                =  89
 integer DEV_ID_PDU_6                                =  90
 integer DEV_ID_PDU_7                                =  91
 integer DEV_ID_PDU_8                                =  92
+integer DEV_ID_VIRTUAL_DRAG_AND_DROP_TP_TABLE       = 33001
 integer DEV_ID_DUET_MODULE_VIRTUAL_RMS              = 41001
 integer DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_LEFT     = 41002
 integer DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_RIGHT    = 41003
@@ -117,6 +118,10 @@ dvTpTableDxlink     = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_DXLINK:SYS_MASTER
 dvTpTableDeviceInfo = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_DEVICE_INFO:SYS_MASTER
 dvTpTableOccupancy  = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_OCCUPANCY:SYS_MASTER
 dvTpTableDebug      = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_DEBUG:SYS_MASTER
+
+// drag and drop elements
+dvTpTableDragAndDrop = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_VIDEO:SYS_MASTER
+
 
 // DXLinx Receiver on Left Monitor
 dvRxMonitorLeftMain     = DEV_ID_RX_MONITOR_LEFT:DXLINK_PORT_MAIN:SYS_MASTER
@@ -274,7 +279,8 @@ vdvMonitorRight = DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_RIGHT:PORT_VIRTUAL_MAIN:SYS
 // RMS
 vdvRms  = DEV_ID_DUET_MODULE_VIRTUAL_RMS:PORT_VIRTUAL_MAIN:SYS_MASTER
 
-
+// drag and drop virtual device
+vdvDragAndDropTpTable = DEV_ID_VIRTUAL_DRAG_AND_DROP_TP_TABLE:PORT_VIRTUAL_MAIN:SYS_MASTER
 
 
 

@@ -15,6 +15,7 @@ PROGRAM_NAME='system-modules'
 define_module
 
 
+'drag-and-drop' dragAndDropMod (vdvDragAndDropTpTable, dvTpTableDragAndDrop)
 
 
 

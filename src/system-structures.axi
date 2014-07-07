@@ -8,7 +8,13 @@ PROGRAM_NAME='system-structures'
 
 define_type
 
-
+structure _area
+{
+	integer left
+	integer top
+	integer width
+	integer height
+}
 
 
 

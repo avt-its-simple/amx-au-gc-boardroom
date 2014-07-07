@@ -10,6 +10,12 @@ PROGRAM_NAME='system-functions'
 #include 'system-library-api'
 #include 'system-library-control'
 
+#include 'system-events'
+
+// special case
+#include 'dynalite-lighting'
+#include 'nec-monitor'
+
 
 /*
  * --------------------
@@ -17,8 +23,249 @@ PROGRAM_NAME='system-functions'
  * --------------------
  */
 
+define_function resetDraggablePopup (dev dragAndDropVirtual, integer id)
+{
+	hideDraggablePopup (dragAndDropVirtual, id)
+	showDraggablePopup (dragAndDropVirtual, id)
+}
+
+define_function resetAllDraggablePopups (dev dragAndDropVirtual)
+{
+    select
+    {
+	active (dragAndDropVirtual == vdvDragAndDropTpTable):
+	{
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInPc.port)
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
+	    
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInPc.port)
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
+	}
+    }
+}
+
+define_function hideDraggablePopup (dev dragAndDropVirtual, integer id)
+{
+    select
+    {
+	active (dragAndDropVirtual == vdvDragAndDropTpTable):
+	{
+	    moderoDisablePopup (dvTpTableDragAndDrop, draggablePopupsTpTable[id])
+	}
+    }
+}
+
+define_function hideAllDraggablePopups (dev dragAndDropVirtual)
+{
+    select
+    {
+	active (dragAndDropVirtual == vdvDragAndDropTpTable):
+	{
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInPc.port)
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
+	}
+    }
+}
+
+define_function showDraggablePopup (dev dragAndDropVirtual, integer id)
+{
+    select
+    {
+	active (dragAndDropVirtual == vdvDragAndDropTpTable):
+	{
+	    moderoEnablePopup (dvTpTableDragAndDrop, draggablePopupsTpTable[id])
+	}
+    }
+}
+
+define_function showDraggablePopupsAll (dev dragAndDropVirtual)
+{
+    select
+    {
+	active (dragAndDropVirtual == vdvDragAndDropTpTable):
+	{
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInPc.port)
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
+	}
+    }
+}
+
+define_function addDragItem (dev dragAndDropVirtual, integer id)
+{
+    select
+    {
+	active (dragAndDropVirtual == vdvDragAndDropTpTable):
+	{
+	    sendCommand (vdvDragAndDropTpTable, "'DEFINE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreasTpTable[id])")
+	}
+    }
+}
+
+define_function addDragItemsAll (dev dragAndDropVirtual)
+{
+    select
+    {
+	active (dragAndDropVirtual == vdvDragAndDropTpTable):
+	{
+	    addDragItem (vdvDragAndDropTpTable, dvDvxVidInPc.port)
+	    addDragItem (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
+	    addDragItem (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
+	    addDragItem (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
+	    addDragItem (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
+	}
+    }
+}
 
 
+define_function enableDragItem (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			sendCommand (vdvDragAndDropTpTable, "'ACTIVATE_DRAG_ITEM-',buildDragAndDropParameterString(id, dragAreasTpTable[id])")
+		}
+	}
+}
+
+define_function enableDragItemsAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			enableDragItem (vdvDragAndDropTpTable, dvDvxVidInPc.port)
+			enableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
+			enableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
+			enableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
+			enableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
+		}
+	}
+}
+
+
+define_function disableDragItem (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			sendCommand (vdvDragAndDropTpTable, "'DEACTIVATE_DRAG_ITEM-',itoa(id)")
+		}
+	}
+}
+
+define_function disableDragItemsAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			disableDragItem (vdvDragAndDropTpTable, dvDvxVidInPc.port)
+			disableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
+			disableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
+			disableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
+			disableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
+		}
+	}
+}
+
+define_function disableDropArea (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			sendCommand (vdvDragAndDropTpTable, "'DEACTIVATE_DROP_AREA-',itoa(id)")
+		}
+	}
+}
+
+define_function disableDropAreasAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			disableDropArea (vdvDragAndDropTpTable, dvDvxVidOutMonitorLeft.port)
+			disableDropArea (vdvDragAndDropTpTable, dvDvxVidOutMonitorRight.port)
+			disableDropArea (vdvDragAndDropTpTable, dvDvxVidOutMultiPreview.port)
+		}
+	}
+}
+
+define_function addDropArea (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			sendCommand (vdvDragAndDropTpTable, "'DEFINE_DROP_AREA-',buildDragAndDropParameterString(id, dropAreasTpTable[id])")
+		}
+	}
+}
+
+define_function addDropAreasAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			addDropArea (vdvDragAndDropTpTable, dvDvxVidOutMonitorLeft.port)
+			addDropArea (vdvDragAndDropTpTable, dvDvxVidOutMonitorRight.port)
+			addDropArea (vdvDragAndDropTpTable, dvDvxVidOutMultiPreview.port)
+		}
+	}
+}
+
+define_function enableDropArea (dev dragAndDropVirtual, integer id)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			sendCommand (vdvDragAndDropTpTable, "'ACTIVATE_DROP_AREA-',itoa(id)")
+		}
+	}
+}
+
+define_function enableDropItemsAll (dev dragAndDropVirtual)
+{
+	select
+	{
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			enableDropArea (vdvDragAndDropTpTable, dvDvxVidOutMonitorLeft.port)
+			enableDropArea (vdvDragAndDropTpTable, dvDvxVidOutMonitorRight.port)
+			enableDropArea (vdvDragAndDropTpTable, dvDvxVidOutMultiPreview.port)
+		}
+	}
+}
+
+define_function initArea (_area area, integer left, integer top, integer width, integer height)
+{
+    area.left = left
+    area.top = top
+    area.width = width
+    area.height = height
+}
+
+define_function char[20] buildDragAndDropParameterString (integer id, _area area)
+{
+    return "itoa(id),',',itoa(area.left),',',itoa(area.top),',',itoa(area.width),',',itoa(area.height)"
+}
 
 define_function recallCameraPreset (integer cameraPreset)
 {
@@ -138,6 +385,75 @@ define_function stopMultiPreviewSnapshots ()
 		CANCEL_WAIT 'WAIT_MULTI_PREVIEW_SNAPSHOT'
 	}
 }
+
+
+
+
+define_function turnOnDisplay (dev virtual)
+{
+	snapiDisplayEnablePower (virtual)
+}
+
+define_function turnOffDisplay (dev virtual)
+{
+	snapiDisplayDisablePower (virtual)
+}
+
+define_function turnOnDisplaysAll ()
+{
+	turnOnDisplay (vdvMonitorLeft)
+	turnOnDisplay (vdvMonitorRight)
+}
+
+define_function turnOffDisplaysAll ()
+{
+	turnOffDisplay (vdvMonitorLeft)
+	turnOffDisplay (vdvMonitorRight)
+}
+
+
+
+
+define_function showSourceOnDisplay (integer input, integer output)
+{
+	// switch the video
+	dvxSwitchVideoOnly (dvDvxMain, input, output)
+	
+	// disable any test patterns on the output of the dvx
+	// turn on the monitor
+	select
+	{
+		active (output == dvDvxVidOutMonitorLeft.port):
+		{
+			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorLeft, DVX_TEST_PATTERN_OFF)
+			turnOnDisplay (vdvMonitorLeft)
+		}
+		
+		active (output == dvDvxVidOutMonitorRight.port):
+		{
+			dvxSetVideoOutputTestPattern (dvDvxVidOutMonitorRight, DVX_TEST_PATTERN_OFF)
+			turnOnDisplay (vdvMonitorRight)
+		}
+	}
+	
+	// set flag to indicate that system is in use
+	setFlagAvSystemInUse (TRUE)
+}
+
+define_function setFlagAvSystemInUse (integer boolean)
+{
+	isSystemAvInUse = boolean
+}
+
+/*define_function setSystemMode (integer mode)
+{
+	systemMode = mode
+}
+
+define_function integer getSystemMode ()
+{
+	return systemMode
+}*/
 
 
 define_function shutdownAvSystem ()
