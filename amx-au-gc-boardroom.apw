@@ -4,6 +4,7 @@
 <!-- Common Elements -->
 <!ELEMENT Identifier (#PCDATA)>
 <!ELEMENT Comments (#PCDATA)>
+<!ELEMENT MasterDirectory (#PCDATA)>
 <!ELEMENT CreationDate (#PCDATA)>
 
 <!-- Workspace Elements-->
@@ -42,15 +43,16 @@
 
 <!ELEMENT System  (  Identifier,
                  SysID,
-                 TransSerial?,
-                 TransModem?,
                  TransTCPIP?,
+                 TransSerial?,
+                 TransTCPIPEx?,
+                 TransSerialEx?,
+                 TransUSBEx?,
+                 TransVNMEx?,
                  VirtualNetLinxMasterFlag?,
-                 VNMRestoreIPSettings?,
                  VNMSystemID?,
                  VNMIPAddress?,
                  VNMMaskAddress?,
-                 IsAuthenticationEnabled?,
                  UserName?,
                  Password?,
                  Comments?,
@@ -59,18 +61,20 @@
 <!ATTLIST System
       IsActive   (true | false)   "false"
       Platform   (Axcess | Netlinx)   "Axcess"
-      Transport   (Serial | Modem | TCPIP) "Serial">
+      Transport   (Serial | Modem | TCPIP) "Serial"
+      TransportEx   (Serial | USB | TCPIP | VNM) "Serial">
 
 <!ELEMENT SysID (#PCDATA)>
 <!ELEMENT TransSerial (#PCDATA)>
-<!ELEMENT TransModem (#PCDATA)>
 <!ELEMENT TransTCPIP (#PCDATA)>
-<!ELEMENT VirtualNetLinxMasterFlag (#PCDATA)>
-<!ELEMENT VNMRestoreIPSettings (#PCDATA)>
+<!ELEMENT TransTCPIPEx (#PCDATA)>
+<!ELEMENT TransSerialEx (#PCDATA)>
+<!ELEMENT TransUSBEx (#PCDATA)>
+<!ELEMENT TransVNMEx (#PCDATA)>
 <!ELEMENT VNMSystemID (#PCDATA)>
 <!ELEMENT VNMIPAddress (#PCDATA)>
 <!ELEMENT VNMMaskAddress (#PCDATA)>
-<!ELEMENT IsAuthenticationEnabled (#PCDATA)>
+<!ELEMENT VirtualNetLinxMasterFlag (#PCDATA)>
 <!ELEMENT UserName (#PCDATA)>
 <!ELEMENT Password (#PCDATA)>
 
@@ -78,11 +82,12 @@
 <!ELEMENT File ( Identifier,
                FilePathName,
                Comments?,
+               MasterDirectory?,
                DeviceMap*,
                IRDB*)>
 
 <!ATTLIST File 
-       Type (Source | MasterSrc | Include | Module | AXB | IR | TPD | TP4 | TP5 | XDD | KPD | TKO | AMX_IR_DB | IRN_DB | Other | DUET | TOK | TKN | KPB ) "Other"
+       Type (Source | MasterSrc | Include | Module | AXB | IR | TPD | TP4 | TP5 | KPD | TKO | AMX_IR_DB | IRN_DB | Other | DUET | TOK | TKN | KPB | XDD ) "Other"
        CompileType (Axcess | Netlinx | None) "None"> 
 
 <!ELEMENT FilePathName	(#PCDATA)>
@@ -104,7 +109,7 @@
        <!ELEMENT Notes (#PCDATA)>
 ]>
 
-<Workspace CurrentVersion="3.3"><Identifier>amx-au-gc-boardroom</Identifier>
+<Workspace CurrentVersion="4.0"><Identifier>amx-au-gc-boardroom</Identifier>
 <CreateVersion>3.3</CreateVersion>
 <PJS_File></PJS_File>
 <PJS_ConvertDate></PJS_ConvertDate>
