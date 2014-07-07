@@ -121,17 +121,18 @@
 <SalesOrder></SalesOrder>
 <PurchaseOrder></PurchaseOrder>
 <Comments></Comments>
-<System IsActive="true" Platform="Netlinx" Transport="TCPIP"><Identifier>amx-au-gc-boardroom</Identifier>
+<System IsActive="true" Platform="Netlinx" Transport="TCPIP" TransportEx="TCPIP"><Identifier>amx-au-gc-boardroom</Identifier>
 <SysID>0</SysID>
-<TransSerial>COM4,38400,8,None,1,None</TransSerial>
-<TransModem></TransModem>
 <TransTCPIP>192.168.7.201:1319:1:AMX AU - GC Office - Boardroom DVX::</TransTCPIP>
-<VirtualNetLinxMasterFlag>0</VirtualNetLinxMasterFlag>
-<VNMRestoreIPSettings>192.168.7.190:1319:1:AMX Australia - GC Office - Boardroom DVX-2100:administrator:p@55w0rd</VNMRestoreIPSettings>
+<TransSerial>COM4,38400,8,None,1,None</TransSerial>
+<TransTCPIPEx>192.168.7.86|1319|1| ||</TransTCPIPEx>
+<TransSerialEx>COM4|38400|8|None|1|None||</TransSerialEx>
+<TransUSBEx>|||||</TransUSBEx>
+<TransVNMEx>10.0.0.1|1</TransVNMEx>
+<VirtualNetLinxMasterFlag>false</VirtualNetLinxMasterFlag>
 <VNMSystemID>1</VNMSystemID>
 <VNMIPAddress>192.168.7.126</VNMIPAddress>
 <VNMMaskAddress>255.255.255.0</VNMMaskAddress>
-<IsAuthenticationEnabled>0</IsAuthenticationEnabled>
 <UserName></UserName>
 <Password></Password>
 <Comments></Comments>
