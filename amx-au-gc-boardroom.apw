@@ -320,8 +320,64 @@
 <FilePathName>src\rms\rms-main.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-constants</Identifier>
+<FilePathName>src\system-constants.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-devices</Identifier>
+<FilePathName>src\system-devices.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-events</Identifier>
+<FilePathName>src\system-events.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-functions</Identifier>
+<FilePathName>src\system-functions.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-library-api</Identifier>
+<FilePathName>src\system-library-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-library-control</Identifier>
+<FilePathName>src\system-library-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-library-listener</Identifier>
+<FilePathName>src\system-library-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-mainline</Identifier>
+<FilePathName>src\system-mainline.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-modules</Identifier>
+<FilePathName>src\system-modules.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-mutual-exclusions</Identifier>
+<FilePathName>src\system-mutual-exclusions.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-start</Identifier>
+<FilePathName>src\system-start.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-structures</Identifier>
+<FilePathName>src\system-structures.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-variables</Identifier>
+<FilePathName>src\system-variables.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>wake-on-lan</Identifier>
 <FilePathName>src\wake-on-lan\wake-on-lan.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>system-defines</Identifier>
+<FilePathName>system-defines.axi</FilePathName>
 <Comments></Comments>
 </File>
 <File CompileType="None" Type="TP4"><Identifier>amx-au-gc-boardroom-mxt-1900</Identifier>
