@@ -915,7 +915,17 @@ button_event[dvTpTableMain, 0]
 	}
 }
 
-
+button_event [dvTpTableDebug,1]
+{
+    push:
+    {
+		channelOff (dvTpTableDebug, 1)
+		moderoDisableButtonPushes (dvTpTableDebug, 2)
+		
+		#warn 'commented out temporarily - must add back in for multi-preview to work'
+		//sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
+    }
+}
 
 /*
  * --------------------
