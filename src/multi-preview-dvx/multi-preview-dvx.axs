@@ -5,6 +5,7 @@ module_name='multi-preview-dvx' (dev virtual,
 								 integer btnAdrsVideoInputSnapshotPreviews[],  // address codes
 								 integer btnAdrsVideoInputLabels[],            // address codes
 								 integer btnAdrsVideoOutputSnapshotPreviews[], // address codes
+								 integer btnAdrsVideoOutputPreviewLabels[],    // address codes
 								 integer btnAdrVideoPreviewLoadingMessage,     // address code
 								 integer btnLoadingBarMultiState,              // channel code
 								 integer btnAdrLoadingBar,                     // address code
@@ -305,6 +306,43 @@ define_function dvxNotifySwitch (dev dvxPort1, char signalType[], integer input,
 				{
 					takeSnapshot ()
 				}
+			}
+		}
+		else
+		{
+			
+			if (input == DVX_PORT_VID_IN_NONE)
+			{
+				//send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - load "no video" image for output #',itoa(output)"
+				moderoSetButtonBitmap (dvTpSnapshotPreview, btnAdrsVideoOutputSnapshotPreviews[output], MODERO_BUTTON_STATE_ALL, imageFileNameNoVideo)
+				moderoSetButtonText (dvTpSnapshotPreview, btnAdrsVideoOutputPreviewLabels[output], MODERO_BUTTON_STATE_ALL, '')
+			}
+			else
+			{
+				//send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - btnAdrsVideoInputSnapshotPreviews[input] #',itoa(btnAdrsVideoInputSnapshotPreviews[input])"
+				//send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - btnAdrsVideoOutputSnapshotPreviews[output] #',itoa(btnAdrsVideoOutputSnapshotPreviews[output])"
+				
+				
+				moderoButtonCopyAttribute (dvTpSnapshotPreview, 
+										   dvTpSnapshotPreview.port, 
+										   btnAdrsVideoInputSnapshotPreviews[input], 
+										   MODERO_BUTTON_STATE_OFF,
+										   btnAdrsVideoOutputSnapshotPreviews[output], 
+										   MODERO_BUTTON_STATE_ALL,
+										   MODERO_BUTTON_ATTRIBUTE_BITMAP)
+				
+				
+				//send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - btnAdrsVideoInputLabels[input] #',itoa(btnAdrsVideoInputLabels[input])"
+				//send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - btnAdrsVideoOutputPreviewLabels[output] #',itoa(btnAdrsVideoOutputPreviewLabels[output])"
+				
+				moderoButtonCopyAttribute (dvTpSnapshotPreview, 
+										   dvTpSnapshotPreview.port, 
+										   btnAdrsVideoInputLabels[input], 
+										   MODERO_BUTTON_STATE_OFF,
+										   btnAdrsVideoOutputPreviewLabels[output], 
+										   MODERO_BUTTON_STATE_ALL,
+										   MODERO_BUTTON_ATTRIBUTE_TEXT)
+				
 			}
 		}
 	}
