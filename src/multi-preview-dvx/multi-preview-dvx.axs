@@ -280,20 +280,6 @@ define_function dvxNotifySwitch (dev dvxPort1, char signalType[], integer input,
 		//dvx.switchStatusVideoOutputs[dvDvxVidOutMultiPreview.port] = input	// replaced with next line
 		dvx.switchStatusVideoOutputs[output] = input
 		
-		if (input == DVX_PORT_VID_IN_NONE)
-		{
-			moderoSetButtonBitmap (dvTpSnapshotPreview, btnAdrsVideoOutputSnapshotPreviews[output], MODERO_BUTTON_STATE_ALL, imageFileNameNoVideo)
-		}
-		else
-		{
-			moderoButtonCopyAttribute (dvTpSnapshotPreview, 
-									   dvTpSnapshotPreview.port, 
-									   btnAdrsVideoInputSnapshotPreviews[input], 
-									   MODERO_BUTTON_STATE_OFF,
-									   btnAdrsVideoOutputSnapshotPreviews[output], 
-									   MODERO_BUTTON_STATE_ALL,
-									   MODERO_BUTTON_ATTRIBUTE_BITMAP)
-		}
 		
 		if (output == dvDvxVidOutMultiPreview.port)
 		{
