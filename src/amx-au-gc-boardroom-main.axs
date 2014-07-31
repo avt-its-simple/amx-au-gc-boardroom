@@ -18,9 +18,6 @@ PROGRAM_NAME='amx-au-gc-boardroom-main'
 
 
 
-// special case agent-usb-ptz-web-cam needs to be declared above system variables
-// as they reference constants within this include file
-#include 'agent-usb-ptz-web-cam'	
 
 
 
@@ -39,6 +36,9 @@ PROGRAM_NAME='amx-au-gc-boardroom-main'
  * --------------------
  */
 
+// special case agent-usb-ptz-web-cam needs to be declared above system variables
+// as they reference constants within this include file
+#include 'agent-usb-ptz-web-cam'	
 // Need to declare the lighting include file after declaring the lighting devices
 #include 'dynalite-lighting'
 // Need to declare the nec monitor include file after declaring the monitor devices
