@@ -19,6 +19,7 @@ module_name='multi-preview-dvx' (dev virtual,
 #include 'amx-dvx-control'
 #include 'amx-modero-api'
 #include 'amx-modero-control'
+#include 'debug'
 
 
 
@@ -196,12 +197,14 @@ define_function takeSnapshot ()
 		}
 		active (1):
 		{
+			send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - load "no video" image for input #',itoa(input)"
 			moderoSetButtonBitmap (dvTpSnapshotPreview, btnAdrsVideoInputSnapshotPreviews[input], MODERO_BUTTON_STATE_ALL, imageFileNameNoVideo)
 			
 			for (output = 1; output <= DVX_MAX_VIDEO_OUTPUTS; output++)
 			{
 				if (dvx.switchStatusVideoOutputs[output] == input)
 				{
+					send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - load "no video" image for output #',itoa(output)"
 					moderoSetButtonBitmap (dvTpSnapshotPreview, btnAdrsVideoOutputSnapshotPreviews[output], MODERO_BUTTON_STATE_ALL, imageFileNameNoVideo)
 				}
 			}
@@ -327,6 +330,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 			{
 				stack_var integer output
 				
+				send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - load "no video" image for input #',itoa(dvxVideoInput.port)"
 				moderoSetButtonBitmap (dvTpSnapshotPreview, btnAdrsVideoInputSnapshotPreviews[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL,imageFileNameNoVideo)
 				
 				for (output = 1; output <= DVX_MAX_VIDEO_OUTPUTS; output++)
