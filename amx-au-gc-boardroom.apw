@@ -180,6 +180,18 @@
 <FilePathName>lib\amx-dxlink-library\amx-dxlink-listener.axi</FilePathName>
 <Comments></Comments>
 </File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-enzo-api</Identifier>
+<FilePathName>lib\amx-enzo-library\amx-enzo-api.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-enzo-control</Identifier>
+<FilePathName>lib\amx-enzo-library\amx-enzo-control.axi</FilePathName>
+<Comments></Comments>
+</File>
+<File CompileType="Netlinx" Type="Include"><Identifier>amx-enzo-listener</Identifier>
+<FilePathName>lib\amx-enzo-library\amx-enzo-listener.axi</FilePathName>
+<Comments></Comments>
+</File>
 <File CompileType="None" Type="Include"><Identifier>amx-modero-api</Identifier>
 <FilePathName>lib\amx-modero-library\amx-modero-api.axi</FilePathName>
 <Comments></Comments>

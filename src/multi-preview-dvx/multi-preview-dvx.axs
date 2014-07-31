@@ -230,6 +230,9 @@ define_function startMultiPreviewSnapshots ()
 
 define_function stopLiveVideoPreview ()
 {
+	cancel_wait 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
+	moderoSetButtonHide (dvTpSnapshotPreview, btnAdrVideoPreviewLoadingMessage)
+	moderoSetButtonHide (dvTpSnapshotPreview, btnAdrLoadingBar)
 	startMultiPreviewSnapshots ()
 }
 
@@ -508,6 +511,7 @@ data_event[dvTpSnapshotPreview]
 		
 		moderoSetButtonHide (dvTpSnapshotPreview, btnAdrVideoPreviewLoadingMessage)
 		moderoSetButtonHide (dvTpSnapshotPreview, btnAdrLoadingBar)
+		moderoSetButtonOpacity (dvTpSnapshotPreview, btnAdrVideoPreviewWindow, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_INVISIBLE)
 		
 		// Setup video settings for MPL
 		moderoSetMultiPreviewInputFormatAndResolution (data.device, MODERO_MULTI_PREVIEW_INPUT_FORMAT_HDMI, MODERO_MULTI_PREVIEW_INPUT_RESOLUTION_HDMI_1280x720p30HZ)
