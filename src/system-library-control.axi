@@ -11,6 +11,7 @@ PROGRAM_NAME='system-library-control'
 #include 'amx-pdu-control'
 #include 'amx-dxlink-control'
 #include 'amx-modero-control'
+#include 'amx-enzo-control'
 #include 'snapi-display-control'
 
 
