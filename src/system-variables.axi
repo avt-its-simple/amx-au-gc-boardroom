@@ -181,7 +181,91 @@ integer btnsVideoInputsMonitorRight[]   =
 	BTN_VIDEO_MONITOR_RIGHT_INPUT_09,
 	BTN_VIDEO_MONITOR_RIGHT_INPUT_10
 }
+*/
 
+
+/*
+ * --------------------
+ * Button channel/address codes
+ * - need to declare these as variable instead of constant as they are being
+ *   passed through to a module
+ * --------------------
+ */
+
+
+integer btnsVideoSnapshotPreviews[DVX_MAX_VIDEO_INPUTS] = 
+{
+	11,
+	12,
+	13,
+	14,
+	15,
+	16,
+	17,
+	18,
+	19,
+	20
+}   
+
+integer btnAdrsVideoSnapshotPreviews[DVX_MAX_VIDEO_INPUTS] = 
+{
+	11,
+	12,
+	13,
+	14,
+	15,
+	16,
+	17,
+	18,
+	19,
+	20
+}   
+
+
+integer btnAdrsVideoInputLabels[DVX_MAX_VIDEO_INPUTS] = 
+{
+	41,
+	42,
+	43,
+	44,
+	45,
+	46,
+	47,
+	48,
+	49,
+	50
+}
+
+integer btnAdrsVideoOutputSnapshotPreviews[DVX_MAX_VIDEO_OUTPUTS] = 
+{
+	BTN_ADR_VIDEO_MONITOR_LEFT_PREVIEW_SNAPSHOT,
+	0,
+	BTN_ADR_VIDEO_MONITOR_RIGHT_PREVIEW_SNAPSHOT,
+	0
+}
+
+integer btnAdrsVideoOutputLabels[DVX_MAX_VIDEO_OUTPUTS] = 
+{
+	BTN_ADR_VIDEO_MONITOR_LEFT_PREVIEW_LABEL,
+	0,
+	BTN_ADR_VIDEO_MONITOR_RIGHT_PREVIEW_LABEL,
+	0
+}
+
+
+integer btnAdrVideoPreviewLoadingMessage = 30
+
+integer btnLoadingBarMultiState = 32
+
+integer btnAdrLoadingBar = 32
+
+integer btnAdrVideoPreviewWindow = 31
+
+integer btnExitVideoPreview = 100
+
+char popupNameVideoPreview[] = 'popup-video-preview'
+
+char imageFileNameNoVideo[] = 'icon-novideo.png'
 
 /*
  * --------------------
