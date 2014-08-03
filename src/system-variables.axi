@@ -153,7 +153,7 @@ dev dvIoPorts[] = {dvDvxIos}
  * Channel arrays
  * --------------------
  */
-
+/*
 integer btnsVideoInputsMonitorLeft[]    =
 {
 	BTN_VIDEO_MONITOR_LEFT_INPUT_01,
