@@ -58,7 +58,7 @@ data_event[dvTpTableMain]
 				dvxSetVideoOutputResolution (dvDvxVidOutMultiPreview, DVX_VIDEO_OUTPUT_RESOLUTION_1280x720p_60HZ)
 				dvxSetVideoOutputAspectRatio (dvDvxVidOutMultiPreview, DVX_ASPECT_RATIO_STRETCH)
 			}
-
+			
 			active (data.device == dvTpTableMain):
 				moderoSetMultiPreviewInputFormatAndResolution (dvTpTableMain, MODERO_MULTI_PREVIEW_INPUT_FORMAT_HDMI, MODERO_MULTI_PREVIEW_INPUT_RESOLUTION_HDMI_1280x720p30HZ)
 		}
@@ -89,156 +89,157 @@ data_event [vdvDragAndDropTpTable]
 {
     online:
     {
-	// Define drag/drop items - they will automatically be enabled by the module
-	addDragItemsAll (vdvDragAndDropTpTable)
-	addDropAreasAll (vdvDragAndDropTpTable)
-	
-	//if (getSystemMode() != SYSTEM_MODE_PRESENTATION)
-	//	disableDropAreasAll (vdvDragAndDrop19)
+		// Define drag/drop items - they will automatically be enabled by the module
+		addDragItemsAll (vdvDragAndDropTpTable)
+		addDropAreasAll (vdvDragAndDropTpTable)
+		
+		//if (getSystemMode() != SYSTEM_MODE_PRESENTATION)
+		//	disableDropAreasAll (vdvDragAndDrop19)
     }
     string:
     {
-	stack_var char header[50]
-	
-	header = remove_string (data.text,DELIM_HEADER,1)
-	
-	switch (header)
-	{
-	    case 'DRAG_ITEM_SELECTED-':
-	    {
-		enableDropItemsAll (vdvDragAndDropTpTable)
+		stack_var char header[50]
 		
-		channelOn (dvTpTableDebug, 1)
+		header = remove_string (data.text,DELIM_HEADER,1)
 		
-		moderoEnableButtonPushes (dvTpTableDebug, 2)
-	    }
-	    
-	    case 'DRAG_ITEM_DESELECTED-':
-	    {
-		stack_var integer idDragItem
-		
-		idDragItem = atoi(data.text)
-		
-		// reset the draggable popup position by hiding it and then showing it again
-		resetDraggablePopup (vdvDragAndDropTpTable, idDragItem)
-		
-		disableDropAreasAll (vdvDragAndDropTpTable)
-		
-		//channelOff (dvTpTableDebug, 1)	// maybe don't do this here
-	    }
-	    
-	    case 'DRAG_ITEM_ENTER_DROP_AREA-':
-	    {
-		stack_var integer idDragItem
-		stack_var integer idDropArea
-		
-		idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
-		idDropArea = atoi(data.text)
-		
-		select
+		switch (header)
 		{
-		    active (idDropArea == dvDvxVidOutMonitorLeft.port):
-		    {
-			channelOn (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_LEFT)
-		    }
-		    
-		    active (idDropArea == dvDvxVidOutMonitorRight.port):
-		    {
-			channelOn (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_RIGHT)
-		    }
+			case 'DRAG_ITEM_SELECTED-':
+			{
+				enableDropItemsAll (vdvDragAndDropTpTable)
+				
+				animateTpVideoSourceSelectionOpen()
+			}
+			
+			case 'DRAG_ITEM_DESELECTED-':
+			{
+				stack_var integer idDragItem
+				
+				idDragItem = atoi(data.text)
+				
+				// reset the draggable popup position by hiding it and then showing it again
+				resetDraggablePopup (vdvDragAndDropTpTable, idDragItem)
+				
+				disableDropAreasAll (vdvDragAndDropTpTable)
+			}
+			
+			case 'DRAG_ITEM_ENTER_DROP_AREA-':
+			{
+				stack_var integer idDragItem
+				stack_var integer idDropArea
+				
+				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
+				idDropArea = atoi(data.text)
+				
+				select
+				{
+					active (idDropArea == dvDvxVidOutMonitorLeft.port):
+					{
+						channelOn (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_LEFT)
+					}
+					
+					active (idDropArea == dvDvxVidOutMonitorRight.port):
+					{
+						channelOn (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_RIGHT)
+					}
+				}
+			}
+			
+			case 'DRAG_ITEM_EXIT_DROP_AREA-':
+			{
+				stack_var integer idDragItem
+				stack_var integer idDropArea
+				
+				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
+				idDropArea = atoi(data.text)
+				
+				select
+				{
+					active (idDropArea == dvDvxVidOutMonitorLeft.port):
+					{
+						channelOff (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_LEFT)
+					}
+					
+					active (idDropArea == dvDvxVidOutMonitorRight.port):
+					{
+						channelOff (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_RIGHT)
+					}
+				}
+			}
+			
+			case 'DRAG_ITEM_DROPPED_ON_DROP_AREA-':
+			{
+				local_var integer idDragItem
+				local_var integer idDropArea
+				stack_var integer btnDropArea
+				
+				idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
+				idDropArea = atoi(data.text)
+				
+				disableDropAreasAll (vdvDragAndDropTpTable)
+				
+				resetDraggablePopup (vdvDragAndDropTpTable, idDragItem)
+				
+				select
+				{
+					active (idDropArea == dvDvxVidOutMonitorLeft.port):
+					{
+						
+						if (dvx.videoInputs[idDragItem].status != DVX_SIGNAL_STATUS_VALID_SIGNAL)
+						{
+							moderoEnablePopup (dvTpTableVideo, POPUP_NAME_NO_SIGNAL_ARE_YOU_SURE)
+							wait_until (userAcknowledgedSelectingInputWithNoSignal) 'WAITING_FOR_USER_TO_ACKNOWLEDGE_SENDING_NO_SIGNAL_INPUT_TO_MONITOR'
+							{
+								userAcknowledgedSelectingInputWithNoSignal = false
+								sendSelectedInputToLeftMonitor (idDragItem, idDropArea)
+							}
+						}
+						else
+						{
+							sendSelectedInputToLeftMonitor (idDragItem, idDropArea)
+						}
+					}
+					
+					active (idDropArea == dvDvxVidOutMonitorRight.port):
+					{
+					
+						if (dvx.videoInputs[idDragItem].status != DVX_SIGNAL_STATUS_VALID_SIGNAL)
+						{
+							moderoEnablePopup (dvTpTableVideo, POPUP_NAME_NO_SIGNAL_ARE_YOU_SURE)
+							wait_until (userAcknowledgedSelectingInputWithNoSignal) 'WAITING_FOR_USER_TO_ACKNOWLEDGE_SENDING_NO_SIGNAL_INPUT_TO_MONITOR'
+							{
+								userAcknowledgedSelectingInputWithNoSignal = false
+								sendSelectedInputToRightMonitor (idDragItem, idDropArea)
+							}
+						}
+						else
+						{
+							sendSelectedInputToRightMonitor (idDragItem, idDropArea)
+						}
+					}
+					
+					active (idDropArea == dvDvxVidOutMultiPreview.port):
+					{
+						showSourceOnDisplay (idDragItem, idDropArea)
+						
+						sendCommand (vdvMultiPreview, "'VIDEO_PREVIEW-',itoa(idDragItem)")
+					}
+				}
+			}
+			
+			case 'DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME-': {}
 		}
-	    }
-	    
-	    case 'DRAG_ITEM_EXIT_DROP_AREA-':
-	    {
-		stack_var integer idDragItem
-		stack_var integer idDropArea
-		
-		idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
-		idDropArea = atoi(data.text)
-		
-		select
-		{
-		    active (idDropArea == dvDvxVidOutMonitorLeft.port):
-		    {
-			channelOff (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_LEFT)
-		    }
-		    
-		    active (idDropArea == dvDvxVidOutMonitorRight.port):
-		    {
-			channelOff (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_RIGHT)
-		    }
-		}
-	    }
-	    
-	    case 'DRAG_ITEM_DROPPED_ON_DROP_AREA-':
-	    {
-		stack_var integer idDragItem
-		stack_var integer idDropArea
-		stack_var integer btnDropArea
-		
-		idDragItem = atoi(remove_string(data.text,DELIM_PARAM,1))
-		idDropArea = atoi(data.text)
-		
-		disableDropAreasAll (vdvDragAndDropTpTable)
-		
-		resetDraggablePopup (vdvDragAndDropTpTable, idDragItem)
-		
-		select
-		{
-		    active (idDropArea == dvDvxVidOutMonitorLeft.port):
-		    {
-			channelOff (dvTpTableDebug, 1)
-			
-			showSourceOnDisplay (idDragItem, idDropArea)
-			
-			#warn 'commented out temporarily - must comment back in for multi-preview to work when drag-and-drop in action'
-			//sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
-			
-			channelOff (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_LEFT)
-			
-			/*moderoButtonCopyAttribute (dvTpTableVideo, 
-						   PORT_TP_VIDEO, 
-						   btnAdrsVideoSnapshotPreviews[idDragItem], 
-						   MODERO_BUTTON_STATE_OFF,
-						   BTN_ADR_VIDEO_MONITOR_LEFT_PREVIEW_SNAPSHOT, 
-						   MODERO_BUTTON_STATE_ALL,
-						   MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
-		    }
-		    
-		    active (idDropArea == dvDvxVidOutMonitorRight.port):
-		    {
-			channelOff (dvTpTableDebug, 1)
-			
-			showSourceOnDisplay (idDragItem, idDropArea)
-			
-			#warn 'commented out temporarily - must comment back in for multi-preview to work when drag-and-drop in action'
-			//sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
-			
-			channelOff (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_RIGHT)
-			
-			/*moderoButtonCopyAttribute (dvTpTableVideo, 
-						   PORT_TP_VIDEO, 
-						   btnAdrsVideoSnapshotPreviews[idDragItem], 
-						   MODERO_BUTTON_STATE_OFF,
-						   BTN_ADR_VIDEO_MONITOR_RIGHT_PREVIEW_SNAPSHOT, 
-						   MODERO_BUTTON_STATE_ALL,
-						   MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
-		    }
-		    
-		    active (idDropArea == dvDvxVidOutMultiPreview.port):
-		    {
-			showSourceOnDisplay (idDragItem, idDropArea)
-			
-			#warn 'commented out temporarily - must comment back in for multi-preview to work when drag-and-drop in action'
-			//sendCommand (vdvMultiPreview, "'START_VIDEO_PREVIEW-',itoa(idDragItem)")
-		    }
-		}
-	    }
-	    
-	    case 'DRAG_ITEM_NOT_LEFT_DRAG_AREA_WITHIN_TIME-': {}
-	}
     }
+}
+
+
+data_event [dvTpTableVideo]
+{
+	online:
+	{
+		moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADR_VIDEO_MONITOR_LEFT_PREVIEW_SNAPSHOT, MODERO_BUTTON_STATE_ALL)
+		moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADR_VIDEO_MONITOR_RIGHT_PREVIEW_SNAPSHOT, MODERO_BUTTON_STATE_ALL)
+	}
 }
 
 data_event[dvTpTableMain]
@@ -688,6 +689,39 @@ button_event[dvTpTablePower,0]
 	}
 }
 
+#warn 'finish programming Enzo control button event'
+button_event[dvTpTableEnzo,0]
+{
+	push:
+	{
+		switch (button.input.channel)
+		{
+			case BTN_ENZO_HOME:						enzoHome (dvEnzo)
+			case BTN_ENZO_BACK:						enzoBack (dvEnzo)
+			case BTN_ENZO_ENTER:					enzoEnter (dvEnzo)
+			case BTN_ENZO_START_SESSION:			enzoSessionStart (dvEnzo)
+			case BTN_ENZO_END_SESSION:				enzoSessionEnd (dvEnzo)
+			case BTN_ENZO_UP:						enzoUp (dvEnzo)
+			case BTN_ENZO_DOWN:						enzoDown (dvEnzo)
+			case BTN_ENZO_LEFT:						enzoLeft (dvEnzo)
+			case BTN_ENZO_RIGHT:					enzoRight (dvEnzo)
+			case BTN_ENZO_PLAY:						enzoPlay (dvEnzo)
+			case BTN_ENZO_PAUSE:					enzoPause (dvEnzo)
+			case BTN_ENZO_STOP:						enzoStop (dvEnzo)
+			case BTN_ENZO_FFWD:						enzoFfwd (dvEnzo)
+			case BTN_ENZO_REWIND:					enzoRewind (dvEnzo)
+			case BTN_ENZO_PAGE_DOWN:				enzoPageDown (dvEnzo)
+			case BTN_ENZO_PAGE_UP:					enzoPageUp (dvEnzo)
+			case BTN_ENZO_PREVIOUS:					enzoPrevious(dvEnzo)
+			case BTN_ENZO_NEXT:						enzoNext (dvEnzo)
+			/*case BTN_ENZO_CLOSE_OPEN_APP:
+			case BTN_ENZO_LAUNCH_APP_WEB_BROWSER:	
+			case BTN_ENZO_LAUNCH_APP_DROPBOX:		
+			case BTN_ENZO_LAUNCH_APP_MIRROR_OP:	*/	
+		}
+	}
+}
+
 button_event[dvTpTableCamera,0]
 {
 	push:
@@ -915,17 +949,32 @@ button_event[dvTpTableMain, 0]
 	}
 }
 
-button_event [dvTpTableDebug,1]
+button_event [dvTpTableDebug, 1]	// exit monitor selection animation
 {
     push:
     {
-		channelOff (dvTpTableDebug, 1)
-		moderoDisableButtonPushes (dvTpTableDebug, 2)
+		animateTpVideoSourceSelectionClose()
 		
-		#warn 'commented out temporarily - must add back in for multi-preview to work'
-		//sendCommand (vdvMultiPreview, "'STOP_VIDEO_PREVIEW'")
+		sendCommand (vdvMultiPreview, "'SNAPSHOTS'")
     }
 }
+
+button_event [dvTpTableDebug, 2]	// select left monitor
+button_event [dvTpTableDebug, 3]	// select right monitor
+{
+    push:
+    {
+		stack_var integer input
+		
+		switch (button.input.channel)
+		{
+			case 2:		showSourceControlPopup (selectedVideoInputMonitorLeft)
+			
+			case 3:		showSourceControlPopup (selectedVideoInputMonitorRight)
+		}
+    }
+}
+
 
 /*
  * --------------------
@@ -1019,12 +1068,45 @@ data_event[dvTpTableMain]
 	string:
 	{
 		// start taking snapshots of each input as soon as the video preview popup closes
-		if (find_string(data.text, '@PPF-popup-video-preview',1) == 1)
+		/*if (find_string(data.text, '@PPF-popup-video-preview',1) == 1)
 		{
 			// turn off the video being previewed flag
 			isVideoBeingPreviewed = FALSE
 			startMultiPreviewSnapshots ()
+		}*/
+		
+		if ( (find_string(data.text, '@PPF-popup-source-selection-drag-and-drop',1) == 1) or
+		     (find_string(data.text, 'PPOF-popup-source-selection-drag-and-drop',1) == 1) )
+		{
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+			do_push(dvTpTableDebug,1)
 		}
+		
+		if ( (find_string(data.text, '@PPN-popup-source-selection-drag-and-drop',1) == 1) or
+		     (find_string(data.text, 'PPON-popup-source-selection-drag-and-drop',1) == 1) )
+		{
+			// activate the source selection drag areas
+			enableDragItemsAll (vdvDragAndDropTpTable)
+		}
+		
+		
+		if ( (find_string(data.text, '@PPF-popup-source-control-background',1) == 1) or
+		     (find_string(data.text, 'PPOF-popup-source-control-background',1) == 1) )
+		{
+			// activate the source selection drag areas
+			enableDragItemsAll (vdvDragAndDropTpTable)
+			sendCommand (vdvMultiPreview, 'SNAPSHOTS')
+		}
+		
+		
+		if ( (find_string(data.text, '@PPN-popup-source-control-background',1) == 1) or
+		     (find_string(data.text, 'PPON-popup-source-control-background',1) == 1) )
+		{
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+		}
+		
 	}
 }
 

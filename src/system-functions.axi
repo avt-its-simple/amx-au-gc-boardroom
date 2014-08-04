@@ -15,13 +15,80 @@ PROGRAM_NAME='system-functions'
 // special case
 #include 'dynalite-lighting'
 #include 'nec-monitor'
+#include 'wake-on-lan'
 
+#include 'debug'
 
 /*
  * --------------------
  * System functions
  * --------------------
  */
+
+
+define_function animateTpVideoSourceSelectionOpen ()
+{
+	channelOn (dvTpTableDebug, 1)	// both display animation elements - opens them via animation
+	channelOn (dvTpTableDebug, 2)	// left display animation elements - hides it via animation
+	channelOn (dvTpTableDebug, 3)	// right display animation elements - hides it via animation
+	moderoEnableButtonPushes (dvTpTableDebug, 2)	// exit animation button
+	moderoDisableButtonPushes (dvTpTableVideo, BTN_ADR_VIDEO_MONITOR_LEFT_PREVIEW_SNAPSHOT)	// left monitor
+	moderoDisableButtonPushes (dvTpTableVideo, BTN_ADR_VIDEO_MONITOR_RIGHT_PREVIEW_SNAPSHOT)	// right monitor
+}
+
+
+define_function animateTpVideoSourceSelectionClose ()
+{
+	channelOff (dvTpTableDebug, 1)	// both display animation elements - closes them via animation
+	channelOff (dvTpTableDebug, 2)	// left display animation elements - shows it via animation
+	channelOff (dvTpTableDebug, 3)	// right display animation elements - shows it via animation
+	moderoDisableButtonPushes (dvTpTableDebug, 2)	// exit animation button
+	moderoEnableButtonPushes (dvTpTableVideo, BTN_ADR_VIDEO_MONITOR_LEFT_PREVIEW_SNAPSHOT)	// left monitor
+	moderoEnableButtonPushes (dvTpTableVideo, BTN_ADR_VIDEO_MONITOR_RIGHT_PREVIEW_SNAPSHOT)	// right monitor
+}
+
+define_function showSourceControlPopup (integer input)
+{
+	select
+	{
+		active (input == dvDvxVidInEnzo.port):
+		{
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[input])
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_ENZO)
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+			sendCommand (vdvMultiPreview, "'SNAPSHOTS_INPUT-',itoa(input)")
+		}
+		
+		active (input == dvDvxVidInPc.port):
+		{
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[input])
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_PC)
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+			sendCommand (vdvMultiPreview, "'SNAPSHOTS_INPUT-',itoa(input)")
+		}
+		
+		/*active (input == dvDvxVidInBluray.port):
+		{
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[input])
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BLURAY_NAVIGATION)
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+			sendCommand (vdvMultiPreview, "'SNAPSHOTS_INPUT-',itoa(input)")
+		}*/
+		
+		/*active (input == dvDvxVidInTv.port):
+		{
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[input])
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BLURAY_TV_CHANNEL_LIST)
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+			sendCommand (vdvMultiPreview, "'SNAPSHOTS_INPUT-',itoa(input)")
+		}*/
+	}
+}
+
 
 define_function resetDraggablePopup (dev dragAndDropVirtual, integer id)
 {
@@ -33,20 +100,22 @@ define_function resetAllDraggablePopups (dev dragAndDropVirtual)
 {
     select
     {
-	active (dragAndDropVirtual == vdvDragAndDropTpTable):
-	{
-	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInPc.port)
-	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
-	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
-	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
-	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
-	    
-	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInPc.port)
-	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
-	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
-	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
-	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
-	}
+		active (dragAndDropVirtual == vdvDragAndDropTpTable):
+		{
+			hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInEnzo.port)
+			hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInPc.port)
+			hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
+			hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
+			hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
+			hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
+			
+			showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInEnzo.port)
+			showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInPc.port)
+			showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
+			showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
+			showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx3.port)
+			showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx4.port)
+		}
     }
 }
 
@@ -67,6 +136,7 @@ define_function hideAllDraggablePopups (dev dragAndDropVirtual)
     {
 	active (dragAndDropVirtual == vdvDragAndDropTpTable):
 	{
+	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInEnzo.port)
 	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInPc.port)
 	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
 	    hideDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
@@ -93,6 +163,7 @@ define_function showDraggablePopupsAll (dev dragAndDropVirtual)
     {
 	active (dragAndDropVirtual == vdvDragAndDropTpTable):
 	{
+	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInEnzo.port)
 	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInPc.port)
 	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
 	    showDraggablePopup (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
@@ -119,6 +190,7 @@ define_function addDragItemsAll (dev dragAndDropVirtual)
     {
 	active (dragAndDropVirtual == vdvDragAndDropTpTable):
 	{
+	    addDragItem (vdvDragAndDropTpTable, dvDvxVidInEnzo.port)
 	    addDragItem (vdvDragAndDropTpTable, dvDvxVidInPc.port)
 	    addDragItem (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
 	    addDragItem (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
@@ -146,6 +218,7 @@ define_function enableDragItemsAll (dev dragAndDropVirtual)
 	{
 		active (dragAndDropVirtual == vdvDragAndDropTpTable):
 		{
+			enableDragItem (vdvDragAndDropTpTable, dvDvxVidInEnzo.port)
 			enableDragItem (vdvDragAndDropTpTable, dvDvxVidInPc.port)
 			enableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
 			enableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
@@ -173,6 +246,7 @@ define_function disableDragItemsAll (dev dragAndDropVirtual)
 	{
 		active (dragAndDropVirtual == vdvDragAndDropTpTable):
 		{
+			disableDragItem (vdvDragAndDropTpTable, dvDvxVidInEnzo.port)
 			disableDragItem (vdvDragAndDropTpTable, dvDvxVidInPc.port)
 			disableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx1.port)
 			disableDragItem (vdvDragAndDropTpTable, dvDvxVidInTx2.port)
@@ -323,7 +397,7 @@ define_function recallCameraPreset (integer cameraPreset)
 	}
 }
 
-
+/*
 define_function startMultiPreviewSnapshots ()
 {
 	if (!isVideoBeingPreviewed)
@@ -374,9 +448,9 @@ define_function startMultiPreviewSnapshots ()
 			}
 		}
 	}
-}
+}*/
 
-
+/*
 define_function stopMultiPreviewSnapshots ()
 {
 	if (timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
@@ -385,7 +459,7 @@ define_function stopMultiPreviewSnapshots ()
 		CANCEL_WAIT 'WAIT_MULTI_PREVIEW_SNAPSHOT'
 	}
 }
-
+*/
 
 
 
@@ -438,6 +512,43 @@ define_function showSourceOnDisplay (integer input, integer output)
 	
 	// set flag to indicate that system is in use
 	setFlagAvSystemInUse (TRUE)
+	
+	
+	
+	/*select
+	{
+		/*active (input = dvDvxVidInEnzo.port):
+		{
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[input])
+			moderoEnablePopup (dvTpTableMain, 'popup-source-control-enzo')
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+		}*/
+		
+		/*active (input = dvDvxVidInPc.port):
+		{
+		}*/
+		
+		/*active (input = dvDvxVidInTx3.port):
+		{
+		}*/
+		
+		/*active (input = dvDvxVidInBluray.port):
+		{
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[input])
+			moderoEnablePopup (dvTpTableMain, 'popup-source-control-bluray-navigation')
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+		}*/
+		
+		/*active (input = dvDvxVidInTv.port):
+		{
+			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[input])
+			moderoEnablePopup (dvTpTableMain, 'popup-source-control-tv-channel-list')
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+		}*/
+	}*/
 }
 
 define_function setFlagAvSystemInUse (integer boolean)
@@ -480,7 +591,7 @@ define_function shutdownAvSystem ()
 	dvxDisableAudioOutputMute (dvDvxAudOutSpeakers)
 
 	// stop taking snapshots (no point constantly switching on the DVX anymore)
-	stopMultiPreviewSnapshots ()
+	//stopMultiPreviewSnapshots ()
 
 	// recall Camera position
 	recallCameraPreset (CAMERA_PRESET_1)
@@ -493,7 +604,110 @@ define_function shutdownAvSystem ()
 	selectedVideoInputMonitorRight = FALSE
 	selectedAudioInput = FALSE
 	audioFollowingVideoOutput = FALSE
+	
+	
+	userAcknowledgedSelectingInputWithNoSignal = false
+	cancel_wait 'WAITING_FOR_USER_TO_ACKNOWLEDGE_SENDING_NO_SIGNAL_INPUT_TO_MONITOR'
+	
+	
+	do_push(dvTpTableDebug,1)
 }
+
+
+
+
+/*
+ *
+ *
+ */
+define_function sendSelectedInputToLeftMonitor (integer input, integer output)
+{
+	animateTpVideoSourceSelectionClose()
+	
+	showSourceOnDisplay (input, output)
+	
+	sendCommand (vdvMultiPreview, "'SNAPSHOTS'")
+	
+	channelOff (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_LEFT)
+	
+	if (input == dvDvxVidInPc.port)
+	{
+		wakeOnLan (MAC_ADDRESS_PC)
+	}
+	
+	if ( (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
+		 ((audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port) and (signalStatusDvxInputMonitorRight != DVX_SIGNAL_STATUS_VALID_SIGNAL))  )
+	{
+		audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
+	}
+	
+	if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
+	{
+		dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
+	}
+	
+	// set flag to indicate that system is in use
+	isSystemAvInUse = TRUE
+	
+	/*moderoButtonCopyAttribute (dvTpTableVideo, 
+				   PORT_TP_VIDEO, 
+				   btnAdrsVideoSnapshotPreviews[idDragItem], 
+				   MODERO_BUTTON_STATE_OFF,
+				   BTN_ADR_VIDEO_MONITOR_LEFT_PREVIEW_SNAPSHOT, 
+				   MODERO_BUTTON_STATE_ALL,
+				   MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
+}
+
+
+
+
+/*
+ *
+ *
+ */
+define_function sendSelectedInputToRightMonitor (integer input, integer output)
+{
+	animateTpVideoSourceSelectionClose()
+	
+	showSourceOnDisplay (input, output)
+	
+	sendCommand (vdvMultiPreview, "'SNAPSHOTS'")
+	
+	channelOff (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_RIGHT)
+	
+	if (input == dvDvxVidInPc.port)
+	{
+		wakeOnLan (MAC_ADDRESS_PC)
+	}
+
+	if ( (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
+		 ((audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port) and (signalStatusDvxInputMonitorLeft != DVX_SIGNAL_STATUS_VALID_SIGNAL))    )
+	{
+		audioFollowingVideoOutput = dvDvxVidOutMonitorRight.port
+	}
+
+	if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
+	{
+		dvxSwitchAudioOnly (dvDvxMain, input, dvDvxAudOutSpeakers.port)
+	}
+
+	// set flag to indicate that system is in use
+	isSystemAvInUse = TRUE
+	
+	/*moderoButtonCopyAttribute (dvTpTableVideo, 
+				   PORT_TP_VIDEO, 
+				   btnAdrsVideoSnapshotPreviews[idDragItem], 
+				   MODERO_BUTTON_STATE_OFF,
+				   BTN_ADR_VIDEO_MONITOR_RIGHT_PREVIEW_SNAPSHOT, 
+				   MODERO_BUTTON_STATE_ALL,
+				   MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
+}
+
+
+
+
+
+
 
 
 /*
@@ -577,7 +791,15 @@ define_function tableInputDetected (dev dvTxVidIn)
 		moderoSetPage (dvTpTableMain, PAGE_NAME_MAIN_USER)
 		// show the source selection / volume control page
 		moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_SELECTION)
-
+		
+		//show the draggable source popups
+		moderoEnablePopup (dvTpTableMain, POPUP_NAME_DRAGGABLE_SOURCES[dvDvxVidInEnzo.port])
+		moderoEnablePopup (dvTpTableMain, POPUP_NAME_DRAGGABLE_SOURCES[dvDvxVidInPc.port])
+		moderoEnablePopup (dvTpTableMain, POPUP_NAME_DRAGGABLE_SOURCES[dvDvxVidInTx1.port])
+		moderoEnablePopup (dvTpTableMain, POPUP_NAME_DRAGGABLE_SOURCES[dvDvxVidInTx2.port])
+		moderoEnablePopup (dvTpTableMain, POPUP_NAME_DRAGGABLE_SOURCES[dvDvxVidInTx3.port])
+		moderoEnablePopup (dvTpTableMain, POPUP_NAME_DRAGGABLE_SOURCES[dvDvxVidInTx4.port])
+		
 		// set the flag to show that the AV system is now in use
 		isSystemAvInUse = TRUE
 	}
@@ -658,7 +880,7 @@ define_function tableInputDetected (dev dvTxVidIn)
 	}
 }
 
-
+/*
 define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
 {
 	// kill the multi-preview snapshot timeline
@@ -692,7 +914,7 @@ define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
 		moderoSetButtonOpacity (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_OPAQUE)
 	}
 }
-
+*/
 
 
 /*
@@ -792,7 +1014,7 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	if (signalStatus != oldSignalStatus)
 	{
 		dvx.videoInputs[dvxVideoInput.port].status = signalStatus
-		startMultiPreviewSnapshots ()
+		//startMultiPreviewSnapshots ()
 	}
 
 
@@ -801,13 +1023,15 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 		case DVX_SIGNAL_STATUS_NO_SIGNAL:
 		case DVX_SIGNAL_STATUS_UNKNOWN:
 		{
+			/*send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - load "no video" image for input #',itoa(dvxVideoInput.port),' (left input selection)'"
 			moderoSetButtonBitmap (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_LEFT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL,IMAGE_FILE_NAME_NO_IMAGE_ICON)
-			moderoSetButtonBitmap (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL,IMAGE_FILE_NAME_NO_IMAGE_ICON)
+			send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - load "no video" image for input #',itoa(dvxVideoInput.port),' (right input selection)'"
+			moderoSetButtonBitmap (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL,IMAGE_FILE_NAME_NO_IMAGE_ICON)*/
 		}
 		case DVX_SIGNAL_STATUS_VALID_SIGNAL:
 		{
-			moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_LEFT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL)
-			moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL)
+			/*moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_LEFT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL)
+			moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL)*/
 
 			// NOTE: Don't set the dynamic resource here. That should be done by the timeline event for taking snapshots.
 			// Otherwise it could result in the snapshots image of the currently routed video to the MPL being shown on all snapshot buttons.
@@ -1468,7 +1692,7 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 				moderoWake (dvTpTableMain)
 
 				// start taking snapshots (just in case the person who triggered the occ sensor wants to go to the source selection page)
-				startMultiPreviewSnapshots ()
+				//startMultiPreviewSnapshots ()
 			}
 		}
 	}
@@ -1501,7 +1725,7 @@ define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 				moderoSleep (dvTpTableMain)
 
 				// Stop taking snapshots
-				stopMultiPreviewSnapshots ()
+				//stopMultiPreviewSnapshots ()
 
 				// shutdown the system if it was being used (i.e., someone just walked away without pressing the shutdown button on the panel)
 				if (isSystemAvInUse)
