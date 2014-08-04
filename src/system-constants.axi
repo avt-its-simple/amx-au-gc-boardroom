@@ -406,6 +406,43 @@ char POPUP_NAME_MESSAGE_QUERY_USER_LYNC_CALL[]  = 'popup-message-query-user-lync
 char PAGE_NAME_SPLASH_SCREEN[]                  = 'page-spash-screen'
 char PAGE_NAME_MAIN_USER[]                      = 'page-main-user'
 char POPUP_NAME_SOURCE_SELECTION[]              = 'popup-source-selection-drag-and-drop'
+char POPUP_NAME_NO_SIGNAL_ARE_YOU_SURE[]        = 'popup-no-signal-are-you-sure'
+
+char POPUP_NAME_DRAGGABLE_SOURCES[][30] = 
+{
+	'draggable-source-1',
+	'draggable-source-2',
+	'draggable-source-3',
+	'draggable-source-4',
+	'draggable-source-5',
+	'draggable-source-6',
+	'draggable-source-7',
+	'draggable-source-8',
+	'draggable-source-9',
+	'draggable-source-10'
+}
+
+char POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[][50] = 
+{
+	'popup-source-control-background-1',
+	'popup-source-control-background-2',
+	'popup-source-control-background-3',
+	'popup-source-control-background-4',
+	'popup-source-control-background-5',
+	'popup-source-control-background-6',
+	'popup-source-control-background-7',
+	'popup-source-control-background-8',
+	'popup-source-control-background-9',
+	'popup-source-control-background-10'
+}
+
+char POPUP_NAME_SOURCE_CONTROL_ENZO[] = 'popup-source-control-enzo'
+char POPUP_NAME_SOURCE_CONTROL_PC[] = 'popup-source-control-pc'
+char POPUP_NAME_SOURCE_CONTROL_BLURAY_MENU[] = 'popup-source-control-bluray-menu'
+char POPUP_NAME_SOURCE_CONTROL_BLURAY_NAVIGATION[] = 'popup-source-control-bluray-navigation'
+char POPUP_NAME_SOURCE_CONTROL_BLURAY_TV_KEYPAD[] = 'popup-source-control-tv-keypad'
+char POPUP_NAME_SOURCE_CONTROL_BLURAY_TV_MENU[] = 'popup-source-control-tv-menu'
+char POPUP_NAME_SOURCE_CONTROL_BLURAY_TV_CHANNEL_LIST[] = 'popup-source-control-tv-channel-list'
 
 /*
  * --------------------
