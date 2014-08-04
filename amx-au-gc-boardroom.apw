@@ -125,7 +125,7 @@
 <SysID>0</SysID>
 <TransTCPIP>192.168.7.201:1319:1:AMX AU - GC Office - Boardroom DVX::</TransTCPIP>
 <TransSerial>COM4,38400,8,None,1,None</TransSerial>
-<TransTCPIPEx>192.168.7.86|1319|1| ||</TransTCPIPEx>
+<TransTCPIPEx>192.168.7.201|1319|1|AMX AU - GC Office - Boardroom DVX||</TransTCPIPEx>
 <TransSerialEx>COM4|38400|8|None|1|None||</TransSerialEx>
 <TransUSBEx>|||||</TransUSBEx>
 <TransVNMEx>10.0.0.1|1</TransVNMEx>
