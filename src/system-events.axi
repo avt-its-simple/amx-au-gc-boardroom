@@ -340,7 +340,6 @@ data_event[dvTxTable4VidInAnalog]
 	online:
 	{
 		dxlinkRequestTxVideoInputSignalStatusAnalog (data.device)
-
 	}
 }
 
@@ -352,7 +351,6 @@ data_event[dvTxTable4VidInDigital]
 	online:
 	{
 		dxlinkRequestTxVideoInputSignalStatusDigital (data.device)
-
 	}
 }
 
