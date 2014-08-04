@@ -288,6 +288,8 @@ persistent integer isSystemAvInUse  = FALSE
 
 persistent integer countTimesPeopleLeftWithoutShuttingDownSystem    = 0
 
+volatile integer userAcknowledgedSelectingInputWithNoSignal = false
+
 _DvxSwitcher dvx
 
 persistent integer volumeMax        = 75

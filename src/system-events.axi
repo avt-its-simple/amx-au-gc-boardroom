@@ -588,6 +588,19 @@ button_event[dvTpTableVideo,0]
 				// set flag to indicate that system is in use
 				isSystemAvInUse = TRUE
 			}
+			
+			case BTN_USER_ACKNOWLEDGE_SEND_INPUT_NO_SIGNAL_TO_MONITOR_NO:
+			{
+				userAcknowledgedSelectingInputWithNoSignal = false
+				cancel_wait 'WAITING_FOR_USER_TO_ACKNOWLEDGE_SENDING_NO_SIGNAL_INPUT_TO_MONITOR'
+				channelOff (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_LEFT)
+				channelOff (dvTpTableVideo, BTN_DROP_AREA_TP_TABLE_HIGHLIGHT_MONITOR_RIGHT)
+			}
+			
+			case BTN_USER_ACKNOWLEDGE_SEND_INPUT_NO_SIGNAL_TO_MONITOR_YES:
+			{
+				userAcknowledgedSelectingInputWithNoSignal = true
+			}
 		}
 	}
 }
