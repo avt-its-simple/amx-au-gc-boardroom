@@ -19,3 +19,6 @@
 [submodule "lib/common-library"]
 	path = lib/common-library
 	url = https://github.com/AMXAUNZ/common-library.git
+[submodule "lib/amx-enzo-library"]
+	path = lib/amx-enzo-library
+	url = https://github.com/AMXAUNZ/amx-enzo-library.git
