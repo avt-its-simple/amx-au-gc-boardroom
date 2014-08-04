@@ -18,6 +18,7 @@ define_constant
 
 integer DEV_ID_MASTER                               = 0
 integer DEV_ID_TOUCH_PANEL_TABLE                    = 10001
+integer DEV_ID_ENZO                                 = 9001
 integer DEV_ID_TX_1                                 = 7001
 integer DEV_ID_TX_2                                 = 7002
 integer DEV_ID_TX_3                                 = 7003
@@ -63,6 +64,7 @@ integer PORT_TP_CAMERA          = 7
 integer PORT_TP_DXLINK          = 8
 integer PORT_TP_DEVICE_INFO     = 9
 integer PORT_TP_OCCUPANCY       = 10
+integer PORT_TP_ENZO            = 11
 integer PORT_TP_DEBUG           = 100
 
 // DVX Controller Serial Ports
@@ -83,6 +85,9 @@ integer PORT_DVX_IR_6               = 14
 integer PORT_DVX_IR_7               = 15
 integer PORT_DVX_IR_8               = 16
 integer PORT_DVX_IOS                = 17
+
+// Enzo Ports
+integer PORT_ENZO_MAIN = 1
 
 // Axlink port - always 1
 integer PORT_AXLINK = 1
@@ -117,6 +122,7 @@ dvTpTableCamera     = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_CAMERA:SYS_MASTER
 dvTpTableDxlink     = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_DXLINK:SYS_MASTER
 dvTpTableDeviceInfo = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_DEVICE_INFO:SYS_MASTER
 dvTpTableOccupancy  = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_OCCUPANCY:SYS_MASTER
+dvTpTableEnzo       = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_ENZO:SYS_MASTER
 dvTpTableDebug      = DEV_ID_TOUCH_PANEL_TABLE:PORT_TP_DEBUG:SYS_MASTER
 
 // drag and drop elements
@@ -174,6 +180,7 @@ dvDvxVidIn8     = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_8:SYS_MASTER
 dvDvxVidIn9     = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_9:SYS_MASTER
 dvDvxVidIn10    = DEV_ID_DVX_SWITCHER:DVX_PORT_VID_IN_10:SYS_MASTER
 // Names ports
+dvDvxVidInEnzo  = dvDvxVidIn4
 dvDvxVidInPc    = dvDvxVidIn5
 dvDvxVidInTx1   = dvDvxVidIn7
 dvDvxVidInTx2   = dvDvxVidIn8
@@ -206,6 +213,7 @@ dvDvxAudIn12    = DEV_ID_DVX_SWITCHER:DVX_PORT_AUD_IN_12:SYS_MASTER
 dvDvxAudIn13    = DEV_ID_DVX_SWITCHER:DVX_PORT_AUD_IN_13:SYS_MASTER
 dvDvxAudIn14    = DEV_ID_DVX_SWITCHER:DVX_PORT_AUD_IN_14:SYS_MASTER
 // Names ports
+dvDvxAudInEnzo  = dvDvxAudIn4
 dvDvxAudInPc    = dvDvxAudIn5
 dvDvxAudInTx1   = dvDvxAudIn7
 dvDvxAudInTx2   = dvDvxAudIn8
@@ -229,6 +237,9 @@ dvRelaysRelBox  = DEV_ID_RELAY_BOX:PORT_AXLINK:SYS_MASTER
 
 // PTZ Camera
 dvPtzCam    = DEV_ID_DVX_CONTROLLER:PORT_DVX_SERIAL_1:SYS_MASTER
+
+// Enzo
+dvEnzo = DEV_ID_ENZO:PORT_ENZO_MAIN:SYS_MASTER
 
 // PDU
 dvPduMain1  = DEV_ID_PDU_1:PORT_AXLINK:SYS_MASTER
