@@ -554,6 +554,8 @@ char POPUP_NAME_SOURCE_SELECTION[]              = 'popup-source-selection-drag-a
  */
 
 char IMAGE_FILE_NAME_NO_IMAGE_ICON[]    = 'icon-novideo.png'
+char IMAGE_FILE_NAME_NO_VIDEO_SIGNAL_ICON[]    = 'icon-novideo.png'
+char IMAGE_FILE_NAME_NO_VIDEO_ROUTE_ICON[]    = 'icon-novideo.png'
 
 /*
  * --------------------
@@ -570,7 +572,7 @@ char IMAGE_FILE_NAME_NO_IMAGE_ICON[]    = 'icon-novideo.png'
  * --------------------
  */
 
-long TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS    = 1
+//long TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS    = 1
 
 
 /*

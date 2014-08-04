@@ -39,6 +39,7 @@ integer DEV_ID_PDU_6                                =  90
 integer DEV_ID_PDU_7                                =  91
 integer DEV_ID_PDU_8                                =  92
 integer DEV_ID_VIRTUAL_DRAG_AND_DROP_TP_TABLE       = 33001
+integer DEV_ID_VIRTUAL_MULTI_PREVIEW                = 33002
 integer DEV_ID_DUET_MODULE_VIRTUAL_RMS              = 41001
 integer DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_LEFT     = 41002
 integer DEV_ID_DUET_MODULE_VIRTUAL_MONITOR_RIGHT    = 41003
@@ -293,6 +294,8 @@ vdvRms  = DEV_ID_DUET_MODULE_VIRTUAL_RMS:PORT_VIRTUAL_MAIN:SYS_MASTER
 // drag and drop virtual device
 vdvDragAndDropTpTable = DEV_ID_VIRTUAL_DRAG_AND_DROP_TP_TABLE:PORT_VIRTUAL_MAIN:SYS_MASTER
 
+// Multi-Preview
+vdvMultiPreview = DEV_ID_VIRTUAL_MULTI_PREVIEW:PORT_VIRTUAL_MAIN:SYS_MASTER
 
 
  

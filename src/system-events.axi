@@ -954,7 +954,7 @@ button_event[dvTpTableMain, 0]
 
 			case BTN_MAIN_SPLASH_SCREEN:
 			{
-				startMultiPreviewSnapshots ()
+				//startMultiPreviewSnapshots ()
 
 				// page flips done on the panel
 			}
@@ -1008,7 +1008,7 @@ level_event[dvTpTableAudio, BTN_LVL_VOLUME_CONTROL]
  * --------------------
  */
 
-timeline_event[TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS]
+/*timeline_event[TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS]
 {
 	stack_var integer input
 	local_var integer slotId
