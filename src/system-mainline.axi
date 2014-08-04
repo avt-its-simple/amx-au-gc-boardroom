@@ -39,6 +39,7 @@ define_program
 
 
 // Feedback for video input selection buttons
+/*
 [dvTpTableVideo, BTN_VIDEO_MONITOR_LEFT_INPUT_01_FEEDBACK]  = (selectedVideoInputMonitorLeft == dvdvxVidIn1.port)
 [dvTpTableVideo, BTN_VIDEO_MONITOR_LEFT_INPUT_02_FEEDBACK]  = (selectedVideoInputMonitorLeft == dvdvxVidIn2.port)
 [dvTpTableVideo, BTN_VIDEO_MONITOR_LEFT_INPUT_03_FEEDBACK]  = (selectedVideoInputMonitorLeft == dvdvxVidIn3.port)
@@ -60,7 +61,7 @@ define_program
 [dvTpTableVideo, BTN_VIDEO_MONITOR_RIGHT_INPUT_08_FEEDBACK] = (selectedVideoInputMonitorRight == dvdvxVidIn8.port)
 [dvTpTableVideo, BTN_VIDEO_MONITOR_RIGHT_INPUT_09_FEEDBACK] = (selectedVideoInputMonitorRight == dvdvxVidIn9.port)
 [dvTpTableVideo, BTN_VIDEO_MONITOR_RIGHT_INPUT_10_FEEDBACK] = (selectedVideoInputMonitorRight == dvdvxVidIn10.port)
-
+*/
 
 // Feedback for audio-follow-video selection buttons
 [dvTpTableAudio, BTN_AUDIO_FOLLOW_MONITOR_LEFT]     = (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port) AND selectedAudioInput
