@@ -11,8 +11,6 @@ PROGRAM_NAME='system-variables'
 #include 'agent-usb-ptz-web-cam'
 
 
-
-
 /*
  * --------------------
  * Global variables
@@ -153,35 +151,6 @@ dev dvIoPorts[] = {dvDvxIos}
  * Channel arrays
  * --------------------
  */
-/*
-integer btnsVideoInputsMonitorLeft[]    =
-{
-	BTN_VIDEO_MONITOR_LEFT_INPUT_01,
-	BTN_VIDEO_MONITOR_LEFT_INPUT_02,
-	BTN_VIDEO_MONITOR_LEFT_INPUT_03,
-	BTN_VIDEO_MONITOR_LEFT_INPUT_04,
-	BTN_VIDEO_MONITOR_LEFT_INPUT_05,
-	BTN_VIDEO_MONITOR_LEFT_INPUT_06,
-	BTN_VIDEO_MONITOR_LEFT_INPUT_07,
-	BTN_VIDEO_MONITOR_LEFT_INPUT_08,
-	BTN_VIDEO_MONITOR_LEFT_INPUT_09,
-	BTN_VIDEO_MONITOR_LEFT_INPUT_10
-}
-
-integer btnsVideoInputsMonitorRight[]   =
-{
-	BTN_VIDEO_MONITOR_RIGHT_INPUT_01,
-	BTN_VIDEO_MONITOR_RIGHT_INPUT_02,
-	BTN_VIDEO_MONITOR_RIGHT_INPUT_03,
-	BTN_VIDEO_MONITOR_RIGHT_INPUT_04,
-	BTN_VIDEO_MONITOR_RIGHT_INPUT_05,
-	BTN_VIDEO_MONITOR_RIGHT_INPUT_06,
-	BTN_VIDEO_MONITOR_RIGHT_INPUT_07,
-	BTN_VIDEO_MONITOR_RIGHT_INPUT_08,
-	BTN_VIDEO_MONITOR_RIGHT_INPUT_09,
-	BTN_VIDEO_MONITOR_RIGHT_INPUT_10
-}
-*/
 
 
 /*
@@ -301,11 +270,6 @@ persistent integer opacitySelected      = 255
 persistent integer panSpeed     = CAMERA_MAX_PAN_SPEED
 persistent integer tiltSpeed    = CAMERA_MAX_TILT_SPEED
 
-/*persistent integer CAMERASpeedPresetTilt  = CAMERA_MIN_TILT_SPEED
-persistent integer CAMERASpeedPresetPan     = CAMERA_MIN_PAN_SPEED
-persistent integer CAMERASpeedPresetZoom    = CAMERA_MIN_ZOOM_SPEED
-persistent integer CAMERASpeedPresetFocus   = CAMERA_MIN_FOCUS_SPEED*/
-
 persistent integer cameraSpeedPreset1Pan    = 17
 persistent integer cameraSpeedPreset1Tilt   = 17
 persistent integer cameraSpeedPreset1Zoom   = 1
@@ -340,10 +304,6 @@ integer waitTimeValidSignal     = 600
 integer waitTimeMplSnapShot     = 8
 
 persistent integer waitTimeCameraAdjustingToBasePosition    = 60
-/*persistent integer waitTimeCameraAdjustingToPresetTilt    = 50
-persistent integer waitTimeCameraAdjustingToPresetPan       = 50
-persistent integer waitTimeCameraAdjustingToPresetZoom      = 50
-persistent integer waitTimeCameraAdjustingToPresetFocus     = 50*/
 persistent integer waitTimeCameraAdjustingToPreset1Pan      = 24
 persistent integer waitTimeCameraAdjustingToPreset1Tilt     = 18
 persistent integer waitTimeCameraAdjustingToPreset1Zoom     = 10

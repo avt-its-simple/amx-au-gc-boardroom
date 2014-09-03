@@ -469,8 +469,6 @@ char IMAGE_FILE_NAME_NO_VIDEO_ROUTE_ICON[]    = 'icon-novideo.png'
  * --------------------
  */
 
-//long TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS    = 1
-
 
 /*
  * --------------------

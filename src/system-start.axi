@@ -18,10 +18,6 @@ PROGRAM_NAME='system-start'
  */
 define_start
 
-
-
-
-
 initArea (dropAreasTpTable[dvDvxVidOutMonitorLeft.port], 438, 164, 320, 180)
 initArea (dropAreasTpTable[dvDvxVidOutMonitorRight.port], 1163, 164, 320, 180)
 initArea (dropAreasTpTable[dvDvxVidOutMultiPreview.port], 771, 164, 379, 180)
@@ -32,7 +28,6 @@ initArea (dragAreasTpTable[dvDvxVidInTx1.port], 820, 376 ,134, 105)
 initArea (dragAreasTpTable[dvDvxVidInTx2.port], 966, 376, 134, 105)
 initArea (dragAreasTpTable[dvDvxVidInTx3.port], 1112,376, 134, 105)
 initArea (dragAreasTpTable[dvDvxVidInTx4.port], 1258,376, 134, 105)
-
 
 {
     stack_var integer i

@@ -85,6 +85,47 @@ data_event[dvPduMain1]
 	}
 }
 
+
+
+data_event[dvTpTableMain]
+{
+	string:
+	{
+		// start taking snapshots of each input as soon as the video preview popup closes
+		if ( (find_string(data.text, '@PPF-popup-source-selection-drag-and-drop',1) == 1) or
+		     (find_string(data.text, 'PPOF-popup-source-selection-drag-and-drop',1) == 1) )
+		{
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+			do_push(dvTpTableDebug,1)
+		}
+		
+		if ( (find_string(data.text, '@PPN-popup-source-selection-drag-and-drop',1) == 1) or
+		     (find_string(data.text, 'PPON-popup-source-selection-drag-and-drop',1) == 1) )
+		{
+			// activate the source selection drag areas
+			enableDragItemsAll (vdvDragAndDropTpTable)
+		}
+		
+		if ( (find_string(data.text, '@PPF-popup-source-control-background',1) == 1) or
+		     (find_string(data.text, 'PPOF-popup-source-control-background',1) == 1) )
+		{
+			// activate the source selection drag areas
+			enableDragItemsAll (vdvDragAndDropTpTable)
+			sendCommand (vdvMultiPreview, 'SNAPSHOTS')
+		}
+		
+		if ( (find_string(data.text, '@PPN-popup-source-control-background',1) == 1) or
+		     (find_string(data.text, 'PPON-popup-source-control-background',1) == 1) )
+		{
+			// deactivate the source selection drag areas
+			disableDragItemsAll (vdvDragAndDropTpTable)
+		}
+	}
+}
+
+
+
 data_event [vdvDragAndDropTpTable]
 {
     online:
@@ -455,83 +496,6 @@ button_event[dvTpTableAudio,0]
 	}
 }
 
-/*button_event[dvTpTableVideo,BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION]
-{
-	hold[waitTimeVideoPreview]:
-	{
-		loadVideoPreviewWindow (dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION)])
-	}
-	release:
-	{
-		if (!isVideoBeingPreviewed)
-		{
-			necMonitorSetPowerOn (vdvMonitorLeft)
-
-			dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION)].port, dvDvxVidOutMonitorLeft.port)
-
-			if (dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION)] == dvDvxVidInPc)
-			{
-				wakeOnLan (MAC_ADDRESS_PC)
-			}
-
-			if ( (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
-			     ((audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port) and (signalStatusDvxInputMonitorRight != DVX_SIGNAL_STATUS_VALID_SIGNAL))  )
-			{
-				audioFollowingVideoOutput = dvDvxVidOutMonitorLeft.port
-			}
-
-			if (audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port)
-			{
-				dvxSwitchAudioOnly (dvDvxMain, dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_LEFT_INPUT_SELECTION)].port, dvDvxAudOutSpeakers.port)
-			}
-
-			// set flag to indicate that system is in use
-			isSystemAvInUse = TRUE
-		}
-
-		// turn off the video being previewed flag
-		//isVideoBeingPreviewed = FALSE	// moved to data_event to capture video preview popup hiding
-	}
-}*/
-
-/*button_event[dvTpTableVideo,BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION]
-{
-	hold[waitTimeVideoPreview]:
-	{
-		loadVideoPreviewWindow (dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION)])
-	}
-	release:
-	{
-		if (!isVideoBeingPreviewed)
-		{
-			necMonitorSetPowerOn (vdvMonitorRight)
-
-			dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION)].port, dvDvxVidOutMonitorRight.port)
-
-			if (dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION)] == dvDvxVidInPc)
-			{
-				wakeOnLan (MAC_ADDRESS_PC)
-			}
-
-			if ( (selectedAudioInput == DVX_PORT_AUD_IN_NONE) or
-			     ((audioFollowingVideoOutput == dvDvxVidOutMonitorLeft.port) and (signalStatusDvxInputMonitorLeft != DVX_SIGNAL_STATUS_VALID_SIGNAL))    )
-			{
-				audioFollowingVideoOutput = dvDvxVidOutMonitorRight.port
-			}
-
-			if (audioFollowingVideoOutput == dvDvxVidOutMonitorRight.port)
-			{
-				dvxSwitchAudioOnly (dvDvxMain, dvDvxVidInPorts[get_last(BTNS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION)].port, dvDvxAudOutSpeakers.port)
-			}
-
-			// set flag to indicate that system is in use
-			isSystemAvInUse = TRUE
-		}
-
-		// turn off the video being previewed flag
-		//isVideoBeingPreviewed = FALSE   // moved to data_event to capture video preview popup hiding
-	}
-}*/
 
 button_event[dvTpTableVideo,0]
 {
@@ -952,8 +916,6 @@ button_event[dvTpTableMain, 0]
 
 			case BTN_MAIN_SPLASH_SCREEN:
 			{
-				//startMultiPreviewSnapshots ()
-
 				// page flips done on the panel
 			}
 		}
@@ -1006,120 +968,12 @@ level_event[dvTpTableAudio, BTN_LVL_VOLUME_CONTROL]
  * --------------------
  */
 
-/*timeline_event[TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS]
-{
-	stack_var integer input
-	local_var integer slotId
-	local_var char dynamicImageName[30]
-
-	input = timeline.sequence
-
-	if (timelineTimesMultiPreviewSnapshots[input])
-	{
-		slotId = input
-		dynamicImageName = "'MXA_PREVIEW_',itoa(slotId)"
-
-		// Only take a snapshot if there is a valid signal status on the input
-		if (dvx.videoInputs[slotId].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
-		{
-			dvxSwitchVideoOnly (dvDvxMain, slotId, dvDvxVidOutMultiPreview.port)
-
-			WAIT waitTimeMplSnapShot 'WAIT_MULTI_PREVIEW_SNAPSHOT'   // wait just over half a second before taking the snapshot....allows the image time to lock on
-			{
-				moderoResourceForceRefreshPrefetchFromCache (dvTpTableVideo, dynamicImageName, MODERO_RESOURCE_NOTIFICATION_OFF)
-				moderoSetButtonBitmapResource (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_LEFT_INPUT_SELECTION[slotId],MODERO_BUTTON_STATE_ALL,"'MXA_PREVIEW_',itoa(slotId)")
-				moderoSetButtonBitmapResource (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION[slotId],MODERO_BUTTON_STATE_ALL,"'MXA_PREVIEW_',itoa(slotId)")
-			}
-		}
-	}
-}*/
-
-
 
 /*
  * --------------------
  * Custom events
  * --------------------
  */
-
-
-#warn 'BUG: amx-au-gc-boardroom-main - custom event for streaming status not triggering'
-
-custom_event[dvTpTableMain,0,MODERO_CUSTOM_EVENT_ID_STREAMING_VIDEO]
-custom_event[dvTpTableVideo,0,MODERO_CUSTOM_EVENT_ID_STREAMING_VIDEO]
-custom_event[dvTpTableMain,1,MODERO_CUSTOM_EVENT_ID_STREAMING_VIDEO]
-custom_event[dvTpTableVideo,1,MODERO_CUSTOM_EVENT_ID_STREAMING_VIDEO]
-{
-	debugPrint ("'custom_event[dvTpTableMain,1,MODERO_CUSTOM_EVENT_ID_STREAMING_VIDEO]'")
-	debugPrint ("'custom.device = [',debugDevToString(custom.device),']'")
-	debugPrint ("'custom.id = <>',itoa(custom.id)")
-	debugPrint ("'custom.type = <>',itoa(custom.type)")
-	debugPrint ("'custom.flag = <>',itoa(custom.flag)")
-	debugPrint ("'custom.value1 = <>',itoa(custom.value1)")
-	debugPrint ("'custom.value2 = <>',itoa(custom.value2)")
-	debugPrint ("'custom.value3 = <>',itoa(custom.value3)")
-	debugPrint ("'custom.text = "',custom.text,'"'")
-
-	switch (custom.flag)
-	{
-		case 1:	// start
-		{
-
-		}
-		case 2:	// stop
-		{
-			//startMultiPreviewSnapshots ()
-		}
-	}
-}
-
-
-data_event[dvTpTableMain]
-{
-	string:
-	{
-		// start taking snapshots of each input as soon as the video preview popup closes
-		/*if (find_string(data.text, '@PPF-popup-video-preview',1) == 1)
-		{
-			// turn off the video being previewed flag
-			isVideoBeingPreviewed = FALSE
-			startMultiPreviewSnapshots ()
-		}*/
-		
-		if ( (find_string(data.text, '@PPF-popup-source-selection-drag-and-drop',1) == 1) or
-		     (find_string(data.text, 'PPOF-popup-source-selection-drag-and-drop',1) == 1) )
-		{
-			// deactivate the source selection drag areas
-			disableDragItemsAll (vdvDragAndDropTpTable)
-			do_push(dvTpTableDebug,1)
-		}
-		
-		if ( (find_string(data.text, '@PPN-popup-source-selection-drag-and-drop',1) == 1) or
-		     (find_string(data.text, 'PPON-popup-source-selection-drag-and-drop',1) == 1) )
-		{
-			// activate the source selection drag areas
-			enableDragItemsAll (vdvDragAndDropTpTable)
-		}
-		
-		
-		if ( (find_string(data.text, '@PPF-popup-source-control-background',1) == 1) or
-		     (find_string(data.text, 'PPOF-popup-source-control-background',1) == 1) )
-		{
-			// activate the source selection drag areas
-			enableDragItemsAll (vdvDragAndDropTpTable)
-			sendCommand (vdvMultiPreview, 'SNAPSHOTS')
-		}
-		
-		
-		if ( (find_string(data.text, '@PPN-popup-source-control-background',1) == 1) or
-		     (find_string(data.text, 'PPON-popup-source-control-background',1) == 1) )
-		{
-			// deactivate the source selection drag areas
-			disableDragItemsAll (vdvDragAndDropTpTable)
-		}
-		
-	}
-}
 
 
 

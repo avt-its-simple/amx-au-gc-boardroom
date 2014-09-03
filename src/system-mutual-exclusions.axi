@@ -16,7 +16,6 @@ PROGRAM_NAME='system-mutual-exclusions'
 define_mutually_exclusive
 
 
-
 // DXLink Rx Aspect Ratio Mode Buttons
 (
 	[dvTpTableDxlink, BTN_DXLINK_RX_ASPECT_ANAMORPHIC_MONITOR_LEFT],
@@ -65,11 +64,6 @@ define_mutually_exclusive
 	[dvTpTableDxlink, BTN_DXLINK_TX_HDMI_4],
 	[dvTpTableDxlink, BTN_DXLINK_TX_VGA_4]
 )
-
-
-
-
-
 
 
 

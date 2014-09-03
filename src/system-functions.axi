@@ -397,71 +397,6 @@ define_function recallCameraPreset (integer cameraPreset)
 	}
 }
 
-/*
-define_function startMultiPreviewSnapshots ()
-{
-	if (!isVideoBeingPreviewed)
-	{
-		stack_var integer i
-		stack_var integer isAtLeastOneValidSignal
-
-		isAtLeastOneValidSignal = FALSE
-
-		// reset all timeline times back to zero
-		for (i = 1; i<= max_length_array(timelineTimesMultiPreviewSnapshots); i++)
-		{
-			if (dvx.videoInputs[i].status == DVX_SIGNAL_STATUS_VALID_SIGNAL)
-			{
-				timelineTimesMultiPreviewSnapshots[i] = timelineTimeMplBetweenSwitches
-				isAtLeastOneValidSignal = TRUE
-			}
-			else
-			{
-				timelineTimesMultiPreviewSnapshots[i] = 0
-			}
-		}
-
-		if (isAtLeastOneValidSignal)
-		{
-			if (!timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
-			{
-				set_length_array (timelineTimesMultiPreviewSnapshots, max_length_array(timelineTimesMultiPreviewSnapshots))
-
-				timeline_create (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS,
-						timelineTimesMultiPreviewSnapshots,
-						length_array (timelineTimesMultiPreviewSnapshots),
-						timeline_relative,
-						timeline_repeat)
-			}
-			else
-			{
-				CANCEL_WAIT 'WAIT_MULTI_PREVIEW_SNAPSHOT'
-				timeline_reload (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS, timelineTimesMultiPreviewSnapshots, length_array(timelineTimesMultiPreviewSnapshots))
-			}
-		}
-		else
-		{
-			if (timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
-			{
-				timeline_kill (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)
-				CANCEL_WAIT 'WAIT_MULTI_PREVIEW_SNAPSHOT'
-			}
-		}
-	}
-}*/
-
-/*
-define_function stopMultiPreviewSnapshots ()
-{
-	if (timeline_active(TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS))
-	{
-		timeline_kill (TIMELINE_ID_MULTI_PREVIEW_SNAPSHOTS)
-		CANCEL_WAIT 'WAIT_MULTI_PREVIEW_SNAPSHOT'
-	}
-}
-*/
-
-
 
 define_function turnOnDisplay (dev virtual)
 {
@@ -512,60 +447,12 @@ define_function showSourceOnDisplay (integer input, integer output)
 	
 	// set flag to indicate that system is in use
 	setFlagAvSystemInUse (TRUE)
-	
-	
-	
-	/*select
-	{
-		/*active (input = dvDvxVidInEnzo.port):
-		{
-			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[input])
-			moderoEnablePopup (dvTpTableMain, 'popup-source-control-enzo')
-			// deactivate the source selection drag areas
-			disableDragItemsAll (vdvDragAndDropTpTable)
-		}*/
-		
-		/*active (input = dvDvxVidInPc.port):
-		{
-		}*/
-		
-		/*active (input = dvDvxVidInTx3.port):
-		{
-		}*/
-		
-		/*active (input = dvDvxVidInBluray.port):
-		{
-			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[input])
-			moderoEnablePopup (dvTpTableMain, 'popup-source-control-bluray-navigation')
-			// deactivate the source selection drag areas
-			disableDragItemsAll (vdvDragAndDropTpTable)
-		}*/
-		
-		/*active (input = dvDvxVidInTv.port):
-		{
-			moderoEnablePopup (dvTpTableMain, POPUP_NAME_SOURCE_CONTROL_BACKGROUNDS[input])
-			moderoEnablePopup (dvTpTableMain, 'popup-source-control-tv-channel-list')
-			// deactivate the source selection drag areas
-			disableDragItemsAll (vdvDragAndDropTpTable)
-		}*/
-	}*/
 }
 
 define_function setFlagAvSystemInUse (integer boolean)
 {
 	isSystemAvInUse = boolean
 }
-
-/*define_function setSystemMode (integer mode)
-{
-	systemMode = mode
-}
-
-define_function integer getSystemMode ()
-{
-	return systemMode
-}*/
-
 
 define_function shutdownAvSystem ()
 {
@@ -648,14 +535,6 @@ define_function sendSelectedInputToLeftMonitor (integer input, integer output)
 	
 	// set flag to indicate that system is in use
 	isSystemAvInUse = TRUE
-	
-	/*moderoButtonCopyAttribute (dvTpTableVideo, 
-				   PORT_TP_VIDEO, 
-				   btnAdrsVideoSnapshotPreviews[idDragItem], 
-				   MODERO_BUTTON_STATE_OFF,
-				   BTN_ADR_VIDEO_MONITOR_LEFT_PREVIEW_SNAPSHOT, 
-				   MODERO_BUTTON_STATE_ALL,
-				   MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
 }
 
 
@@ -693,14 +572,6 @@ define_function sendSelectedInputToRightMonitor (integer input, integer output)
 
 	// set flag to indicate that system is in use
 	isSystemAvInUse = TRUE
-	
-	/*moderoButtonCopyAttribute (dvTpTableVideo, 
-				   PORT_TP_VIDEO, 
-				   btnAdrsVideoSnapshotPreviews[idDragItem], 
-				   MODERO_BUTTON_STATE_OFF,
-				   BTN_ADR_VIDEO_MONITOR_RIGHT_PREVIEW_SNAPSHOT, 
-				   MODERO_BUTTON_STATE_ALL,
-				   MODERO_BUTTON_ATTRIBUTE_BITMAP)*/
 }
 
 
@@ -800,6 +671,9 @@ define_function tableInputDetected (dev dvTxVidIn)
 		moderoEnablePopup (dvTpTableMain, POPUP_NAME_DRAGGABLE_SOURCES[dvDvxVidInTx3.port])
 		moderoEnablePopup (dvTpTableMain, POPUP_NAME_DRAGGABLE_SOURCES[dvDvxVidInTx4.port])
 		
+		// activate the source selection drag areas
+		enableDragItemsAll (vdvDragAndDropTpTable)
+		
 		// set the flag to show that the AV system is now in use
 		isSystemAvInUse = TRUE
 	}
@@ -880,42 +754,6 @@ define_function tableInputDetected (dev dvTxVidIn)
 	}
 }
 
-/*
-define_function loadVideoPreviewWindow (dev dvDvxVidInPort)
-{
-	// kill the multi-preview snapshot timeline
-	stopMultiPreviewSnapshots ()
-
-	// turn on the video being previed flag
-	ON [isVideoBeingPreviewed]
-
-	// delete video snapshot on the video preview button
-	moderoDeleteButtonVideoSnapshot (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL)
-
-	moderoDisableButtonFeedback (dvTpTableVideo, BTN_VIDEO_PREVIEW_LOADING_BAR)    // reset the loading progress bar
-
-	moderoSetButtonOpacity (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_INVISIBLE)
-	//moderoSetButtonHide (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW)
-	moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_LOADING_PREVIEW)
-	moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_LOADING_BAR)
-
-	moderoEnablePopup (dvTpTableVideo, POPUP_NAME_VIDEO_PREVIEW)
-
-	moderoEnableButtonFeedback (dvTpTableVideo, BTN_VIDEO_PREVIEW_LOADING_BAR) //start the loading progress bar
-
-	dvxSwitchVideoOnly (dvDvxMain, dvDvxVidInPort.port, dvDvxVidOutMultiPreview.port)
-
-	CANCEL_WAIT 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
-	WAIT waitTimeVideoLoading 'WAIT_HIDE_VIDEO_LOADING_BUTTON'
-	{
-		moderoSetButtonHide (dvTpTableVideo, BTN_ADR_VIDEO_LOADING_PREVIEW)
-		moderoSetButtonHide (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_LOADING_BAR)
-		//moderoSetButtonShow (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW)
-		moderoSetButtonOpacity (dvTpTableVideo, BTN_ADR_VIDEO_PREVIEW_WINDOW, MODERO_BUTTON_STATE_ALL, MODERO_OPACITY_OPAQUE)
-	}
-}
-*/
-
 
 /*
  * --------------------
@@ -994,9 +832,6 @@ define_function dvxNotifyVideoInputName (dev dvxVideoInput, char name[])
 	// dvxVideoInput is the D:P:S of the video input port on the DVX switcher. The input number can be taken from dvxVideoInput.PORT
 	// name is the name of the video input
 
-	//moderoSetButtonText (dvTpTableVideo, btnsVideoInputsMonitorLeft[dvxVideoInput.port], MODERO_BUTTON_STATE_ALL, name)
-	//moderoSetButtonText (dvTpTableVideo, btnsVideoInputsMonitorRight[dvxVideoInput.port], MODERO_BUTTON_STATE_ALL, name)
-
 	dvx.videoInputs[dvxVideoInput.port].name = name
 }
 
@@ -1014,29 +849,6 @@ define_function dvxNotifyVideoInputStatus (dev dvxVideoInput, char signalStatus[
 	if (signalStatus != oldSignalStatus)
 	{
 		dvx.videoInputs[dvxVideoInput.port].status = signalStatus
-		//startMultiPreviewSnapshots ()
-	}
-
-
-	switch (signalStatus)
-	{
-		case DVX_SIGNAL_STATUS_NO_SIGNAL:
-		case DVX_SIGNAL_STATUS_UNKNOWN:
-		{
-			/*send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - load "no video" image for input #',itoa(dvxVideoInput.port),' (left input selection)'"
-			moderoSetButtonBitmap (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_LEFT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL,IMAGE_FILE_NAME_NO_IMAGE_ICON)
-			send_string 0, "'DEBUG[File ',__FILE__,', Line ',itoa(__LINE__),'] - load "no video" image for input #',itoa(dvxVideoInput.port),' (right input selection)'"
-			moderoSetButtonBitmap (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL,IMAGE_FILE_NAME_NO_IMAGE_ICON)*/
-		}
-		case DVX_SIGNAL_STATUS_VALID_SIGNAL:
-		{
-			/*moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_LEFT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL)
-			moderoEnableButtonScaleToFit (dvTpTableVideo, BTN_ADRS_VIDEO_MONITOR_RIGHT_INPUT_SELECTION[dvxVideoInput.port],MODERO_BUTTON_STATE_ALL)*/
-
-			// NOTE: Don't set the dynamic resource here. That should be done by the timeline event for taking snapshots.
-			// Otherwise it could result in the snapshots image of the currently routed video to the MPL being shown on all snapshot buttons.
-
-		}
 	}
 
 	if (dvxVideoInput.port == selectedVideoInputMonitorLeft)
@@ -1334,22 +1146,6 @@ define_function dxlinkNotifyTxVideoInputStatusDigital (dev dxlinkTxDigitalVideoI
 	}
 }
 
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_FORMAT_ANALOG_CALLBACK
-define_function dxlinkNotifyTxVideoInputFormatAnalog (dev dxlinkTxAnalogVideoInput, char videoFormat[])
-{
-	// dxlinkTxAnalogVideoInput is the analog video input port on the DXLink Tx
-	// videoFormat is the video format (VIDEO_SIGNAL_FORMAT_VGA | VIDEO_SIGNAL_FORMAT_COMPOSITE | VIDEO_SIGNAL_FORMAT_COMPONENT | VIDEO_SIGNAL_FORMAT_SVIDEO)
-}
-*/
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_FORMAT_DIGITAL_CALLBACK
-define_function dxlinkNotifyTxVideoInputFormatDigital (dev dxlinkTxDigitalVideoInput, char videoFormat[])
-{
-	// dxlinkTxDigitalVideoInput is the digital video input port on the DXLink Tx
-	// videoFormat is the video format (VIDEO_SIGNAL_FORMAT_DVI | VIDEO_SIGNAL_FORMAT_HDMI)
-}
-*/
 
 #define INCLUDE_DXLINK_NOTIFY_TX_SWITCH_CALLBACK
 define_function dxlinkNotifyTxSwitch (dev dxlinkTxPort1, integer input, integer output)
@@ -1383,22 +1179,6 @@ define_function dxlinkNotifyTxSwitch (dev dxlinkTxPort1, integer input, integer 
 	}
 }
 
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_RESOLUTION_ANALOG_CALLBACK
-define_function dxlinkNotifyTxVideoInputResolutionAnalog (dev dxlinkTxAnalogVideoInput, char resolution[])
-{
-	// dxlinkTxAnalogVideoInput is the analog video input port on the DXLink Tx
-	// resolution is the input resolution.
-}
-*/
-/*
-#define INCLUDE_DXLINK_NOTIFY_TX_VIDEO_INPUT_RESOLUTION_DIGITAL_CALLBACK
-define_function dxlinkNotifyTxVideoInputResolutionDigital (dev dxlinkTxDigitalVideoInput, char resolution[])
-{
-	// dxlinkTxDigitalVideoInput is the digital video input port on the DXLink Tx
-	// resolution is the input resolution.
-}
-*/
 
 /*
  * --------------------
@@ -1407,24 +1187,6 @@ define_function dxlinkNotifyTxVideoInputResolutionDigital (dev dxlinkTxDigitalVi
  */
 
 
-/*
-#define INCLUDE_PDU_NOTIFY_OVER_CURRENT_CALLBACK
-define_function pduNotifyOverCurrent (dev pduPort1, integer outlet, float current)
-{
-	// pduPort1 is port 1 on the PDU
-	// outlet is the outlet of the PDU which is reporting overcurrent. If nPduOutlet is zero (0) then entire PDU is over current.
-	// current is the current (in Amps)
-}
-*/
-
-/*
-#define INCLUDE_PDU_NOTIFY_PERSIST_STATE_ALL_OUTLETS_CALLBACK
-define_function pduNotifyPersistStateAllOutlets (dev pduPort1, integer outletPersistStates[])
-{
-	// pduPort1 is port 1 on the PDU
-	// outletPersistStates is an array containing the persist state of each outlet on the PDU
-}
-*/
 
 #define INCLUDE_PDU_NOTIFY_POWER_SENSE_TRIGGER_CALLBACK
 define_function pduNotifyPowerSenseTrigger (dev pduPort1, integer outlet, float triggerValue)
@@ -1512,24 +1274,6 @@ define_function pduNotifyOutletRelay (dev pduOutletPort, integer relayStatus)
 }
 
 
-/*
-#define INCLUDE_PDU_NOTIFY_SERIAL_NUMBER_CALLBACK
-define_function fnPdyNotifySerialNumber (dev pduPort1, char serialNumber[])
-{
-	// pduPort1 is port 1 on the PDU
-	// serialNumber is the serial number of the PDU
-}
-*/
-
-/*
-#define INCLUDE_PDU_NOTIFY_VERSION_CALLBACK
-define_function pduNotifyVersion (dev pduPort1, float version)
-{
-	// pduPort1 is port 1 on the PDU
-	// version is the version of firmware running on the PDU
-}
-*/
-
 #define INCLUDE_PDU_NOTIFY_INPUT_VOLTAGE_CALLBACK
 define_function pduNotifyInputVoltage (dev pduPort1, float voltage)
 {
@@ -1586,17 +1330,6 @@ define_function pduNotifyOutletCurrent (dev pduOutletPort, float current)
 }
 
 
-/*
-#define INCLUDE_PDU_NOTIFY_OUTLET_POWER_FACTOR_CALLBACK
-define_function pduNotifyOutletPowerFactor (dev pduOutletPort, float powerFactor)
-{
-	// pduOutletPort is the outlet on the PDU reporting its power factor
-	// powerFactor is the Power Factor: W/VA, 2 decimal places (data scale factor = 100).
-	//     - "Power Factor" is the ratio of real power to apparent power.
-}
-*/
-
-
 #define INCLUDE_PDU_NOTIFY_OUTLET_POWER_CALLBACK
 define_function pduNotifyOutletEnergy (dev pduOutletPort, float accumulatedEnergy)
 {
@@ -1625,40 +1358,18 @@ define_function pduNotifyAxlinkVoltage (dev pduPort2, float voltage)
 }
 
 
-/*
-#define INCLUDE_PDU_NOTIFY_AXLINK_POWER
-define_function pduNotifyAxlinkPower (dev pduAxlinkBus, float power)
-{
-	// pduAxlinkBus is an Axlink bus on the PDU
-	// power is the power (W): Resolution to 0.1W (data scale factor = 10)
-}
-*/
-
-/*
-#define INCLUDE_PDU_NOTIFY_AXLINK_CURRENT
-define_function pduNotifyAxlinkCurrent (dev pduAxlinkBus, float current)
-{
-	// pduAxlinkBus is an Axlink bus on the PDU
-	// current is the curren (A): Resolution to 0.1A (data scale factor = 10)
-}
-*/
-
-
 #define INCLUDE_PDU_NOTIFY_TEMPERATURE_SCALE_CELCIUS
 define_function pduNotifyTemperatureScaleCelcius (dev pduPort1)
 {
 	// pduPort1 is the first device on the PDU
 }
 
+
 #define INCLUDE_PDU_NOTIFY_TEMPERATURE_SCALE_FAHRENHEIT
 define_function pduNotifyTemperatureScaleFahrenheit (dev pduPort1)
 {
 	// pduPort1 is the first device on the PDU
 }
-
-
-
-
 
 
 
@@ -1684,15 +1395,12 @@ define_function amxControlPortNotifyIoInputOn (dev ioPort, integer ioChanCde)
 			{
 				// occupancy has been detected - meaning the room was previously vacant
 				isRoomOccupied = TRUE
-
+				
 				// Set lights to "all on" mode as people have entered the room
 				lightsEnablePresetAllOn ()
-
+				
 				// wake up the touch panel
 				moderoWake (dvTpTableMain)
-
-				// start taking snapshots (just in case the person who triggered the occ sensor wants to go to the source selection page)
-				//startMultiPreviewSnapshots ()
 			}
 		}
 	}
@@ -1714,19 +1422,16 @@ define_function amxControlPortNotifyIoInputOff (dev ioPort, integer ioChanCde)
 			{
 				// room is now unoccupied (note: Will take 8 minutes minimum to trigger after person leaves room)
 				isRoomOccupied = FALSE
-
+				
 				// Set lights to "all off" mode as there have been no people in the room for at least 8 minutes
 				lightsEnablePresetAllOff ()
-
+				
 				// Flip the touch panel to the splash screen
 				moderoSetPage (dvTpTableMain, PAGE_NAME_SPLASH_SCREEN)
-
+				
 				// Send the panel to sleep
 				moderoSleep (dvTpTableMain)
-
-				// Stop taking snapshots
-				//stopMultiPreviewSnapshots ()
-
+				
 				// shutdown the system if it was being used (i.e., someone just walked away without pressing the shutdown button on the panel)
 				if (isSystemAvInUse)
 				{

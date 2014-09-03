@@ -25,7 +25,6 @@ define_device
  * --------------------
  */
 
-//define_module 'NEC_LCD5710_Comm_dr1_0_0' NEC_Left(vdvMonitor, dvMonitor)
 define_module 'NEC_LCD5710_Comm_dr1_0_0' NEC_Left(vdvMonitorLeft, dvMonitorLeft)
 define_module 'NEC_LCD5710_Comm_dr1_0_0' NEC_Right(vdvMonitorRight, dvMonitorRight)
 
