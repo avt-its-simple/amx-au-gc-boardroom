@@ -514,6 +514,9 @@ char POPUP_NAME_SOURCE_CONTROL_BLURAY_TV_KEYPAD[] = 'popup-source-control-tv-key
 char POPUP_NAME_SOURCE_CONTROL_BLURAY_TV_MENU[] = 'popup-source-control-tv-menu'
 char POPUP_NAME_SOURCE_CONTROL_BLURAY_TV_CHANNEL_LIST[] = 'popup-source-control-tv-channel-list'
 
+char POPUP_NAME_VOLUME_MODAL[] = 'popup-volume-modal'
+char POPUP_NAME_VOLUME_NON_MODAL[] = 'popup-volume'
+
 /*
  * --------------------
  * Touch panel image files
