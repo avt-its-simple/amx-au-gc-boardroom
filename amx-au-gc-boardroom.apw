@@ -399,6 +399,8 @@
 <File CompileType="None" Type="TP4"><Identifier>amx-au-gc-boardroom-mxt-1900</Identifier>
 <FilePathName>touch-panels\amx-au-gc-boardroom-mxt-1900.TP4</FilePathName>
 <Comments></Comments>
+<DeviceMap DevAddr="Custom [10001:1:0]"><DevName>Custom [10001:1:0]</DevName>
+</DeviceMap>
 </File>
 </System>
 </Project>
