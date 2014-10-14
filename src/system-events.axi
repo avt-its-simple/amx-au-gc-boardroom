@@ -692,10 +692,481 @@ button_event[dvTpTableEnzo,0]
 			/*case BTN_ENZO_CLOSE_OPEN_APP:
 			case BTN_ENZO_LAUNCH_APP_WEB_BROWSER:	
 			case BTN_ENZO_LAUNCH_APP_DROPBOX:		
-			case BTN_ENZO_LAUNCH_APP_MIRROR_OP:	*/	
+			case BTN_ENZO_LAUNCH_APP_MIRROR_OP:	*/
 		}
 	}
 }
+
+
+button_event[dvTpTableEnzoKeyboard,0]
+{
+	push:
+	{
+		
+		switch (button.input.channel)
+		{
+			case BTN_KEYBOARD_SHIFT_LEFT:
+			{
+				keyboardStatusLeftShiftHeld = TRUE
+				enableKeyboardShift (dvTpTableEnzoKeyboard)
+			}
+			
+			case BTN_KEYBOARD_SHIFT_RIGHT:
+			{
+				keyboardStatusRightShiftHeld = TRUE
+				enableKeyboardShift (dvTpTableEnzoKeyboard)
+			}
+			
+			case BTN_KEYBOARD_CAPS_LOCK:
+			{
+				// toggle Caps lock
+				keyboardStatusCapsLock = !keyboardStatusCapsLock
+				
+				if (keyboardStatusCapsLock)	// caps lock is now on
+				{
+					enableKeyboardCapsLock (dvTpTableEnzoKeyboard)
+				}
+				else	// caps lock is off
+				{
+					disableKeyboardCapsLock (dvTpTableEnzoKeyboard)
+				}
+			}
+			
+			case BTN_KEYBOARD_SPACE:        enzoKeystrokes(dvEnzo,' ')
+			case BTN_KEYBOARD_TAB:          enzoKeystrokes(dvEnzo,"$09")
+			case BTN_KEYBOARD_INSERT:       { }
+			case BTN_KEYBOARD_ENTER:        enzoEnter(dvEnzo)
+			case BTN_KEYBOARD_BACKSPACE:    enzoKeystrokes(dvEnzo,"$08")
+			case BTN_KEYBOARD_DELETE:       enzoKeystrokes(dvEnzo,"$7F")
+			
+			
+			case BTN_KEYBOARD_HOME:         enzoHome(dvEnzo)
+			case BTN_KEYBOARD_END:          { }
+			   // there is no "END" function for Enzo
+			
+			case BTN_KEYBOARD_CTRL_LEFT:    { }
+			case BTN_KEYBOARD_CTRL_RIGHT:   { }
+			
+			case BTN_KEYBOARD_ALT_LEFT:     { }
+			case BTN_KEYBOARD_ALT_RIGHT:    { }
+			
+			case BTN_KEYBOARD_ARROW_UP:      enzoUp(dvEnzo)
+			case BTN_KEYBOARD_ARROW_DOWN:    enzoDown(dvEnzo)
+			case BTN_KEYBOARD_ARROW_LEFT:    enzoLeft(dvEnzo)
+			case BTN_KEYBOARD_ARROW_RIGHT:   enzoRight(dvEnzo)
+			
+			case BTN_KEYBOARD_PAGE_UP:       enzoPageUp(dvEnzo)
+			case BTN_KEYBOARD_PAGE_DOWN:     enzoPageDown(dvEnzo)
+		}
+		
+		if (keyboardStatusCapsLock == TRUE)	// caps lock enabled
+		{
+			switch (button.input.channel)
+			{
+				case BTN_KEYBOARD_A:                                 enzoKeystrokes(dvEnzo,'A')
+				case BTN_KEYBOARD_B:                                 enzoKeystrokes(dvEnzo,'B')
+				case BTN_KEYBOARD_C:                                 enzoKeystrokes(dvEnzo,'C')
+				case BTN_KEYBOARD_D:                                 enzoKeystrokes(dvEnzo,'D')
+				case BTN_KEYBOARD_E:                                 enzoKeystrokes(dvEnzo,'E')
+				case BTN_KEYBOARD_F:                                 enzoKeystrokes(dvEnzo,'F')
+				case BTN_KEYBOARD_G:                                 enzoKeystrokes(dvEnzo,'G')
+				case BTN_KEYBOARD_H:                                 enzoKeystrokes(dvEnzo,'H')
+				case BTN_KEYBOARD_I:                                 enzoKeystrokes(dvEnzo,'I')
+				case BTN_KEYBOARD_J:                                 enzoKeystrokes(dvEnzo,'J')
+				case BTN_KEYBOARD_K:                                 enzoKeystrokes(dvEnzo,'K')
+				case BTN_KEYBOARD_L:                                 enzoKeystrokes(dvEnzo,'L')
+				case BTN_KEYBOARD_M:                                 enzoKeystrokes(dvEnzo,'M')
+				case BTN_KEYBOARD_N:                                 enzoKeystrokes(dvEnzo,'N')
+				case BTN_KEYBOARD_O:                                 enzoKeystrokes(dvEnzo,'O')
+				case BTN_KEYBOARD_P:                                 enzoKeystrokes(dvEnzo,'P')
+				case BTN_KEYBOARD_Q:                                 enzoKeystrokes(dvEnzo,'Q')
+				case BTN_KEYBOARD_R:                                 enzoKeystrokes(dvEnzo,'R')
+				case BTN_KEYBOARD_S:                                 enzoKeystrokes(dvEnzo,'S')
+				case BTN_KEYBOARD_T:                                 enzoKeystrokes(dvEnzo,'T')
+				case BTN_KEYBOARD_U:                                 enzoKeystrokes(dvEnzo,'U')
+				case BTN_KEYBOARD_V:                                 enzoKeystrokes(dvEnzo,'V')
+				case BTN_KEYBOARD_W:                                 enzoKeystrokes(dvEnzo,'W')
+				case BTN_KEYBOARD_X:                                 enzoKeystrokes(dvEnzo,'X')
+				case BTN_KEYBOARD_Y:                                 enzoKeystrokes(dvEnzo,'Y')
+				case BTN_KEYBOARD_Z:                                 enzoKeystrokes(dvEnzo,'Z')
+			}
+			
+			if ((keyboardStatusLeftShiftHeld == TRUE) or (keyboardStatusRightShiftHeld == TRUE))	// shift key held down
+			{
+				switch (button.input.channel)
+				{
+					case BTN_KEYBOARD_1_EXCLAMATION_POINT:               enzoKeystrokes(dvEnzo,'!')
+					case BTN_KEYBOARD_2_AT_SYMBOL:                       enzoKeystrokes(dvEnzo,'@')
+					case BTN_KEYBOARD_3_NUMBER_SIGN:                     enzoKeystrokes(dvEnzo,'#')
+					case BTN_KEYBOARD_4_DOLLAR_SIGN:                     enzoKeystrokes(dvEnzo,'$')
+					case BTN_KEYBOARD_5_PERCENT_SIGN:                    enzoKeystrokes(dvEnzo,'%')
+					case BTN_KEYBOARD_6_CARET:                           enzoKeystrokes(dvEnzo,'^')
+					case BTN_KEYBOARD_7_AMPERSAND:                       enzoKeystrokes(dvEnzo,'&')
+					case BTN_KEYBOARD_8_ASTERISK:                        enzoKeystrokes(dvEnzo,'*')
+					case BTN_KEYBOARD_9_OPENING_PARENTHESIS:             enzoKeystrokes(dvEnzo,'(')
+					case BTN_KEYBOARD_0_CLOSING_PARENTHESIS:             enzoKeystrokes(dvEnzo,')')
+					case BTN_KEYBOARD_GRAVE_ACCENT_TILDE:                enzoKeystrokes(dvEnzo,'~')
+					case BTN_KEYBOARD_MINUS_SIGN_UNDERSCORE:             enzoKeystrokes(dvEnzo,'_')
+					case BTN_KEYBOARD_EQUAL_SIGN_PLUS_SIGN:              enzoKeystrokes(dvEnzo,'+')
+					case BTN_KEYBOARD_OPENING_BRACKET_OPENING_BRACE:     enzoKeystrokes(dvEnzo,'{')
+					case BTN_KEYBOARD_CLOSING_BRACKET_CLOSING_BRACE:     enzoKeystrokes(dvEnzo,'}')
+					case BTN_KEYBOARD_BACKSLASH_VERTICAL_BAR:            enzoKeystrokes(dvEnzo,'|')
+					case BTN_KEYBOARD_SEMICOLON_COLON:                   enzoKeystrokes(dvEnzo,':')
+					case BTN_KEYBOARD_SINGLE_QUOTE_DOUBLE_QUOTE:         enzoKeystrokes(dvEnzo,'"')
+					case BTN_KEYBOARD_COMMA_LESS_THAN_SIGN:              enzoKeystrokes(dvEnzo,'<')
+					case BTN_KEYBOARD_FULLSTOP_GREATER_THAN_SIGN:        enzoKeystrokes(dvEnzo,'>')
+					case BTN_KEYBOARD_SLASH_QUESTION_MARK:               enzoKeystrokes(dvEnzo,'?')
+				}
+			}
+			else
+			{
+				switch (button.input.channel)
+				{
+					case BTN_KEYBOARD_1_EXCLAMATION_POINT:               enzoKeystrokes(dvEnzo,'1')
+					case BTN_KEYBOARD_2_AT_SYMBOL:                       enzoKeystrokes(dvEnzo,'2')
+					case BTN_KEYBOARD_3_NUMBER_SIGN:                     enzoKeystrokes(dvEnzo,'3')
+					case BTN_KEYBOARD_4_DOLLAR_SIGN:                     enzoKeystrokes(dvEnzo,'4')
+					case BTN_KEYBOARD_5_PERCENT_SIGN:                    enzoKeystrokes(dvEnzo,'5')
+					case BTN_KEYBOARD_6_CARET:                           enzoKeystrokes(dvEnzo,'6')
+					case BTN_KEYBOARD_7_AMPERSAND:                       enzoKeystrokes(dvEnzo,'7')
+					case BTN_KEYBOARD_8_ASTERISK:                        enzoKeystrokes(dvEnzo,'8')
+					case BTN_KEYBOARD_9_OPENING_PARENTHESIS:             enzoKeystrokes(dvEnzo,'9')
+					case BTN_KEYBOARD_0_CLOSING_PARENTHESIS:             enzoKeystrokes(dvEnzo,'0')
+					case BTN_KEYBOARD_GRAVE_ACCENT_TILDE:                enzoKeystrokes(dvEnzo,'`')
+					case BTN_KEYBOARD_MINUS_SIGN_UNDERSCORE:             enzoKeystrokes(dvEnzo,'-')
+					case BTN_KEYBOARD_EQUAL_SIGN_PLUS_SIGN:              enzoKeystrokes(dvEnzo,'=')
+					case BTN_KEYBOARD_OPENING_BRACKET_OPENING_BRACE:     enzoKeystrokes(dvEnzo,'[')
+					case BTN_KEYBOARD_CLOSING_BRACKET_CLOSING_BRACE:     enzoKeystrokes(dvEnzo,']')
+					case BTN_KEYBOARD_BACKSLASH_VERTICAL_BAR:            enzoKeystrokes(dvEnzo,'\')
+					case BTN_KEYBOARD_SEMICOLON_COLON:                   enzoKeystrokes(dvEnzo,';')
+					case BTN_KEYBOARD_SINGLE_QUOTE_DOUBLE_QUOTE:         enzoKeystrokes(dvEnzo,"$27")
+					case BTN_KEYBOARD_COMMA_LESS_THAN_SIGN:              enzoKeystrokes(dvEnzo,',')
+					case BTN_KEYBOARD_FULLSTOP_GREATER_THAN_SIGN:        enzoKeystrokes(dvEnzo,'.')
+					case BTN_KEYBOARD_SLASH_QUESTION_MARK:               enzoKeystrokes(dvEnzo,'/')
+				}
+			}
+		}
+		else // caps lock disabled
+		{
+			if ((keyboardStatusLeftShiftHeld == TRUE) or (keyboardStatusRightShiftHeld == TRUE))	// shift key not held down
+			{
+				switch (button.input.channel)
+				{
+					case BTN_KEYBOARD_A:                                 enzoKeystrokes(dvEnzo,'a')
+					case BTN_KEYBOARD_B:                                 enzoKeystrokes(dvEnzo,'b')
+					case BTN_KEYBOARD_C:                                 enzoKeystrokes(dvEnzo,'c')
+					case BTN_KEYBOARD_D:                                 enzoKeystrokes(dvEnzo,'d')
+					case BTN_KEYBOARD_E:                                 enzoKeystrokes(dvEnzo,'e')
+					case BTN_KEYBOARD_F:                                 enzoKeystrokes(dvEnzo,'f')
+					case BTN_KEYBOARD_G:                                 enzoKeystrokes(dvEnzo,'g')
+					case BTN_KEYBOARD_H:                                 enzoKeystrokes(dvEnzo,'h')
+					case BTN_KEYBOARD_I:                                 enzoKeystrokes(dvEnzo,'i')
+					case BTN_KEYBOARD_J:                                 enzoKeystrokes(dvEnzo,'j')
+					case BTN_KEYBOARD_K:                                 enzoKeystrokes(dvEnzo,'k')
+					case BTN_KEYBOARD_L:                                 enzoKeystrokes(dvEnzo,'l')
+					case BTN_KEYBOARD_M:                                 enzoKeystrokes(dvEnzo,'m')
+					case BTN_KEYBOARD_N:                                 enzoKeystrokes(dvEnzo,'n')
+					case BTN_KEYBOARD_O:                                 enzoKeystrokes(dvEnzo,'o')
+					case BTN_KEYBOARD_P:                                 enzoKeystrokes(dvEnzo,'p')
+					case BTN_KEYBOARD_Q:                                 enzoKeystrokes(dvEnzo,'q')
+					case BTN_KEYBOARD_R:                                 enzoKeystrokes(dvEnzo,'r')
+					case BTN_KEYBOARD_S:                                 enzoKeystrokes(dvEnzo,'s')
+					case BTN_KEYBOARD_T:                                 enzoKeystrokes(dvEnzo,'t')
+					case BTN_KEYBOARD_U:                                 enzoKeystrokes(dvEnzo,'u')
+					case BTN_KEYBOARD_V:                                 enzoKeystrokes(dvEnzo,'v')
+					case BTN_KEYBOARD_W:                                 enzoKeystrokes(dvEnzo,'w')
+					case BTN_KEYBOARD_X:                                 enzoKeystrokes(dvEnzo,'x')
+					case BTN_KEYBOARD_Y:                                 enzoKeystrokes(dvEnzo,'y')
+					case BTN_KEYBOARD_Z:                                 enzoKeystrokes(dvEnzo,'z')
+					case BTN_KEYBOARD_1_EXCLAMATION_POINT:               enzoKeystrokes(dvEnzo,'1')
+					case BTN_KEYBOARD_2_AT_SYMBOL:                       enzoKeystrokes(dvEnzo,'2')
+					case BTN_KEYBOARD_3_NUMBER_SIGN:                     enzoKeystrokes(dvEnzo,'3')
+					case BTN_KEYBOARD_4_DOLLAR_SIGN:                     enzoKeystrokes(dvEnzo,'4')
+					case BTN_KEYBOARD_5_PERCENT_SIGN:                    enzoKeystrokes(dvEnzo,'5')
+					case BTN_KEYBOARD_6_CARET:                           enzoKeystrokes(dvEnzo,'6')
+					case BTN_KEYBOARD_7_AMPERSAND:                       enzoKeystrokes(dvEnzo,'7')
+					case BTN_KEYBOARD_8_ASTERISK:                        enzoKeystrokes(dvEnzo,'8')
+					case BTN_KEYBOARD_9_OPENING_PARENTHESIS:             enzoKeystrokes(dvEnzo,'9')
+					case BTN_KEYBOARD_0_CLOSING_PARENTHESIS:             enzoKeystrokes(dvEnzo,'0')
+					case BTN_KEYBOARD_GRAVE_ACCENT_TILDE:                enzoKeystrokes(dvEnzo,'`')
+					case BTN_KEYBOARD_MINUS_SIGN_UNDERSCORE:             enzoKeystrokes(dvEnzo,'-')
+					case BTN_KEYBOARD_EQUAL_SIGN_PLUS_SIGN:              enzoKeystrokes(dvEnzo,'=')
+					case BTN_KEYBOARD_OPENING_BRACKET_OPENING_BRACE:     enzoKeystrokes(dvEnzo,'[')
+					case BTN_KEYBOARD_CLOSING_BRACKET_CLOSING_BRACE:     enzoKeystrokes(dvEnzo,']')
+					case BTN_KEYBOARD_BACKSLASH_VERTICAL_BAR:            enzoKeystrokes(dvEnzo,'\')
+					case BTN_KEYBOARD_SEMICOLON_COLON:                   enzoKeystrokes(dvEnzo,';')
+					case BTN_KEYBOARD_SINGLE_QUOTE_DOUBLE_QUOTE:         enzoKeystrokes(dvEnzo,"$27")
+					case BTN_KEYBOARD_COMMA_LESS_THAN_SIGN:              enzoKeystrokes(dvEnzo,',')
+					case BTN_KEYBOARD_FULLSTOP_GREATER_THAN_SIGN:        enzoKeystrokes(dvEnzo,'.')
+					case BTN_KEYBOARD_SLASH_QUESTION_MARK:               enzoKeystrokes(dvEnzo,'/')
+				}
+			}
+			else
+			{
+				switch (button.input.channel)
+				{
+					case BTN_KEYBOARD_A:                                 enzoKeystrokes(dvEnzo,'A')
+					case BTN_KEYBOARD_B:                                 enzoKeystrokes(dvEnzo,'B')
+					case BTN_KEYBOARD_C:                                 enzoKeystrokes(dvEnzo,'C')
+					case BTN_KEYBOARD_D:                                 enzoKeystrokes(dvEnzo,'D')
+					case BTN_KEYBOARD_E:                                 enzoKeystrokes(dvEnzo,'E')
+					case BTN_KEYBOARD_F:                                 enzoKeystrokes(dvEnzo,'F')
+					case BTN_KEYBOARD_G:                                 enzoKeystrokes(dvEnzo,'G')
+					case BTN_KEYBOARD_H:                                 enzoKeystrokes(dvEnzo,'H')
+					case BTN_KEYBOARD_I:                                 enzoKeystrokes(dvEnzo,'I')
+					case BTN_KEYBOARD_J:                                 enzoKeystrokes(dvEnzo,'J')
+					case BTN_KEYBOARD_K:                                 enzoKeystrokes(dvEnzo,'K')
+					case BTN_KEYBOARD_L:                                 enzoKeystrokes(dvEnzo,'L')
+					case BTN_KEYBOARD_M:                                 enzoKeystrokes(dvEnzo,'M')
+					case BTN_KEYBOARD_N:                                 enzoKeystrokes(dvEnzo,'N')
+					case BTN_KEYBOARD_O:                                 enzoKeystrokes(dvEnzo,'O')
+					case BTN_KEYBOARD_P:                                 enzoKeystrokes(dvEnzo,'P')
+					case BTN_KEYBOARD_Q:                                 enzoKeystrokes(dvEnzo,'Q')
+					case BTN_KEYBOARD_R:                                 enzoKeystrokes(dvEnzo,'R')
+					case BTN_KEYBOARD_S:                                 enzoKeystrokes(dvEnzo,'S')
+					case BTN_KEYBOARD_T:                                 enzoKeystrokes(dvEnzo,'T')
+					case BTN_KEYBOARD_U:                                 enzoKeystrokes(dvEnzo,'U')
+					case BTN_KEYBOARD_V:                                 enzoKeystrokes(dvEnzo,'V')
+					case BTN_KEYBOARD_W:                                 enzoKeystrokes(dvEnzo,'W')
+					case BTN_KEYBOARD_X:                                 enzoKeystrokes(dvEnzo,'X')
+					case BTN_KEYBOARD_Y:                                 enzoKeystrokes(dvEnzo,'Y')
+					case BTN_KEYBOARD_Z:                                 enzoKeystrokes(dvEnzo,'Z')
+					case BTN_KEYBOARD_1_EXCLAMATION_POINT:               enzoKeystrokes(dvEnzo,'!')
+					case BTN_KEYBOARD_2_AT_SYMBOL:                       enzoKeystrokes(dvEnzo,'@')
+					case BTN_KEYBOARD_3_NUMBER_SIGN:                     enzoKeystrokes(dvEnzo,'#')
+					case BTN_KEYBOARD_4_DOLLAR_SIGN:                     enzoKeystrokes(dvEnzo,'$')
+					case BTN_KEYBOARD_5_PERCENT_SIGN:                    enzoKeystrokes(dvEnzo,'%')
+					case BTN_KEYBOARD_6_CARET:                           enzoKeystrokes(dvEnzo,'^')
+					case BTN_KEYBOARD_7_AMPERSAND:                       enzoKeystrokes(dvEnzo,'&')
+					case BTN_KEYBOARD_8_ASTERISK:                        enzoKeystrokes(dvEnzo,'*')
+					case BTN_KEYBOARD_9_OPENING_PARENTHESIS:             enzoKeystrokes(dvEnzo,'(')
+					case BTN_KEYBOARD_0_CLOSING_PARENTHESIS:             enzoKeystrokes(dvEnzo,')')
+					case BTN_KEYBOARD_GRAVE_ACCENT_TILDE:                enzoKeystrokes(dvEnzo,'~')
+					case BTN_KEYBOARD_MINUS_SIGN_UNDERSCORE:             enzoKeystrokes(dvEnzo,'_')
+					case BTN_KEYBOARD_EQUAL_SIGN_PLUS_SIGN:              enzoKeystrokes(dvEnzo,'+')
+					case BTN_KEYBOARD_OPENING_BRACKET_OPENING_BRACE:     enzoKeystrokes(dvEnzo,'{')
+					case BTN_KEYBOARD_CLOSING_BRACKET_CLOSING_BRACE:     enzoKeystrokes(dvEnzo,'}')
+					case BTN_KEYBOARD_BACKSLASH_VERTICAL_BAR:            enzoKeystrokes(dvEnzo,'|')
+					case BTN_KEYBOARD_SEMICOLON_COLON:                   enzoKeystrokes(dvEnzo,':')
+					case BTN_KEYBOARD_SINGLE_QUOTE_DOUBLE_QUOTE:         enzoKeystrokes(dvEnzo,'"')
+					case BTN_KEYBOARD_COMMA_LESS_THAN_SIGN:              enzoKeystrokes(dvEnzo,'<')
+					case BTN_KEYBOARD_FULLSTOP_GREATER_THAN_SIGN:        enzoKeystrokes(dvEnzo,'>')
+					case BTN_KEYBOARD_SLASH_QUESTION_MARK:               enzoKeystrokes(dvEnzo,'?')
+				}
+			}
+		}
+		
+		
+		// feedback
+		switch (button.input.channel)
+		{
+			case BTN_KEYBOARD_SHIFT_LEFT:
+			case BTN_KEYBOARD_SHIFT_RIGHT:
+			case BTN_KEYBOARD_SPACE:
+			case BTN_KEYBOARD_TAB:
+			case BTN_KEYBOARD_INSERT:
+			case BTN_KEYBOARD_ENTER:
+			case BTN_KEYBOARD_BACKSPACE:
+			case BTN_KEYBOARD_DELETE:
+			case BTN_KEYBOARD_HOME:
+			case BTN_KEYBOARD_END:
+			case BTN_KEYBOARD_CTRL_LEFT:
+			case BTN_KEYBOARD_CTRL_RIGHT:
+			case BTN_KEYBOARD_ALT_LEFT:
+			case BTN_KEYBOARD_ALT_RIGHT:
+			case BTN_KEYBOARD_ARROW_UP:
+			case BTN_KEYBOARD_ARROW_DOWN:
+			case BTN_KEYBOARD_ARROW_LEFT:
+			case BTN_KEYBOARD_ARROW_RIGHT:
+			case BTN_KEYBOARD_PAGE_UP:
+			case BTN_KEYBOARD_PAGE_DOWN:
+			{
+				channelTo(button.input.device, button.input.channel)
+			}
+			
+			case BTN_KEYBOARD_CAPS_LOCK:
+			{
+				channelSet(button.input.device, button.input.channel, keyboardStatusCapsLock)
+			}
+			
+			
+			case BTN_KEYBOARD_A:
+			case BTN_KEYBOARD_B:
+			case BTN_KEYBOARD_C:
+			case BTN_KEYBOARD_D:
+			case BTN_KEYBOARD_E:
+			case BTN_KEYBOARD_F:
+			case BTN_KEYBOARD_G:
+			case BTN_KEYBOARD_H:
+			case BTN_KEYBOARD_I:
+			case BTN_KEYBOARD_J:
+			case BTN_KEYBOARD_K:
+			case BTN_KEYBOARD_L:
+			case BTN_KEYBOARD_M:
+			case BTN_KEYBOARD_N:
+			case BTN_KEYBOARD_O:
+			case BTN_KEYBOARD_P:
+			case BTN_KEYBOARD_Q:
+			case BTN_KEYBOARD_R:
+			case BTN_KEYBOARD_S:
+			case BTN_KEYBOARD_T:
+			case BTN_KEYBOARD_U:
+			case BTN_KEYBOARD_V:
+			case BTN_KEYBOARD_W:
+			case BTN_KEYBOARD_X:
+			case BTN_KEYBOARD_Y:
+			case BTN_KEYBOARD_Z:
+			{
+				if (keyboardStatusCapsLock == TRUE)
+				{
+					moderoEnableButtonAnimate (button.input.device, button.input.channel, 0, 4, 0)
+				}
+				else
+				{
+					moderoEnableButtonAnimate (button.input.device, button.input.channel, 0, 2, 0)
+				}
+			}
+			
+			case BTN_KEYBOARD_1_EXCLAMATION_POINT:
+			case BTN_KEYBOARD_2_AT_SYMBOL:
+			case BTN_KEYBOARD_3_NUMBER_SIGN:
+			case BTN_KEYBOARD_4_DOLLAR_SIGN:
+			case BTN_KEYBOARD_5_PERCENT_SIGN:
+			case BTN_KEYBOARD_6_CARET:
+			case BTN_KEYBOARD_7_AMPERSAND:
+			case BTN_KEYBOARD_8_ASTERISK:
+			case BTN_KEYBOARD_9_OPENING_PARENTHESIS:
+			case BTN_KEYBOARD_0_CLOSING_PARENTHESIS:
+			case BTN_KEYBOARD_GRAVE_ACCENT_TILDE:
+			case BTN_KEYBOARD_MINUS_SIGN_UNDERSCORE:
+			case BTN_KEYBOARD_EQUAL_SIGN_PLUS_SIGN:
+			case BTN_KEYBOARD_OPENING_BRACKET_OPENING_BRACE:
+			case BTN_KEYBOARD_CLOSING_BRACKET_CLOSING_BRACE:
+			case BTN_KEYBOARD_BACKSLASH_VERTICAL_BAR:
+			case BTN_KEYBOARD_SEMICOLON_COLON:
+			case BTN_KEYBOARD_SINGLE_QUOTE_DOUBLE_QUOTE:
+			case BTN_KEYBOARD_COMMA_LESS_THAN_SIGN:
+			case BTN_KEYBOARD_FULLSTOP_GREATER_THAN_SIGN:
+			case BTN_KEYBOARD_SLASH_QUESTION_MARK:
+			{
+				if ((keyboardStatusLeftShiftHeld == TRUE) or (keyboardStatusRightShiftHeld == TRUE))
+				{
+					moderoEnableButtonAnimate (button.input.device, button.input.channel, 0, 4, 0)
+				}
+				else
+				{
+					moderoEnableButtonAnimate (button.input.device, button.input.channel, 0, 3, 0)
+				}
+			}
+			
+		}
+	}
+	release:
+	{
+		
+		switch (button.input.channel)
+		{
+			case BTN_KEYBOARD_SHIFT_LEFT:
+			{
+				keyboardStatusLeftShiftHeld = FALSE
+				
+				if (keyboardStatusRightShiftHeld == FALSE)
+				{
+					disableKeyboardShift (dvTpTableEnzoKeyboard, keyboardStatusCapsLock)
+				}
+			}
+			
+			case BTN_KEYBOARD_SHIFT_RIGHT:
+			{
+				keyboardStatusRightShiftHeld = FALSE
+				
+				if (keyboardStatusLeftShiftHeld == FALSE)
+				{
+					disableKeyboardShift (dvTpTableEnzoKeyboard, keyboardStatusCapsLock)
+				}
+			}
+		}
+		
+		
+		// feedback
+		switch (button.input.channel)
+		{
+			case BTN_KEYBOARD_A:
+			case BTN_KEYBOARD_B:
+			case BTN_KEYBOARD_C:
+			case BTN_KEYBOARD_D:
+			case BTN_KEYBOARD_E:
+			case BTN_KEYBOARD_F:
+			case BTN_KEYBOARD_G:
+			case BTN_KEYBOARD_H:
+			case BTN_KEYBOARD_I:
+			case BTN_KEYBOARD_J:
+			case BTN_KEYBOARD_K:
+			case BTN_KEYBOARD_L:
+			case BTN_KEYBOARD_M:
+			case BTN_KEYBOARD_N:
+			case BTN_KEYBOARD_O:
+			case BTN_KEYBOARD_P:
+			case BTN_KEYBOARD_Q:
+			case BTN_KEYBOARD_R:
+			case BTN_KEYBOARD_S:
+			case BTN_KEYBOARD_T:
+			case BTN_KEYBOARD_U:
+			case BTN_KEYBOARD_V:
+			case BTN_KEYBOARD_W:
+			case BTN_KEYBOARD_X:
+			case BTN_KEYBOARD_Y:
+			case BTN_KEYBOARD_Z:
+			{
+				if (keyboardStatusCapsLock == TRUE)
+				{
+					moderoEnableButtonAnimate (button.input.device, button.input.channel, 0, 3, 0)
+				}
+				else
+				{
+					moderoEnableButtonAnimate (button.input.device, button.input.channel, 0, 1, 0)
+				}
+			}
+			
+			case BTN_KEYBOARD_1_EXCLAMATION_POINT:
+			case BTN_KEYBOARD_2_AT_SYMBOL:
+			case BTN_KEYBOARD_3_NUMBER_SIGN:
+			case BTN_KEYBOARD_4_DOLLAR_SIGN:
+			case BTN_KEYBOARD_5_PERCENT_SIGN:
+			case BTN_KEYBOARD_6_CARET:
+			case BTN_KEYBOARD_7_AMPERSAND:
+			case BTN_KEYBOARD_8_ASTERISK:
+			case BTN_KEYBOARD_9_OPENING_PARENTHESIS:
+			case BTN_KEYBOARD_0_CLOSING_PARENTHESIS:
+			case BTN_KEYBOARD_GRAVE_ACCENT_TILDE:
+			case BTN_KEYBOARD_MINUS_SIGN_UNDERSCORE:
+			case BTN_KEYBOARD_EQUAL_SIGN_PLUS_SIGN:
+			case BTN_KEYBOARD_OPENING_BRACKET_OPENING_BRACE:
+			case BTN_KEYBOARD_CLOSING_BRACKET_CLOSING_BRACE:
+			case BTN_KEYBOARD_BACKSLASH_VERTICAL_BAR:
+			case BTN_KEYBOARD_SEMICOLON_COLON:
+			case BTN_KEYBOARD_SINGLE_QUOTE_DOUBLE_QUOTE:
+			case BTN_KEYBOARD_COMMA_LESS_THAN_SIGN:
+			case BTN_KEYBOARD_FULLSTOP_GREATER_THAN_SIGN:
+			case BTN_KEYBOARD_SLASH_QUESTION_MARK:
+			{
+				if ((keyboardStatusLeftShiftHeld == TRUE) or (keyboardStatusRightShiftHeld == TRUE))
+				{
+					moderoEnableButtonAnimate (button.input.device, button.input.channel, 0, 3, 0)
+				}
+				else
+				{
+					moderoEnableButtonAnimate (button.input.device, button.input.channel, 0, 1, 0)
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
 
 button_event[dvTpTableCamera,0]
 {
@@ -947,6 +1418,8 @@ button_event [dvTpTableDebug, 3]	// select right monitor
 		}
     }
 }
+
+
 
 
 /*

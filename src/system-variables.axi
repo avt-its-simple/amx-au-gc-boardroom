@@ -290,6 +290,19 @@ _area dragAreasTpTable[DVX_MAX_VIDEO_INPUTS]
 
 char draggablePopupsTpTable[DVX_MAX_VIDEO_INPUTS][40]
 
+
+/*
+ * --------------------
+ * Keyboard status tracking
+ * --------------------
+ */
+
+volatile integer keyboardStatusCapsLock = FALSE
+volatile integer keyboardStatusLeftShiftHeld = FALSE
+volatile integer keyboardStatusRightShiftHeld = FALSE
+
+
+
 /*
  * --------------------
  * Wait times
